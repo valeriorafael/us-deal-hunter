@@ -7,3 +7,17 @@ data/
 __pycache__/
 .pytest_cache/
 *.egg-info/
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Test/cache
+.pytest_cache/
+
+# Local data
+data/
+bot.py.backup-*

@@ -1,0 +1,2 @@
+cd ~/projetos/us-deal-hunter
+nano tests/deals/test_scorer.py
