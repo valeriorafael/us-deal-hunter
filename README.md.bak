@@ -1,0 +1,130 @@
+# Multi-Platform Affiliate Telegram Bot v2.1
+
+🤖 A Telegram bot that automatically converts product links from **5 major e-commerce platforms** into affiliate links. Now with modular architecture, SQLite analytics, link caching, rate limiting, and multi-language support.
+
+## ✨ What's New in v2.0
+
+## 🆕 What's New in v2.1
+
+- 🔔 **Price Monitoring** — Track product prices and get notified on drops
+- 📊 **Price History** — 30-day price trend tracking
+- 🎯 **Smart Alerts** — Customizable price drop thresholds (default 5%)
+- 📝 **Watch Management** — Add/remove/list price watches via commands
+
+
+- 🏗️ **Modular Architecture** — Clean separation: platforms / services / config
+- 🗄️ **SQLite Analytics** — Proper database with daily stats, user tracking, group stats
+- ⚡ **Link Cache** — Avoid re-converting the same URL (TTL-based)
+- 🚦 **Rate Limiter** — Token-bucket per-user rate limiting with burst protection
+- 💰 **Commission Display** — Show estimated commission rates per platform
+- 📊 **Export** — CSV/JSON data export via `/export` command
+- 🌍 **Multi-language** — Chinese (zh) and English (en) support
+- 🚫 **User Management** — Block/unblock users, enable/disable groups
+- 📈 **Rich Reports** — Visual bar charts, trends, and group analytics
+- 🧪 **100+ Tests** — Comprehensive test coverage across 9 test files
+
+## Supported Platforms
+
+| Platform | Emoji | Affiliate Program | Commission |
+|----------|-------|-------------------|------------|
+| Amazon | 🛒 | Amazon Associates | 1-10% |
+| Shopee | 🧡 | Shopee Affiliate | 2-10% |
+| Lazada | 💜 | Lazada Affiliate | 1-12% |
+| AliExpress | 🔴 | AliExpress Portals | 3-9% |
+| TikTok Shop | 🎵 | TikTok Affiliate | 2-20% |
+
+## Quick Start
+
+```bash
+# Clone
+git clone https://github.com/platoba/MultiAffiliateTGBot.git
+cd MultiAffiliateTGBot
+
+# Configure
+cp .env.example .env
+# Edit .env with your bot token and affiliate IDs
+
+# Run
+pip install -r requirements.txt
+python bot.py
+```
+
+## Docker
+
+```bash
+cp .env.example .env
+# Edit .env
+docker compose up -d
+```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/start` | Welcome message with active platforms |
+| `/help` | Usage instructions |
+| `/stats` | Overall conversion statistics |
+| `/mystats` | Personal conversion statistics |
+| `/report` | Detailed analytics report |
+| `/export` | Export data as CSV |
+| `/commission` | Commission rate reference table |
+
+## Architecture (v2.0)
+
+```
+app/
+├── __init__.py            # Version
+├── config.py              # Centralized config from env
+├── platforms/             # Platform handlers
+│   ├── base.py            # Abstract base + ConversionResult
+│   ├── amazon.py          # Amazon Associates
+│   ├── shopee.py          # Shopee Affiliate
+│   ├── lazada.py          # Lazada Affiliate
+│   ├── aliexpress.py      # AliExpress Portals
+│   ├── tiktok.py          # TikTok Affiliate
+│   └── registry.py        # URL detection + dispatch
+├── services/              # Business logic
+│   ├── database.py        # SQLite analytics (users, groups, daily)
+│   ├── cache.py           # Link conversion cache (TTL)
+│   ├── rate_limiter.py    # Token-bucket rate limiting
+│   ├── exporter.py        # CSV/JSON export + reports
+│   └── formatter.py       # i18n message formatting (zh/en)
+bot.py                     # Telegram bot (legacy compatible)
+analytics.py               # Legacy analytics (still works)
+tests/                     # 100+ tests across 9 files
+```
+
+## Testing
+
+```bash
+# Install dev deps
+pip install pytest pytest-cov requests
+
+# Run all tests
+make test
+
+# With coverage
+make test-cov
+
+# Via Docker
+docker compose run --rm test
+```
+
+## Configuration
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `BOT_TOKEN` | Telegram bot token | Required |
+| `AMAZON_TAG` | Amazon Associates tag | - |
+| `SHOPEE_AFF_ID` | Shopee affiliate ID | - |
+| `LAZADA_AFF_ID` | Lazada affiliate ID | - |
+| `ALIEXPRESS_AFF_ID` | AliExpress affiliate ID | - |
+| `TIKTOK_AFF_ID` | TikTok affiliate ID | - |
+| `BOT_LANGUAGE` | Language (zh/en) | zh |
+| `MAX_LINKS_PER_MSG` | Max links per message | 10 |
+| `RATE_LIMIT_PER_MIN` | Rate limit per user/min | 30 |
+| `CACHE_TTL_HOURS` | Link cache TTL | 24 |
+
+## License
+
+MIT
