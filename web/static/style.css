@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f4f5f7;
+    color: #111827;
+}
+
+.container {
+    width: 100%;
+    max-width: 680px;
+
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo {
+    width: 82px;
+    height: 82px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #111827;
+    color: white;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.profile h1 {
+    margin: 0;
+
+    font-size: 32px;
+}
+
+.profile p {
+    margin-top: 10px;
+
+    color: #6b7280;
+
+    font-size: 16px;
+}
+
+.deals {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.deal {
+    display: flex;
+    align-items: center;
+
+    padding: 18px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    text-decoration: none;
+    color: inherit;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.deal:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.deal-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f4f6;
+
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+.deal-content {
+    flex: 1;
+
+    margin-left: 15px;
+}
+
+.deal-content h2 {
+    margin: 0;
+
+    font-size: 17px;
+}
+
+.deal-content p {
+    margin: 5px 0 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+.arrow {
+    font-size: 22px;
+    color: #9ca3af;
+}
+
+footer {
+    margin-top: 35px;
+
+    text-align: center;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+    line-height: 1.5;
+}

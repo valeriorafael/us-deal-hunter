@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Deal Hunter</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="profile">
+
+            <div class="logo">
+                DH
+            </div>
+
+            <h1>Deal Hunter</h1>
+
+            <p>
+                Finding the best deals on Amazon US.
+            </p>
+
+        </div>
+
+        <section class="deals">
+
+            {% for deal in deals %}
+
+            <a
+                class="deal"
+                href="{{ deal.url }}"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+            >
+
+                <div class="deal-icon">
+                    🔥
+                </div>
+
+                <div class="deal-content">
+
+                    <h2>{{ deal.title }}</h2>
+
+                    <p>{{ deal.description }}</p>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </section>
+
+        <footer>
+
+            <p>
+                Deal Hunter finds interesting products and deals
+                available on Amazon.
+            </p>
+
+            <p>
+                As an Amazon Associate we earn from qualifying purchases.
+            </p>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>
