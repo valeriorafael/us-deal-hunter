@@ -67,7 +67,8 @@ def test_hunter_finds_great_deal(tmp_path):
     hunter = create_hunter(tmp_path)
 
     deal = hunter.analyze(
-        "https://www.amazon.com/dp/B08N5WRWNW"
+        "https://www.amazon.com/dp/B08N5WRWNW",
+        now=datetime(2026, 8, 15),
     )
 
     assert deal is not None
