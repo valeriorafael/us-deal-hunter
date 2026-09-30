@@ -55,6 +55,37 @@ class AmazonProvider(ProductProvider):
 
         product.platform = "amazon"
         product.product_url = url
-        product.affiliate_url = url
+        product.affiliate_url = self._extract_detail_page_url(data)
 
         return product
+
+    @staticmethod
+    def _extract_detail_page_url(data: dict) -> str:
+        """
+        Extracts the Amazon-provided affiliate/detail URL.
+
+        Supports both the current Creators API SDK structure
+        (camelCase) and the legacy test/fake structure.
+        """
+        items_result = (
+            data.get("itemsResult")
+            or data.get("ItemsResult")
+            or {}
+        )
+
+        items = (
+            items_result.get("items")
+            or items_result.get("Items")
+            or []
+        )
+
+        if not items:
+            return ""
+
+        item = items[0] or {}
+
+        return (
+            item.get("detailPageURL")
+            or item.get("DetailPageURL")
+            or ""
+        )

@@ -182,6 +182,10 @@ class FakeAmazonClientForHunter:
                 "Items": [
                     {
                         "ASIN": "B08N5WRWNW",
+                        "DetailPageURL": (
+                            "https://www.amazon.com/dp/B08N5WRWNW"
+                            "?tag=testtag-20&linkCode=ogi"
+                        ),
                         "ItemInfo": {
                             "Title": {
                                 "DisplayValue": "Test Product"
@@ -201,7 +205,6 @@ class FakeAmazonClientForHunter:
                 ]
             }
         }
-
 
 def test_hunter_integrates_amazon_provider_with_pipeline(tmp_path):
     from app.platforms.amazon_provider import AmazonProvider
@@ -369,3 +372,4 @@ def test_hunter_uses_distributed_price_history(tmp_path):
     )
 
     assert len(history) == 4
+

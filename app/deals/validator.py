@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from app.deals.affiliate_validator import AffiliateLinkValidator
 from app.models.deal import Deal
 
 
@@ -16,9 +17,16 @@ class DealValidator:
     to be considered a real deal.
     """
 
+    def __init__(
+        self,
+        affiliate_validator: AffiliateLinkValidator | None = None,
+    ):
+        self.affiliate_validator = (
+            affiliate_validator or AffiliateLinkValidator()
+        )
+
     def validate(self, deal: Deal) -> ValidationResult:
 
-        # No historical price data.
         if deal.confidence == "LOW":
             return ValidationResult(
                 is_valid=False,
@@ -26,8 +34,6 @@ class DealValidator:
                 reason="Insufficient historical price data.",
             )
 
-        # Some historical data exists, but not enough
-        # to confidently validate the opportunity.
         if deal.confidence == "MEDIUM":
             return ValidationResult(
                 is_valid=False,
@@ -35,12 +41,22 @@ class DealValidator:
                 reason="Historical price data is incomplete.",
             )
 
-        # Complete history, but weak score.
         if deal.score < 60:
             return ValidationResult(
                 is_valid=False,
                 status="LOW_SCORE",
                 reason="Deal score is below the minimum threshold.",
+            )
+
+        affiliate_result = self.affiliate_validator.validate(
+            deal.product
+        )
+
+        if not affiliate_result.is_valid:
+            return ValidationResult(
+                is_valid=False,
+                status=affiliate_result.status,
+                reason=affiliate_result.reason,
             )
 
         return ValidationResult(

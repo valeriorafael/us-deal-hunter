@@ -1,0 +1,46 @@
+﻿{
+  "keywords": [
+    {
+      "query": "gaming mouse",
+      "search_index": "Electronics",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 20
+    },
+    {
+      "query": "gaming keyboard",
+      "search_index": "Electronics",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 20
+    },
+    {
+      "query": "gaming headset",
+      "search_index": "Electronics",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 20
+    },
+    {
+      "query": "computer monitor",
+      "search_index": "Electronics",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 15
+    },
+    {
+      "query": "SSD",
+      "search_index": "Computers",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 15
+    },
+    {
+      "query": "laptop",
+      "search_index": "Computers",
+      "item_count": 10,
+      "item_page": 1,
+      "min_saving_percent": 20
+    }
+  ]
+}

@@ -3,10 +3,21 @@ from datetime import datetime, timedelta
 from app.models.product import Product
 from app.models.price_history import PriceHistory
 from app.services.deal_pipeline import DealPipeline
+from app.services.price_history_repository import (
+    PriceHistoryRepository,
+)
 import pytest
 
 
-def test_pipeline_evaluates_product_with_strong_history():
+def build_pipeline(tmp_path) -> DealPipeline:
+    return DealPipeline(
+        repository=PriceHistoryRepository(
+            str(tmp_path / "pipeline.db")
+        )
+    )
+
+
+def test_pipeline_evaluates_product_with_strong_history(tmp_path):
     now = datetime(2026, 8, 15)
 
     product = Product(
@@ -45,7 +56,7 @@ def test_pipeline_evaluates_product_with_strong_history():
         ),
     ]
 
-    pipeline = DealPipeline()
+    pipeline = build_pipeline(tmp_path)
 
     deal = pipeline.evaluate(
         product,
@@ -63,7 +74,7 @@ def test_pipeline_evaluates_product_with_strong_history():
     assert deal.confidence == "HIGH"
 
 
-def test_pipeline_ignores_history_from_other_products():
+def test_pipeline_ignores_history_from_other_products(tmp_path):
     now = datetime(2026, 8, 15)
 
     product = Product(
@@ -85,7 +96,7 @@ def test_pipeline_ignores_history_from_other_products():
         ),
     ]
 
-    deal = DealPipeline().evaluate(
+    deal = build_pipeline(tmp_path).evaluate(
         product,
         history,
         now=now,
@@ -96,7 +107,7 @@ def test_pipeline_ignores_history_from_other_products():
     assert deal is None
 
 
-def test_pipeline_rejects_insufficient_history():
+def test_pipeline_rejects_insufficient_history(tmp_path):
     now = datetime(2026, 8, 15)
 
     product = Product(
@@ -105,7 +116,7 @@ def test_pipeline_rejects_insufficient_history():
         current_price=100.0,
     )
 
-    deal = DealPipeline().evaluate(
+    deal = build_pipeline(tmp_path).evaluate(
         product,
         [],
         now=now,
@@ -115,8 +126,6 @@ def test_pipeline_rejects_insufficient_history():
 
 
 def test_pipeline_can_use_persisted_history(tmp_path):
-    from app.services.price_history_repository import PriceHistoryRepository
-
     now = datetime(2026, 8, 15)
 
     repository = PriceHistoryRepository(str(tmp_path / "test.db"))
@@ -182,8 +191,6 @@ def test_pipeline_can_use_persisted_history(tmp_path):
 
 
 def test_pipeline_records_current_price_before_evaluation(tmp_path):
-    from app.services.price_history_repository import PriceHistoryRepository
-
     now = datetime(2026, 8, 15)
 
     repository = PriceHistoryRepository(
@@ -211,3 +218,52 @@ def test_pipeline_records_current_price_before_evaluation(tmp_path):
     assert history[0].product_id == "123"
     assert history[0].price == 75.0
     assert history[0].recorded_at == now
+
+
+def test_pipeline_rejects_amazon_deal_without_affiliate_link(tmp_path):
+    now = datetime(2026, 8, 15)
+
+    product = Product(
+        product_id="123",
+        title="Amazon Product",
+        current_price=75.0,
+        rating=4.7,
+        review_count=8500,
+        platform="amazon",
+    )
+
+    history = [
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=now - timedelta(days=90),
+        ),
+        PriceHistory(
+            "123",
+            95.0,
+            recorded_at=now - timedelta(days=60),
+        ),
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=now - timedelta(days=20),
+        ),
+        PriceHistory(
+            "123",
+            95.0,
+            recorded_at=now - timedelta(days=10),
+        ),
+        PriceHistory(
+            "123",
+            70.0,
+            recorded_at=now,
+        ),
+    ]
+
+    deal = build_pipeline(tmp_path).evaluate(
+        product,
+        history,
+        now=now,
+    )
+
+    assert deal is None

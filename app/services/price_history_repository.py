@@ -11,6 +11,7 @@ class PriceHistoryRepository:
         self._connection = sqlite3.connect(self.db_path)
 
         self._create_table()
+        self._create_index()
 
     def _create_table(self) -> None:
         self._connection.execute(
@@ -22,6 +23,17 @@ class PriceHistoryRepository:
                 currency TEXT NOT NULL,
                 recorded_at TEXT NOT NULL
             )
+            """
+        )
+
+        self._connection.commit()
+
+    def _create_index(self) -> None:
+        self._connection.execute(
+            """
+            CREATE INDEX IF NOT EXISTS
+                idx_price_history_product_recorded
+            ON price_history (product_id, recorded_at)
             """
         )
 
@@ -84,3 +96,19 @@ class PriceHistoryRepository:
         ).fetchone()
 
         return row[0]
+
+    def delete_older_than(self, cutoff: datetime) -> int:
+        # recorded_at is stored as an ISO 8601 string, so the
+        # comparison is chronological as long as every stored
+        # value uses the same format as the cutoff.
+        cursor = self._connection.execute(
+            """
+            DELETE FROM price_history
+            WHERE recorded_at < ?
+            """,
+            (cutoff.isoformat(),),
+        )
+
+        self._connection.commit()
+
+        return cursor.rowcount

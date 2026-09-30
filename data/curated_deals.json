@@ -1,0 +1,38 @@
+{
+  "max_publications_per_run": 3,
+  "deals": [
+    {
+      "asin": "B0FMYWSMDF",
+      "title": "LEGO Star Wars SMART Play: AT-ST Attack on Endor 75424",
+      "current_price": 39.95,
+      "reference_price": 50.00,
+      "rating": 4.5,
+      "review_count": 121,
+      "source_name": "Slickdeals",
+      "source_url": "https://slickdeals.net/f/20066469-lego-star-wars-smart-play-at-st-attack-on-endor-75424-2026-39-95-free-shipping",
+      "expires_at": null
+    },
+    {
+      "asin": "B0GQN21TF6",
+      "title": "Bltend Heavy Duty Golf Net, 10x7ft",
+      "current_price": 98.98,
+      "reference_price": 139.99,
+      "rating": 4.5,
+      "review_count": 55,
+      "source_name": "Slickdeals",
+      "source_url": "https://slickdeals.net/f/20057619-amazon-bltend-10x7-ft-heavy-duty-golf-practice-net-98-98-deal",
+      "expires_at": "2026-09-28T03:59:00-03:00"
+    },
+{
+  "asin": "B0GYTS2QL2",
+  "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
+  "current_price": 29.99,
+  "reference_price": 40.00,
+  "rating": null,
+  "review_count": 0,
+  "source_name": "Slickdeals",
+  "source_url": "",
+  "expires_at": null
+}
+  ]
+}

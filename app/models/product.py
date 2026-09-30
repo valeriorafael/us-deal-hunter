@@ -19,6 +19,7 @@ class Product:
     platform: str = ""
     product_url: str = ""
     affiliate_url: str = ""
+    image_url: str = ""
 
     @property
     def discount_vs_30d(self) -> Optional[float]:

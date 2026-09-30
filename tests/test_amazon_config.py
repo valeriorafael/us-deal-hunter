@@ -44,8 +44,9 @@ def test_amazon_config_rejects_missing_credentials(monkeypatch):
         )
 
 
-def test_amazon_config_builds_api_client(monkeypatch):
+def test_amazon_config_builds_current_api_client(monkeypatch):
     from app.config import AmazonConfig
+    from app.platforms.amazon_client import AmazonApiClient
 
     monkeypatch.setenv("AMAZON_CREDENTIAL_ID", "test-id")
     monkeypatch.setenv("AMAZON_CREDENTIAL_SECRET", "test-secret")
@@ -55,7 +56,8 @@ def test_amazon_config_builds_api_client(monkeypatch):
     config = AmazonConfig.from_environment()
     client = config.create_client()
 
-    assert client.credential_id == "test-id"
-    assert client.credential_secret == "test-secret"
+    assert isinstance(client, AmazonApiClient)
+    assert client.access_key == "test-id"
+    assert client.secret_key == "test-secret"
     assert client.credential_version == "3.1"
     assert client.partner_tag == "test-20"
