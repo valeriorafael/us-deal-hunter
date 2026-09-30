@@ -22,9 +22,9 @@ $LogRetentionDays = 30
 try {
     $ExpiredLogs = Get-ChildItem -Path $LogDir -Filter "hunt-*.log" `
         -File `
-        -Exclude (Split-Path -Leaf $LogFile) `
         -ErrorAction SilentlyContinue |
         Where-Object {
+            $_.FullName -ne $LogFile -and
             $_.LastWriteTime -lt (Get-Date).AddDays(-$LogRetentionDays)
         }
 
