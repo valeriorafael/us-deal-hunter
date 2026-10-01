@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 from app.config import AmazonConfig, TelegramConfig
 from app.models.price_history import PriceHistory
+from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
 from app.publication.service import PublicationService
 from app.services.amazon_discovery import AmazonDiscovery
 from app.services.deal_pipeline import DealPipeline
@@ -24,6 +25,13 @@ DEMO_DB_PATH = ":memory:"
 DEMO_PUBLICATION_DB_PATH = "data/demo_publication.db"
 
 HISTORY_RETENTION_DAYS = 90
+
+# Deduplication policy for the hunter: a product is published
+# again only after this window has fully elapsed. The value is
+# owned by app.publication.base.DEFAULT_PUBLICATION_COOLDOWN so
+# there is a single place to change it. Assign None here to
+# disable re-publication entirely.
+DEDUPLICATION_COOLDOWN = DEFAULT_PUBLICATION_COOLDOWN
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -320,6 +328,7 @@ def run(args: argparse.Namespace) -> int:
             publisher=publisher,
             deal_validator=CuratedDealValidator(),
             repository=PublicationRepository(),
+            cooldown=DEDUPLICATION_COOLDOWN,
         )
 
         workflow = HuntWorkflow(
@@ -418,6 +427,7 @@ def run(args: argparse.Namespace) -> int:
         publication_service = PublicationService(
             publisher=publisher,
             repository=repository,
+            cooldown=DEDUPLICATION_COOLDOWN,
         )
 
     all_deals = []

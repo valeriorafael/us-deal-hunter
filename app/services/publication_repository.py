@@ -1,6 +1,8 @@
 import sqlite3
 from datetime import datetime, timedelta
 
+from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
+
 
 class PublicationRepository:
     def __init__(
@@ -118,7 +120,7 @@ class PublicationRepository:
         self,
         product_id: str,
         now: datetime | None = None,
-        cooldown: timedelta = timedelta(hours=24),
+        cooldown: timedelta = DEFAULT_PUBLICATION_COOLDOWN,
     ) -> bool:
         now = now or datetime.now()
 
@@ -127,6 +129,7 @@ class PublicationRepository:
             SELECT published_at
             FROM publications
             WHERE product_id = ?
+              AND status = 'PUBLISHED'
             ORDER BY published_at DESC
             LIMIT 1
             """,
@@ -138,7 +141,21 @@ class PublicationRepository:
 
         published_at = datetime.fromisoformat(row[0])
 
-        return published_at >= now - cooldown
+        return published_at > now - cooldown
+
+    def was_published(self, product_id: str) -> bool:
+        row = self._connection.execute(
+            """
+            SELECT 1
+            FROM publications
+            WHERE product_id = ?
+              AND status = 'PUBLISHED'
+            LIMIT 1
+            """,
+            (product_id,),
+        ).fetchone()
+
+        return row is not None
 
     def count(self, product_id: str) -> int:
         row = self._connection.execute(

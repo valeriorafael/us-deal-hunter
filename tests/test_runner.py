@@ -261,3 +261,108 @@ def test_prune_old_history_keeps_ninety_day_window(tmp_path):
         now - timedelta(days=45),
         now,
     ]
+
+
+def test_runner_wires_deduplication_cooldown(monkeypatch):
+    from argparse import Namespace
+    from datetime import timedelta
+    from types import SimpleNamespace
+
+    import app.runner as runner_module
+    import app.services.curated_deals as curated_deals
+    from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
+
+    recorded = []
+
+    def record_publication_service(**kwargs):
+        recorded.append(kwargs)
+        return object()
+
+    class FakeTelegramConfig:
+        @classmethod
+        def from_environment(cls):
+            return cls()
+
+        def create_publisher(self):
+            return object()
+
+    class FakePublicationRepository:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return []
+
+    class FakeCuratedDealLoader:
+        def load(self, path=None):
+            return SimpleNamespace(
+                deals=[],
+                max_publications_per_run=3,
+            )
+
+    monkeypatch.setattr(
+        runner_module,
+        "PublicationService",
+        record_publication_service,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "TelegramConfig",
+        FakeTelegramConfig,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "PublicationRepository",
+        FakePublicationRepository,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "build_discovery_workflow",
+        lambda **kwargs: FakeDiscoveryWorkflow(),
+    )
+    monkeypatch.setattr(
+        curated_deals,
+        "CuratedDealLoader",
+        FakeCuratedDealLoader,
+    )
+
+    demo_result = runner_module.run(
+        Namespace(
+            keywords="gaming mouse",
+            search_index="All",
+            item_count=10,
+            item_page=1,
+            min_saving_percent=None,
+            max_publications=None,
+            keywords_file=None,
+            curated_file=None,
+            dry_run=False,
+            demo=True,
+            publish_demo=True,
+        )
+    )
+
+    curated_result = runner_module.run(
+        Namespace(
+            keywords=None,
+            keywords_file=None,
+            curated_file="data/curated_deals.json",
+            demo=False,
+            publish_demo=False,
+            dry_run=False,
+            max_publications=None,
+        )
+    )
+
+    assert demo_result == 0
+    assert curated_result == 0
+    assert len(recorded) == 2
+
+    for call in recorded:
+        assert (
+            call["cooldown"]
+            == runner_module.DEDUPLICATION_COOLDOWN
+            == DEFAULT_PUBLICATION_COOLDOWN
+            == timedelta(hours=24)
+        )
