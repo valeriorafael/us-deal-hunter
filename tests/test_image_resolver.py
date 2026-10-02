@@ -83,3 +83,22 @@ def test_image_resolver_returns_empty_when_not_found():
         )
         == ""
     )
+
+def test_image_resolver_logs_unexpected_candidate_errors(
+    caplog,
+):
+    import logging
+
+    def exploding_get(url, timeout, headers):
+        raise ValueError("unexpected parser failure")
+
+    resolver = ImageResolver(get=exploding_get)
+
+    with caplog.at_level(
+        logging.WARNING,
+        logger="app.services.image_resolver",
+    ):
+        assert resolver.resolve("https://example.com/deal") == ""
+
+    assert "image candidate failed" in caplog.text
+    assert "unexpected parser failure" in caplog.text

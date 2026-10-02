@@ -137,6 +137,18 @@ MIGRATIONS: tuple[Migration, ...] = (
         ),
         requires_backup=True,
     ),
+    Migration(
+        version=4,
+        name="publication_attempt_state",
+        statements=(
+            """
+            ALTER TABLE publications
+            ADD COLUMN message_id INTEGER
+            """,
+        ),
+        requires_backup=False,
+        adopt_legacy=False,
+    ),
 )
 
 LATEST_SCHEMA_VERSION = max(
@@ -404,9 +416,29 @@ def _apply_migration(
     connection: sqlite3.Connection,
     migration: Migration,
 ) -> None:
-    connection.execute("BEGIN")
+    # BEGIN IMMEDIATE + in-transaction version check: a concurrent
+    # process may have applied this migration after run_migrations
+    # read user_version; without the recheck both processes would
+    # run the same ALTER TABLE and one would fail with
+    # "duplicate column name".
+    connection.execute("BEGIN IMMEDIATE")
 
     try:
+        current = connection.execute(
+            "PRAGMA user_version"
+        ).fetchone()[0]
+
+        if current >= migration.version:
+            connection.execute("COMMIT")
+
+            logger.info(
+                "migration already applied: %04d_%s",
+                migration.version,
+                migration.name,
+            )
+
+            return
+
         for statement in migration.statements:
             connection.execute(statement)
 
@@ -418,7 +450,17 @@ def _apply_migration(
         )
         connection.execute("COMMIT")
     except BaseException:
-        connection.execute("ROLLBACK")
+        try:
+            connection.execute("ROLLBACK")
+        except sqlite3.Error:
+            # never let a failed rollback mask the original
+            # migration error
+            logger.warning(
+                "rollback failed for migration %04d_%s",
+                migration.version,
+                migration.name,
+            )
+
         raise
 
     logger.info(

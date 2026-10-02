@@ -1,8 +1,12 @@
+import logging
 from datetime import datetime
 
 from app.models.deal import Deal
 from app.services.amazon_discovery import AmazonDiscovery
 from app.services.deal_pipeline import DealPipeline
+from app.services.run_summary import sanitize_error
+
+logger = logging.getLogger(__name__)
 
 
 class DiscoveryWorkflow:
@@ -23,6 +27,10 @@ class DiscoveryWorkflow:
     ):
         self.discovery = discovery
         self.pipeline = pipeline
+        # errors of individual products, formatted for the
+        # runner SUMMARY (spec phase 3, section 9); the runner
+        # drains this list after every keyword
+        self.product_errors: list[str] = []
 
     def discover_deals(
         self,
@@ -50,15 +58,31 @@ class DiscoveryWorkflow:
 
             processed_ids.add(product.product_id)
 
-            self.pipeline.record_price(
-                product,
-                now=now,
-            )
+            try:
+                self.pipeline.record_price(
+                    product,
+                    now=now,
+                )
 
-            deal = self.pipeline.evaluate(
-                product,
-                now=now,
-            )
+                deal = self.pipeline.evaluate(
+                    product,
+                    now=now,
+                )
+            except Exception as exc:
+                # one broken product must not abort the
+                # whole discovery flow
+                message = sanitize_error(exc)
+
+                logger.warning(
+                    "product %s failed: %s",
+                    product.product_id,
+                    message,
+                )
+                self.product_errors.append(
+                    f"product: {product.product_id} "
+                    f"@ {keywords}: {message}"
+                )
+                continue
 
             if deal is not None:
                 deal.source_query = keywords

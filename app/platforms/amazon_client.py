@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from creatorsapi_python_sdk.api.default_api import DefaultApi
@@ -14,6 +15,13 @@ from creatorsapi_python_sdk.models.search_items_request_content import (
 from creatorsapi_python_sdk.models.search_items_resource import (
     SearchItemsResource,
 )
+
+from app.services.resilience import (
+    AMAZON_RETRY_POLICY,
+    retry_call,
+)
+
+logger = logging.getLogger(__name__)
 
 
 class AmazonApiClient:
@@ -77,6 +85,20 @@ class AmazonApiClient:
 
         return None
 
+    @staticmethod
+    def _log_search_retry(
+        attempt: int,
+        exc: BaseException,
+        delay: float,
+    ) -> None:
+        logger.warning(
+            "retry attempt=%s/%s delay=%.2fs error=%s",
+            attempt,
+            AMAZON_RETRY_POLICY.attempts,
+            delay,
+            type(exc).__name__,
+        )
+
     def get_items(
         self,
         asin: str,
@@ -132,9 +154,16 @@ class AmazonApiClient:
             ],
         )
 
-        response = api.search_items(
-            x_marketplace=self.marketplace,
-            search_items_request_content=request,
+        def attempt() -> Any:
+            return api.search_items(
+                x_marketplace=self.marketplace,
+                search_items_request_content=request,
+            )
+
+        response = retry_call(
+            attempt,
+            policy=AMAZON_RETRY_POLICY,
+            on_retry=self._log_search_retry,
         )
 
         return self._to_dict(response)

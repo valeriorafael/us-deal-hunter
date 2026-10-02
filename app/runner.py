@@ -1,12 +1,20 @@
 import argparse
+import logging
+import sqlite3
 from datetime import datetime, timedelta
 
 from app.config import AmazonConfig, TelegramConfig
 from app.models.price_history import PriceHistory
-from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
+from app.publication.base import (
+    DEFAULT_PUBLICATION_COOLDOWN,
+    is_failure_status,
+)
 from app.publication.service import PublicationService
 from app.services.amazon_discovery import AmazonDiscovery
-from app.services.database import DatabaseBackupError
+from app.services.database import (
+    DatabaseBackupError,
+    UnsupportedSchemaVersionError,
+)
 from app.services.deal_pipeline import DealPipeline
 from app.services.demo_discovery import DemoAmazonDiscovery
 from app.services.discovery_workflow import DiscoveryWorkflow
@@ -20,6 +28,20 @@ from app.services.price_history_repository import PriceHistoryRepository
 from app.services.publication_repository import (
     PublicationRepository,
 )
+from app.services.resilience import (
+    AMAZON_MIN_INTERVAL_SECONDS,
+    DEFAULT_RUN_DEADLINE_SECONDS,
+    Deadline,
+    RateLimiter,
+)
+from app.services.run_summary import (
+    KeywordOutcome,
+    RunSummary,
+    sanitize_error,
+    sanitize_text,
+)
+
+logger = logging.getLogger(__name__)
 
 
 DEMO_DB_PATH = ":memory:"
@@ -155,12 +177,12 @@ def _prune_old_history(
         days=HISTORY_RETENTION_DAYS
     )
 
-    if repository.count_older_than(cutoff) == 0:
-        return
-
     try:
+        if repository.count_older_than(cutoff) == 0:
+            return
+
         removed = repository.prune_older_than(cutoff)
-    except DatabaseBackupError as exc:
+    except (DatabaseBackupError, sqlite3.Error) as exc:
         print(f"History prune aborted: {exc}")
 
         return
@@ -269,7 +291,65 @@ def format_deal(deal) -> str:
     return "\n".join(lines)
 
 
-def run(args: argparse.Namespace) -> int:
+def _reconcile_stale_attempts(
+    publication_service: PublicationService,
+) -> int:
+    """Resolve stale attempt rows once per run (phase 3).
+
+    Reconciliation is housekeeping: if it fails the run still
+    continues (the rows are picked up again on the next run).
+    """
+    try:
+        return publication_service.reconcile_stale_attempts()
+    except Exception as exc:
+        logger.error(
+            "stale reconciliation failed: %s",
+            sanitize_error(exc),
+        )
+        return 0
+
+
+def _verify_channel_attempts(
+    publication_service: PublicationService,
+) -> int:
+    """Probe in-flight attempts against the channel (phase 4).
+
+    Verification is housekeeping: if it fails the run still
+    continues (the rows stay for the next attempt).
+    """
+    verify = getattr(
+        publication_service,
+        "verify_channel_attempts",
+        None,
+    )
+
+    if verify is None:
+        return 0
+
+    try:
+        return verify()
+    except Exception as exc:
+        logger.error(
+            "channel verification failed: %s",
+            sanitize_error(exc),
+        )
+        return 0
+
+
+def run(
+    args: argparse.Namespace,
+    *,
+    deadline: Deadline | None = None,
+    rate_limiter: RateLimiter | None = None,
+) -> int:
+    if deadline is None:
+        deadline = Deadline(DEFAULT_RUN_DEADLINE_SECONDS)
+
+    if rate_limiter is None:
+        rate_limiter = RateLimiter(
+            AMAZON_MIN_INTERVAL_SECONDS
+        )
+
     if args.publish_demo and not args.demo:
         raise ValueError(
             "--publish-demo requires --demo."
@@ -336,24 +416,37 @@ def run(args: argparse.Namespace) -> int:
             deal_validator=CuratedDealValidator(),
             repository=PublicationRepository(),
             cooldown=DEDUPLICATION_COOLDOWN,
+            verifier=publisher,
+        )
+
+        verified = _verify_channel_attempts(
+            publication_service
+        )
+        reconciled = _reconcile_stale_attempts(
+            publication_service
+        )
+
+        publication_limit = (
+            args.max_publications
+            if args.max_publications is not None
+            else config.max_publications_per_run
         )
 
         workflow = HuntWorkflow(
             discovery_workflow=None,
             publication_service=publication_service,
             policy=HuntPublicationPolicy(
-                max_publications_per_run=(
-                    args.max_publications
-                    if args.max_publications is not None
-                    else config.max_publications_per_run
-                )
+                max_publications_per_run=publication_limit
             ),
         )
 
         result = workflow.publish_deals(
             deals,
             now=datetime.now(),
+            deadline=deadline,
         )
+
+        summary_errors: list[str] = []
 
         for deal, publication_result in zip(
             deals,
@@ -362,8 +455,42 @@ def run(args: argparse.Namespace) -> int:
             print(
                 f"{deal.product.product_id}: "
                 f"{publication_result.status} - "
-                f"{publication_result.reason}"
+                f"{sanitize_text(publication_result.reason)}"
             )
+
+            if is_failure_status(
+                publication_result.status
+            ):
+                summary_errors.append(
+                    f"publication: "
+                    f"{deal.product.product_id}: "
+                    f"{sanitize_text(publication_result.reason)}"
+                )
+
+        summary = RunSummary(
+            keyword_outcomes=[],
+            deals_found=len(deals),
+            publications_attempted=len(result.results),
+            publications_successful=result.published_count,
+            publications_failed=(
+                len(result.results)
+                - result.published_count
+            ),
+            duplicates_blocked=result.duplicate_count,
+            reconciled=reconciled,
+            deadline_exceeded=(
+                deadline.expired
+                or result.deadline_exceeded
+            ),
+            errors=summary_errors,
+            publication_limit=publication_limit,
+            channel_verified=verified,
+        )
+
+        print("")
+
+        for line in summary.lines():
+            print(line)
 
         print("")
         print(
@@ -435,24 +562,82 @@ def run(args: argparse.Namespace) -> int:
             publisher=publisher,
             repository=repository,
             cooldown=DEDUPLICATION_COOLDOWN,
+            verifier=publisher,
         )
 
     all_deals = []
+    outcomes: list[KeywordOutcome] = []
+    errors: list[str] = []
 
     for keyword in keyword_configs:
+        if deadline.expired:
+            outcomes.append(
+                KeywordOutcome(
+                    keyword.query,
+                    "SKIPPED",
+                    0,
+                    None,
+                )
+            )
+            continue
+
         print("")
         print("========================================")
         print(f"Keyword: {keyword.query}")
         print("========================================")
 
-        deals = discovery_workflow.discover_deals(
-            keywords=keyword.query,
-            search_index=keyword.search_index,
-            item_count=keyword.item_count,
-            item_page=keyword.item_page,
-            min_saving_percent=keyword.min_saving_percent,
-            now=now,
+        try:
+            if not args.demo:
+                rate_limiter.wait()
+
+            deals = discovery_workflow.discover_deals(
+                keywords=keyword.query,
+                search_index=keyword.search_index,
+                item_count=keyword.item_count,
+                item_page=keyword.item_page,
+                min_saving_percent=keyword.min_saving_percent,
+                now=now,
+            )
+        except Exception as exc:
+            # a failing keyword never aborts the run (phase 3)
+            message = sanitize_error(exc)
+
+            logger.error(
+                "keyword failed: %s - %s",
+                keyword.query,
+                message,
+            )
+            outcomes.append(
+                KeywordOutcome(
+                    keyword.query,
+                    "FAILED",
+                    0,
+                    message,
+                )
+            )
+            errors.append(
+                f"keyword: {keyword.query}: {message}"
+            )
+            continue
+
+        outcomes.append(
+            KeywordOutcome(
+                keyword.query,
+                "OK",
+                len(deals),
+                None,
+            )
         )
+
+        product_errors = getattr(
+            discovery_workflow,
+            "product_errors",
+            None,
+        )
+
+        if product_errors:
+            errors.extend(product_errors)
+            product_errors.clear()
 
         all_deals.extend(deals)
 
@@ -474,8 +659,20 @@ def run(args: argparse.Namespace) -> int:
 
     total_deals = len(all_deals)
     published = 0
+    attempted = 0
+    duplicates_blocked = 0
+    reconciled = 0
+    verified = 0
+    deadline_flag = deadline.expired
 
     if publication_service is not None:
+        verified = _verify_channel_attempts(
+            publication_service
+        )
+        reconciled = _reconcile_stale_attempts(
+            publication_service
+        )
+
         hunt = HuntWorkflow(
             discovery_workflow=discovery_workflow,
             publication_service=publication_service,
@@ -487,33 +684,62 @@ def run(args: argparse.Namespace) -> int:
         result = hunt.publish_deals(
             all_deals,
             now=now,
+            deadline=deadline,
         )
 
         published = result.published_count
+        attempted = len(result.results)
+        duplicates_blocked = result.duplicate_count
+        deadline_flag = (
+            deadline.expired or result.deadline_exceeded
+        )
 
         for deal, publication_result in zip(
             all_deals,
             result.results,
         ):
-            print(
-                f"{deal.product.product_id}: "
-                f"{publication_result.status} - "
-                f"{publication_result.reason}"
-            )
+            try:
+                print(
+                    f"{deal.product.product_id}: "
+                    f"{publication_result.status} - "
+                    f"{sanitize_text(publication_result.reason)}"
+                )
+            except Exception as exc:
+                # last line of defence per deal (phase 3)
+                errors.append(
+                    f"publication: "
+                    f"{deal.product.product_id}: "
+                    f"{sanitize_error(exc)}"
+                )
+                continue
+
+            if is_failure_status(
+                publication_result.status
+            ):
+                errors.append(
+                    f"publication: "
+                    f"{deal.product.product_id}: "
+                    f"{sanitize_text(publication_result.reason)}"
+                )
+
+    summary = RunSummary(
+        keyword_outcomes=outcomes,
+        deals_found=total_deals,
+        publications_attempted=attempted,
+        publications_successful=published,
+        publications_failed=attempted - published,
+        duplicates_blocked=duplicates_blocked,
+        reconciled=reconciled,
+        deadline_exceeded=deadline_flag,
+        errors=errors,
+        publication_limit=max_publications,
+        channel_verified=verified,
+    )
 
     print("")
-    print("========================================")
-    print("SUMMARY")
-    print("========================================")
-    print(
-        f"Keywords processed: "
-        f"{len(keyword_configs)}"
-    )
-    print(f"Deals found: {total_deals}")
-    print(
-        f"Publication limit: "
-        f"{max_publications}"
-    )
+
+    for line in summary.lines():
+        print(line)
 
     if args.dry_run or (
         args.demo and not args.publish_demo
@@ -540,6 +766,14 @@ def main() -> int:
     except DatabaseBackupError as exc:
         print(f"Database backup error: {exc}")
         return 3
+    except (
+        sqlite3.Error,
+        UnsupportedSchemaVersionError,
+    ) as exc:
+        # corrupt schema, disk full, locked database: clean
+        # one-line error instead of a raw traceback
+        print(f"Database error: {exc}")
+        return 4
 
 
 if __name__ == "__main__":

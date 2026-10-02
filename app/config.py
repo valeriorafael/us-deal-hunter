@@ -1,5 +1,5 @@
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
 
@@ -64,7 +64,9 @@ class AmazonConfig:
 
 @dataclass(frozen=True)
 class TelegramConfig:
-    bot_token: str
+    # repr=False keeps the bot token out of tracebacks,
+    # log records and debug output (Fase 5 security hardening).
+    bot_token: str = field(repr=False)
     chat_id: str
 
     @classmethod

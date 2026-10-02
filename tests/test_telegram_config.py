@@ -58,3 +58,28 @@ def test_telegram_config_creates_publisher(monkeypatch):
     assert publisher.bot_token == "test-token"
     assert publisher.chat_id == "@testchannel"
 
+
+
+def test_telegram_config_repr_hides_bot_token(
+    monkeypatch,
+):
+    from app.config import TelegramConfig
+
+    monkeypatch.setenv(
+        "TELEGRAM_BOT_TOKEN",
+        "123456:VERYSECRETVALUE",
+    )
+    monkeypatch.setenv(
+        "TELEGRAM_CHAT_ID",
+        "@testchannel",
+    )
+
+    config = TelegramConfig.from_environment()
+
+    rendered = repr(config)
+
+    assert "VERYSECRETVALUE" not in rendered
+    assert "123456" not in rendered
+    assert "bot_token" not in rendered
+    assert config.bot_token == "123456:VERYSECRETVALUE"
+    assert config.chat_id == "@testchannel"

@@ -127,3 +127,85 @@ def test_curated_loader_keeps_explicit_image(
     assert config.deals[0].product.image_url == (
         "https://cdn.example.com/explicit.jpg"
     )
+
+def test_curated_loader_missing_file_raises_value_error(
+    tmp_path,
+    monkeypatch,
+):
+    import pytest
+
+    monkeypatch.setenv(
+        "AMAZON_PARTNER_TAG",
+        "test-20",
+    )
+
+    loader = CuratedDealLoader()
+
+    with pytest.raises(
+        ValueError,
+        match="Curated deals file not found",
+    ):
+        loader.load(
+            str(tmp_path / "missing.json")
+        )
+
+
+def test_curated_loader_invalid_json_raises_value_error(
+    tmp_path,
+    monkeypatch,
+):
+    import pytest
+
+    monkeypatch.setenv(
+        "AMAZON_PARTNER_TAG",
+        "test-20",
+    )
+
+    path = tmp_path / "curated.json"
+    path.write_text("{not json", encoding="utf-8")
+
+    loader = CuratedDealLoader()
+
+    with pytest.raises(
+        ValueError,
+        match="Invalid curated deals JSON",
+    ):
+        loader.load(str(path))
+
+
+def test_curated_loader_reports_invalid_deal_index(
+    tmp_path,
+    monkeypatch,
+):
+    import pytest
+
+    monkeypatch.setenv(
+        "AMAZON_PARTNER_TAG",
+        "test-20",
+    )
+
+    path = tmp_path / "curated.json"
+
+    path.write_text(
+        json.dumps(
+            {
+                "deals": [
+                    {
+                        "asin": "B123456789",
+                        "current_price": 50.0,
+                        "reference_price": 70.0,
+                        "source_name": "Test Source",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    loader = CuratedDealLoader()
+
+    with pytest.raises(
+        ValueError,
+        match=r"Invalid curated deal #1",
+    ):
+        loader.load(str(path))

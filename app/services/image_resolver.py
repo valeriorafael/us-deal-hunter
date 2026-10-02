@@ -1,8 +1,11 @@
+import logging
 import re
 from html.parser import HTMLParser
 from urllib.parse import urljoin
 
 import requests
+
+logger = logging.getLogger(__name__)
 
 
 class _ImageMetaParser(HTMLParser):
@@ -174,7 +177,12 @@ class ImageResolver:
 
             except requests.RequestException:
                 continue
-            except Exception:
+            except Exception as exc:
+                logger.warning(
+                    "image candidate failed for %s: %s",
+                    url,
+                    exc,
+                )
                 continue
 
         return ""

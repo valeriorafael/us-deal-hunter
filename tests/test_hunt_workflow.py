@@ -379,3 +379,217 @@ def test_hunt_workflow_publication_limit_counts_only_successes():
     assert result.published_count == 2
     assert len(result.results) == 3
     assert calls == ["123", "456", "789"]
+
+
+def test_publish_deals_stops_when_deadline_already_expired():
+    from app.services.resilience import Deadline
+
+    calls = []
+
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return []
+
+    class FakePublicationService:
+        def publish(self, deal, now=None):
+            calls.append(deal.product.product_id)
+
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+            )
+
+    workflow = HuntWorkflow(
+        discovery_workflow=FakeDiscoveryWorkflow(),
+        publication_service=FakePublicationService(),
+    )
+
+    deadline = Deadline(seconds=0, clock=lambda: 0.0)
+
+    result = workflow.publish_deals(
+        [build_deal("123"), build_deal("456")],
+        deadline=deadline,
+    )
+
+    assert calls == []
+    assert result.discovered_count == 2
+    assert result.published_count == 0
+    assert result.results == ()
+    assert result.attempted_count == 0
+    assert result.deadline_exceeded is True
+    assert deadline.expired is True
+
+
+def test_publish_deals_checks_deadline_between_deals():
+    from app.services.resilience import Deadline
+
+    state = {"now": 0.0}
+    calls = []
+
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return []
+
+    class SlowPublicationService:
+        def publish(self, deal, now=None):
+            calls.append(deal.product.product_id)
+            state["now"] += 100.0
+
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+                message_id=len(calls),
+            )
+
+    workflow = HuntWorkflow(
+        discovery_workflow=FakeDiscoveryWorkflow(),
+        publication_service=SlowPublicationService(),
+    )
+
+    deadline = Deadline(
+        seconds=10, clock=lambda: state["now"]
+    )
+
+    result = workflow.publish_deals(
+        [
+            build_deal("123"),
+            build_deal("456"),
+            build_deal("789"),
+        ],
+        deadline=deadline,
+    )
+
+    assert calls == ["123"]
+    assert result.published_count == 1
+    assert len(result.results) == 1
+    assert result.attempted_count == 1
+    assert result.deadline_exceeded is True
+    assert deadline.expired is True
+
+
+def test_publish_deals_survives_unexpected_exception():
+    calls = []
+
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return []
+
+    class BrokenPublicationService:
+        def publish(self, deal, now=None):
+            calls.append(deal.product.product_id)
+
+            if deal.product.product_id == "123":
+                raise ValueError("db is on fire token=abc")
+
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+                message_id=len(calls),
+            )
+
+    workflow = HuntWorkflow(
+        discovery_workflow=FakeDiscoveryWorkflow(),
+        publication_service=BrokenPublicationService(),
+    )
+
+    result = workflow.publish_deals(
+        [build_deal("123"), build_deal("456")],
+    )
+
+    assert calls == ["123", "456"]
+    assert result.discovered_count == 2
+    assert result.published_count == 1
+    assert len(result.results) == 2
+    assert result.attempted_count == 2
+    assert result.failed_count == 1
+    assert result.duplicate_count == 0
+    assert result.deadline_exceeded is False
+    assert result.results[0].success is False
+    assert result.results[0].status == "PUBLICATION_ERROR"
+    assert "abc" not in result.results[0].reason
+    assert "token=[REDACTED]" in result.results[0].reason
+    assert result.results[1].success is True
+
+
+def test_discover_and_publish_forwards_deadline():
+    from app.services.resilience import Deadline
+
+    captured = {}
+
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return [build_deal("123")]
+
+    class FakePublicationService:
+        def publish(self, deal, now=None):
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+            )
+
+    workflow = HuntWorkflow(
+        discovery_workflow=FakeDiscoveryWorkflow(),
+        publication_service=FakePublicationService(),
+    )
+
+    deadline = Deadline(seconds=0, clock=lambda: 0.0)
+    original = workflow.publish_deals
+
+    def spy(deals, now=None, *, deadline=None):
+        captured["deadline"] = deadline
+        return original(deals, now=now, deadline=deadline)
+
+    workflow.publish_deals = spy
+
+    workflow.discover_and_publish(
+        keywords="mouse",
+        deadline=deadline,
+    )
+
+    assert captured["deadline"] is deadline
+
+
+def test_hunt_result_counts_failures_and_duplicates():
+    class FakeDiscoveryWorkflow:
+        def discover_deals(self, **kwargs):
+            return []
+
+    calls = 0
+
+    class FakePublicationService:
+        def publish(self, deal, now=None):
+            nonlocal calls
+            calls += 1
+
+            if deal.product.product_id == "456":
+                return PublicationResult(
+                    success=False,
+                    status="DUPLICATE_PUBLICATION",
+                    reason="Product was published recently.",
+                )
+
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+                message_id=calls,
+            )
+
+    workflow = HuntWorkflow(
+        discovery_workflow=FakeDiscoveryWorkflow(),
+        publication_service=FakePublicationService(),
+    )
+
+    result = workflow.publish_deals(
+        [build_deal("123"), build_deal("456")],
+    )
+
+    assert result.attempted_count == 2
+    assert result.published_count == 1
+    assert result.failed_count == 1
+    assert result.duplicate_count == 1
+    assert result.deadline_exceeded is False

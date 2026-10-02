@@ -312,6 +312,7 @@ def test_migration_baseline_adopts_legacy_publications_table(
         "discount_vs_30d",
         "source_query",
         "status",
+        "message_id",
     ]
     assert defaults["status"] == "'PUBLISHED'"
     assert (
@@ -362,6 +363,25 @@ def _create_legacy_history(db_path, rows):
         )
         """
     )
+    # a realistic pre-v3 database also carries the v1
+    # baseline publications table
+    connection.execute(
+        """
+        CREATE TABLE publications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id TEXT NOT NULL,
+            affiliate_url TEXT NOT NULL,
+            price REAL NOT NULL,
+            published_at TEXT NOT NULL,
+            title TEXT,
+            score REAL,
+            label TEXT,
+            discount_vs_30d REAL,
+            source_query TEXT,
+            status TEXT NOT NULL DEFAULT 'PUBLISHED'
+        )
+        """
+    )
     connection.executemany(
         """
         INSERT INTO price_history (
@@ -385,8 +405,8 @@ def test_migrations_are_complete_and_ordered():
     ]
 
     assert versions == sorted(set(versions))
-    assert versions == [1, 2, 3]
-    assert database.LATEST_SCHEMA_VERSION == 3
+    assert versions == [1, 2, 3, 4]
+    assert database.LATEST_SCHEMA_VERSION == 4
     assert database.LATEST_SCHEMA_VERSION == max(versions)
 
 
@@ -447,7 +467,7 @@ def test_migration_3_deduplicates_before_unique_index(
         migrated.execute(
             "PRAGMA user_version"
         ).fetchone()[0]
-        == 3
+        == database.LATEST_SCHEMA_VERSION
     )
     assert rows == [
         (95.0, "2026-08-15T18:00:00"),
@@ -479,7 +499,7 @@ def test_migration_failure_is_rolled_back(
 
     broken = database.MIGRATIONS + (
         database.Migration(
-            version=4,
+            version=database.LATEST_SCHEMA_VERSION + 1,
             name="broken_migration",
             statements=(
                 """
@@ -510,7 +530,7 @@ def test_migration_failure_is_rolled_back(
 
     connection.close()
 
-    assert version == 3
+    assert version == database.LATEST_SCHEMA_VERSION
     assert probes == 0
 
 
@@ -781,7 +801,7 @@ def test_connect_closes_connection_when_migration_fails(
 
     broken = database.MIGRATIONS + (
         database.Migration(
-            version=4,
+            version=database.LATEST_SCHEMA_VERSION + 1,
             name="broken_migration",
             statements=("THIS IS NOT VALID SQL",),
         ),
@@ -798,3 +818,217 @@ def test_connect_closes_connection_when_migration_fails(
     assert not tmp_path.joinpath(
         "rollback_close.db-shm"
     ).exists()
+
+
+def _make_v3_database(db_path, monkeypatch, publications=()):
+    original = database.MIGRATIONS
+
+    monkeypatch.setattr(
+        database,
+        "MIGRATIONS",
+        tuple(
+            migration
+            for migration in original
+            if migration.version <= 3
+        ),
+    )
+
+    connection = connect(db_path)
+
+    for publication in publications:
+        connection.execute(
+            """
+            INSERT INTO publications (
+                product_id,
+                affiliate_url,
+                price,
+                published_at,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            publication,
+        )
+
+    connection.commit()
+    connection.close()
+
+    monkeypatch.setattr(database, "MIGRATIONS", original)
+
+
+def test_migration_4_adds_message_id_column(tmp_path):
+    db_path = str(tmp_path / "fresh.db")
+
+    connection = connect(db_path)
+
+    columns = {
+        row[1]
+        for row in connection.execute(
+            "PRAGMA table_info(publications)"
+        ).fetchall()
+    }
+    version = connection.execute(
+        "PRAGMA user_version"
+    ).fetchone()[0]
+    connection.close()
+
+    assert "message_id" in columns
+    assert version == database.LATEST_SCHEMA_VERSION == 4
+
+
+def test_migration_4_preserves_existing_publication_rows(
+    tmp_path,
+    monkeypatch,
+):
+    db_path = str(tmp_path / "legacy_publications.db")
+
+    _make_v3_database(
+        db_path,
+        monkeypatch,
+        publications=[
+            (
+                "B00001",
+                "https://example.com/dp/B00001",
+                99.5,
+                "2026-08-15T12:00:00",
+                "PUBLISHED",
+            )
+        ],
+    )
+
+    connection = connect(db_path)
+
+    rows = connection.execute(
+        """
+        SELECT product_id, price, status, message_id
+        FROM publications
+        """
+    ).fetchall()
+    version = connection.execute(
+        "PRAGMA user_version"
+    ).fetchone()[0]
+    connection.close()
+
+    assert rows == [
+        ("B00001", 99.5, "PUBLISHED", None)
+    ]
+    assert version == 4
+
+
+def test_migration_4_is_idempotent_on_reopen(tmp_path):
+    db_path = str(tmp_path / "reopen.db")
+
+    first = connect(db_path)
+    first.close()
+
+    second = connect(db_path)
+
+    message_id_columns = [
+        row
+        for row in second.execute(
+            "PRAGMA table_info(publications)"
+        ).fetchall()
+        if row[1] == "message_id"
+    ]
+    version = second.execute(
+        "PRAGMA user_version"
+    ).fetchone()[0]
+    second.close()
+
+    assert len(message_id_columns) == 1
+    assert version == 4
+
+
+def test_migration_4_creates_no_new_backup(
+    tmp_path,
+    monkeypatch,
+):
+    db_path = str(tmp_path / "no_backup.db")
+    _make_v3_database(db_path, monkeypatch)
+
+    backups_dir = database.backups_directory(db_path)
+    before = (
+        len(list(backups_dir.glob("*.db")))
+        if backups_dir.exists()
+        else 0
+    )
+
+    connection = connect(db_path)
+    connection.close()
+
+    after = (
+        len(list(backups_dir.glob("*.db")))
+        if backups_dir.exists()
+        else 0
+    )
+
+    assert after == before
+
+
+def test_migrations_reject_version_five(tmp_path):
+    db_path = str(tmp_path / "future5.db")
+
+    future = sqlite3.connect(db_path)
+    future.execute("PRAGMA user_version = 5")
+    future.commit()
+    future.close()
+
+    with pytest.raises(
+        database.UnsupportedSchemaVersionError
+    ) as excinfo:
+        connect(db_path)
+
+    assert "5" in str(excinfo.value)
+
+
+def test_migration_rollback_failure_does_not_mask_original_error(
+    tmp_path,
+    caplog,
+):
+    db_path = str(tmp_path / "rollback_fail.db")
+
+    connect(db_path).close()
+
+    broken = database.Migration(
+        version=database.LATEST_SCHEMA_VERSION + 1,
+        name="broken_migration",
+        statements=("THIS IS NOT VALID SQL",),
+    )
+
+    class RollbackFailConnection:
+        def __init__(self, real):
+            self._real = real
+
+        def execute(self, statement, *args):
+            if statement.strip().upper() == "ROLLBACK":
+                raise sqlite3.OperationalError(
+                    "rollback exploded"
+                )
+
+            return self._real.execute(statement, *args)
+
+        def __getattr__(self, name):
+            return getattr(self._real, name)
+
+    real = sqlite3.connect(db_path)
+    wrapped = RollbackFailConnection(real)
+
+    with caplog.at_level(logging.WARNING):
+        with pytest.raises(
+            sqlite3.OperationalError,
+        ) as exc_info:
+            database._apply_migration(
+                wrapped,
+                broken,
+            )
+
+    original = str(exc_info.value)
+
+    assert "rollback exploded" not in original
+    assert "syntax error" in original
+    assert any(
+        "rollback failed for migration" in record.getMessage()
+        for record in caplog.records
+    )
+
+    real.close()

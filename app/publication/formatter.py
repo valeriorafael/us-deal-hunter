@@ -2,6 +2,12 @@ from html import escape
 
 from app.models.deal import Deal
 
+# Telegram titles are only part of the message, but an unbounded
+# one makes the caption/text limits impossible to enforce (phase 4,
+# item 3): the raw title is cut before escaping so the escaped
+# length can never explode past it.
+MAX_TITLE_LENGTH = 200
+
 
 class DealMessageFormatter:
     """
@@ -11,7 +17,9 @@ class DealMessageFormatter:
     def format(self, deal: Deal) -> str:
         product = deal.product
 
-        title = escape(product.title.strip())
+        title = escape(
+            product.title.strip()[:MAX_TITLE_LENGTH]
+        )
         affiliate_url = escape(
             product.affiliate_url.strip(),
             quote=True,

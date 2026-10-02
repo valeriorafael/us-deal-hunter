@@ -242,3 +242,88 @@ def test_discovery_workflow_sorts_deals_by_score(
     assert len(deals) == 2
     assert deals[0].score >= deals[1].score
     assert deals[0].product.product_id == "123"
+
+
+def test_discovery_workflow_survives_record_price_failure():
+    now = datetime(2026, 8, 15, 12, 0)
+
+    class FlakyPipeline:
+        def __init__(self):
+            self.recorded = []
+
+        def record_price(self, product, now=None):
+            if product.product_id == "BAD":
+                raise ValueError("price parse failed")
+
+            self.recorded.append(product.product_id)
+
+        def evaluate(self, product, now=None):
+            return None
+
+    discovery = FakeDiscovery(
+        [
+            build_product("123", 75.0),
+            build_product("BAD", 50.0),
+            build_product("789", 30.0),
+        ]
+    )
+    pipeline = FlakyPipeline()
+
+    workflow = DiscoveryWorkflow(
+        discovery=discovery,
+        pipeline=pipeline,
+    )
+
+    deals = workflow.discover_deals(
+        keywords="mouse",
+        now=now,
+    )
+
+    assert deals == []
+    assert pipeline.recorded == ["123", "789"]
+    assert workflow.product_errors == [
+        "product: BAD @ mouse: ValueError: price parse failed"
+    ]
+
+
+def test_discovery_workflow_survives_evaluate_failure():
+    now = datetime(2026, 8, 15, 12, 0)
+
+    class FlakyPipeline:
+        def __init__(self):
+            self.recorded = []
+
+        def record_price(self, product, now=None):
+            self.recorded.append(product.product_id)
+
+        def evaluate(self, product, now=None):
+            if product.product_id == "456":
+                raise RuntimeError("bad history")
+
+            return None
+
+    discovery = FakeDiscovery(
+        [
+            build_product("123", 75.0),
+            build_product("456", 50.0),
+            build_product("789", 30.0),
+        ]
+    )
+    pipeline = FlakyPipeline()
+
+    workflow = DiscoveryWorkflow(
+        discovery=discovery,
+        pipeline=pipeline,
+    )
+
+    deals = workflow.discover_deals(
+        keywords="mouse",
+        now=now,
+    )
+
+    assert deals == []
+    # all three were attempted, none aborted the loop
+    assert pipeline.recorded == ["123", "456", "789"]
+    assert workflow.product_errors == [
+        "product: 456 @ mouse: RuntimeError: bad history"
+    ]
