@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from app.deals.validator import DealValidator
 from app.models.deal import Deal
 from app.publication.base import (
+    CHANNEL_TELEGRAM,
     DEFAULT_PUBLICATION_COOLDOWN,
     STATUS_DUPLICATE_PUBLICATION,
     STATUS_PUBLICATION_EXCEPTION,
@@ -53,6 +54,7 @@ class PublicationService:
         ),
         *,
         verifier=None,
+        channel: str = CHANNEL_TELEGRAM,
     ):
         self.publisher = publisher
         self.deal_validator = (
@@ -65,6 +67,9 @@ class PublicationService:
         # optional MessageVerifier: probes the channel for
         # attempts whose outcome was never recorded (phase 4)
         self.verifier = verifier
+        # publication channel: one service instance per channel,
+        # single shared pipeline (spec 2.2/50)
+        self.channel = channel
 
     def _duplicate_result(self) -> PublicationResult:
         if self.cooldown is None:
@@ -85,13 +90,15 @@ class PublicationService:
     ) -> bool:
         if self.cooldown is None:
             return self.repository.was_published(
-                product_id=deal.product.product_id
+                product_id=deal.product.product_id,
+                channel=self.channel,
             )
 
         return self.repository.was_published_recently(
             product_id=deal.product.product_id,
             now=now,
             cooldown=self.cooldown,
+            channel=self.channel,
         )
 
     def _store_error(self, exc: Exception) -> PublicationResult:
@@ -184,6 +191,7 @@ class PublicationService:
                 )
             ),
             limit=CHANNEL_VERIFY_MAX_PER_RUN,
+            channel=self.channel,
         )
 
         resolved = 0
@@ -296,7 +304,8 @@ class PublicationService:
                     duplicate_check=lambda: (
                         self._is_duplicate(deal, now)
                         or self.repository.has_inflight_attempt(
-                            deal.product.product_id
+                            deal.product.product_id,
+                            channel=self.channel,
                         )
                     ),
                     product_id=deal.product.product_id,
@@ -308,6 +317,7 @@ class PublicationService:
                     label=deal.label,
                     discount_vs_30d=deal.discount_vs_30d,
                     source_query=deal.source_query,
+                    channel=self.channel,
                 )
             )
         except Exception as exc:

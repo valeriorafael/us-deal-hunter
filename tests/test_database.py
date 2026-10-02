@@ -162,6 +162,7 @@ def test_migration_2_creates_publication_indexes(tmp_path):
     }
 
     assert indexes == {
+        "idx_publications_channel_product_published",
         "idx_publications_product_published",
         "idx_publications_published_at",
         "idx_publications_status",
@@ -178,12 +179,13 @@ def test_publication_queries_use_indexes(tmp_path):
         """
         SELECT published_at
         FROM publications
-        WHERE product_id = ?
+        WHERE channel = ?
+          AND product_id = ?
           AND status = 'PUBLISHED'
         ORDER BY published_at DESC
         LIMIT 1
         """,
-        ("B00001",),
+        ("TELEGRAM", "B00001"),
     )
 
     status_plan = _query_plan(
@@ -197,7 +199,8 @@ def test_publication_queries_use_indexes(tmp_path):
 
     assert "INDEX" in cooldown_plan
     assert (
-        "idx_publications_product_published" in cooldown_plan
+        "idx_publications_channel_product_published"
+        in cooldown_plan
     )
     assert "SCAN publications" not in cooldown_plan
     assert "INDEX" in status_plan
@@ -313,6 +316,7 @@ def test_migration_baseline_adopts_legacy_publications_table(
         "source_query",
         "status",
         "message_id",
+        "channel",
     ]
     assert defaults["status"] == "'PUBLISHED'"
     assert (
@@ -405,8 +409,8 @@ def test_migrations_are_complete_and_ordered():
     ]
 
     assert versions == sorted(set(versions))
-    assert versions == [1, 2, 3, 4]
-    assert database.LATEST_SCHEMA_VERSION == 4
+    assert versions == [1, 2, 3, 4, 5]
+    assert database.LATEST_SCHEMA_VERSION == 5
     assert database.LATEST_SCHEMA_VERSION == max(versions)
 
 
@@ -873,7 +877,7 @@ def test_migration_4_adds_message_id_column(tmp_path):
     connection.close()
 
     assert "message_id" in columns
-    assert version == database.LATEST_SCHEMA_VERSION == 4
+    assert version == database.LATEST_SCHEMA_VERSION == 5
 
 
 def test_migration_4_preserves_existing_publication_rows(
@@ -912,7 +916,7 @@ def test_migration_4_preserves_existing_publication_rows(
     assert rows == [
         ("B00001", 99.5, "PUBLISHED", None)
     ]
-    assert version == 4
+    assert version == 5
 
 
 def test_migration_4_is_idempotent_on_reopen(tmp_path):
@@ -936,7 +940,7 @@ def test_migration_4_is_idempotent_on_reopen(tmp_path):
     second.close()
 
     assert len(message_id_columns) == 1
-    assert version == 4
+    assert version == 5
 
 
 def test_migration_4_creates_no_new_backup(
@@ -965,11 +969,11 @@ def test_migration_4_creates_no_new_backup(
     assert after == before
 
 
-def test_migrations_reject_version_five(tmp_path):
-    db_path = str(tmp_path / "future5.db")
+def test_migrations_reject_version_six(tmp_path):
+    db_path = str(tmp_path / "future6.db")
 
     future = sqlite3.connect(db_path)
-    future.execute("PRAGMA user_version = 5")
+    future.execute("PRAGMA user_version = 6")
     future.commit()
     future.close()
 
@@ -978,7 +982,7 @@ def test_migrations_reject_version_five(tmp_path):
     ) as excinfo:
         connect(db_path)
 
-    assert "5" in str(excinfo.value)
+    assert "6" in str(excinfo.value)
 
 
 def test_migration_rollback_failure_does_not_mask_original_error(

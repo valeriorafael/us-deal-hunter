@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from app.config import AmazonConfig, TelegramConfig
 from app.models.price_history import PriceHistory
 from app.publication.base import (
+    CHANNEL_TELEGRAM,
     DEFAULT_PUBLICATION_COOLDOWN,
     is_failure_status,
 )
@@ -417,6 +418,7 @@ def run(
             repository=PublicationRepository(),
             cooldown=DEDUPLICATION_COOLDOWN,
             verifier=publisher,
+            channel=CHANNEL_TELEGRAM,
         )
 
         verified = _verify_channel_attempts(
@@ -563,6 +565,7 @@ def run(
             repository=repository,
             cooldown=DEDUPLICATION_COOLDOWN,
             verifier=publisher,
+            channel=CHANNEL_TELEGRAM,
         )
 
     all_deals = []

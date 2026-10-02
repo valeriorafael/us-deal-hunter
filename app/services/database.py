@@ -149,6 +149,23 @@ MIGRATIONS: tuple[Migration, ...] = (
         requires_backup=False,
         adopt_legacy=False,
     ),
+    Migration(
+        version=5,
+        name="publication_channel",
+        statements=(
+            """
+            ALTER TABLE publications
+            ADD COLUMN channel TEXT NOT NULL DEFAULT 'TELEGRAM'
+            """,
+            """
+            CREATE INDEX IF NOT EXISTS
+                idx_publications_channel_product_published
+            ON publications (channel, product_id, published_at)
+            """,
+        ),
+        requires_backup=False,
+        adopt_legacy=False,
+    ),
 )
 
 LATEST_SCHEMA_VERSION = max(

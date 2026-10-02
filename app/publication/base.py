@@ -10,6 +10,11 @@ from app.models.deal import Deal
 # elapsed since its last successful publication.
 DEFAULT_PUBLICATION_COOLDOWN = timedelta(hours=24)
 
+# Publication channels (spec 2.2/18): one pipeline, many adapters.
+# Deduplication and cooldown are keyed by (channel, product_id).
+CHANNEL_TELEGRAM = "TELEGRAM"
+CHANNEL_WEBSITE = "WEBSITE"
+
 # Attempt row lifecycle (spec 16): PENDING -> SENDING ->
 # PUBLISHED, or RECONCILIATION when the outcome is unknown.
 STATUS_PENDING = "PENDING"

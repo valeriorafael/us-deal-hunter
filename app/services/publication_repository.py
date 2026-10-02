@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 
 from app.publication.base import (
+    CHANNEL_TELEGRAM,
     DEFAULT_PUBLICATION_COOLDOWN,
     STATUS_PENDING,
     STATUS_PUBLISHED,
@@ -49,6 +50,7 @@ class PublicationRepository:
         status: str = STATUS_PUBLISHED,
         *,
         message_id: int | None = None,
+        channel: str = CHANNEL_TELEGRAM,
     ) -> None:
         self._connection.execute(
             """
@@ -63,9 +65,10 @@ class PublicationRepository:
                 discount_vs_30d,
                 source_query,
                 status,
-                message_id
+                message_id,
+                channel
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 product_id,
@@ -79,6 +82,7 @@ class PublicationRepository:
                 source_query,
                 status,
                 message_id,
+                channel,
             ),
         )
 
@@ -96,6 +100,7 @@ class PublicationRepository:
         label: str | None = None,
         discount_vs_30d: float | None = None,
         source_query: str | None = None,
+        channel: str = CHANNEL_TELEGRAM,
     ) -> int:
         """T1: record the intent to publish (fail-closed).
 
@@ -116,9 +121,10 @@ class PublicationRepository:
                 discount_vs_30d,
                 source_query,
                 status,
-                message_id
+                message_id,
+                channel
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)
             """,
             (
                 product_id,
@@ -131,6 +137,7 @@ class PublicationRepository:
                 discount_vs_30d,
                 source_query,
                 STATUS_PENDING,
+                channel,
             ),
         )
 
@@ -172,21 +179,28 @@ class PublicationRepository:
 
             raise
 
-    def has_inflight_attempt(self, product_id: str) -> bool:
+    def has_inflight_attempt(
+        self,
+        product_id: str,
+        channel: str = CHANNEL_TELEGRAM,
+    ) -> bool:
         """True while an attempt for this product may still run.
 
         PENDING and SENDING rows belong either to this run or to
         a crashed one; publishing again now would duplicate.
+        Scoped per channel so an attempt on one channel never
+        blocks another channel.
         """
         row = self._connection.execute(
             """
             SELECT 1
             FROM publications
-            WHERE product_id = ?
+            WHERE channel = ?
+              AND product_id = ?
               AND status IN (?, ?)
             LIMIT 1
             """,
-            (product_id, STATUS_PENDING, STATUS_SENDING),
+            (channel, product_id, STATUS_PENDING, STATUS_SENDING),
         ).fetchone()
 
         return row is not None
@@ -336,6 +350,7 @@ class PublicationRepository:
         stale_before: datetime,
         not_older_than: datetime,
         limit: int,
+        channel: str = CHANNEL_TELEGRAM,
     ) -> list[AttemptRecord]:
         """Stored attempts that can be probed in the channel.
 
@@ -344,6 +359,8 @@ class PublicationRepository:
         rows younger than ``stale_before`` may still belong to a
         run that is active, and rows older than
         ``not_older_than`` are outside the verification window.
+        Scoped to the requesting channel (message handles are a
+        Telegram concern; other channels carry no message id).
         """
         rows = self._connection.execute(
             """
@@ -354,7 +371,8 @@ class PublicationRepository:
                 published_at,
                 message_id
             FROM publications
-            WHERE status IN (?, ?)
+            WHERE channel = ?
+              AND status IN (?, ?)
               AND message_id IS NOT NULL
               AND published_at < ?
               AND published_at >= ?
@@ -362,6 +380,7 @@ class PublicationRepository:
             LIMIT ?
             """,
             (
+                channel,
                 STATUS_SENDING,
                 STATUS_RECONCILIATION,
                 stale_before.isoformat(),
@@ -386,6 +405,7 @@ class PublicationRepository:
         product_id: str,
         now: datetime | None = None,
         cooldown: timedelta = DEFAULT_PUBLICATION_COOLDOWN,
+        channel: str = CHANNEL_TELEGRAM,
     ) -> bool:
         now = now or datetime.now()
 
@@ -393,12 +413,13 @@ class PublicationRepository:
             """
             SELECT published_at
             FROM publications
-            WHERE product_id = ?
+            WHERE channel = ?
+              AND product_id = ?
               AND status = 'PUBLISHED'
             ORDER BY published_at DESC
             LIMIT 1
             """,
-            (product_id,),
+            (channel, product_id),
         ).fetchone()
 
         if row is None:
@@ -408,16 +429,21 @@ class PublicationRepository:
 
         return published_at > now - cooldown
 
-    def was_published(self, product_id: str) -> bool:
+    def was_published(
+        self,
+        product_id: str,
+        channel: str = CHANNEL_TELEGRAM,
+    ) -> bool:
         row = self._connection.execute(
             """
             SELECT 1
             FROM publications
-            WHERE product_id = ?
+            WHERE channel = ?
+              AND product_id = ?
               AND status = 'PUBLISHED'
             LIMIT 1
             """,
-            (product_id,),
+            (channel, product_id),
         ).fetchone()
 
         return row is not None
