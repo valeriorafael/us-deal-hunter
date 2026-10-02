@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-02T20:58:41Z",
+  "deals": [
+    {
+      "id": "B0GYTS2QL2",
+      "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
+      "price": 29.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "CURATED",
+      "image": null,
+      "url": "https://www.amazon.com/dp/B0GYTS2QL2?tag=dealhunter0e2-20",
+      "published_at": "2026-09-28T20:02:19Z",
+      "source_query": "curated:Slickdeals",
+      "history": []
+    },
+    {
+      "id": "B0FMYWSMDF",
+      "title": "LEGO Star Wars SMART Play: AT-ST Attack on Endor 75424",
+      "price": 39.95,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "CURATED",
+      "image": null,
+      "url": "https://www.amazon.com/dp/B0FMYWSMDF?tag=dealhunter0e2-20",
+      "published_at": "2026-09-28T20:02:19Z",
+      "source_query": "curated:Slickdeals",
+      "history": []
+    },
+    {
+      "id": "B0GQN21TF6",
+      "title": "Bltend Heavy Duty Golf Net, 10x7ft",
+      "price": 98.98,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "CURATED",
+      "image": null,
+      "url": "https://www.amazon.com/dp/B0GQN21TF6?tag=dealhunter0e2-20",
+      "published_at": "2026-09-27T14:55:10Z",
+      "source_query": "curated:Slickdeals",
+      "history": []
+    },
+    {
+      "id": "B08N5WRWNW",
+      "title": "",
+      "price": 75.0,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": null,
+      "image": null,
+      "url": "https://www.amazon.com/dp/B08N5WRWNW?tag=test",
+      "published_at": "2026-09-27T14:34:54Z",
+      "source_query": null,
+      "history": []
+    },
+    {
+      "id": "123",
+      "title": "",
+      "price": 75.0,
+      "currency": "USD",
+      "previous_price": 75.0,
+      "discount_pct": null,
+      "score": null,
+      "label": null,
+      "image": null,
+      "url": "https://www.amazon.com/dp/123?tag=test-20",
+      "published_at": "2026-09-27T13:41:43Z",
+      "source_query": null,
+      "history": [
+        {
+          "date": "2026-08-01",
+          "price": 100.0
+        },
+        {
+          "date": "2026-08-10",
+          "price": 80.0
+        },
+        {
+          "date": "2026-08-14",
+          "price": 90.0
+        },
+        {
+          "date": "2026-08-15",
+          "price": 100.0
+        },
+        {
+          "date": "2026-08-15",
+          "price": 70.0
+        },
+        {
+          "date": "2026-08-15",
+          "price": 75.0
+        },
+        {
+          "date": "2026-08-15",
+          "price": 75.0
+        }
+      ]
+    }
+  ]
+}

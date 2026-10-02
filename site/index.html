@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src https: data:; connect-src 'self'; base-uri 'none'; form-action 'none'"
+    >
+
+    <title>Deal Hunter</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <div class="logo" aria-hidden="true">
+                DH
+            </div>
+
+            <div class="header-text">
+                <h1>Deal Hunter</h1>
+                <p class="tagline">
+                    Finding the best deals on Amazon US.
+                </p>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section
+            class="deals-section"
+            aria-labelledby="deals-heading"
+        >
+            <h2 id="deals-heading">Today&rsquo;s offers</h2>
+
+            <p
+                id="state-loading"
+                class="state"
+                role="status"
+                aria-live="polite"
+            >
+                Loading offers&hellip;
+            </p>
+
+            <p
+                id="state-error"
+                class="state state-error"
+                role="status"
+                aria-live="polite"
+                hidden
+            >
+                We couldn&rsquo;t load the offers.
+                Please try again later.
+            </p>
+
+            <p
+                id="state-empty"
+                class="state"
+                role="status"
+                aria-live="polite"
+                hidden
+            >
+                No offers right now.
+                Come back later!
+            </p>
+
+            <ul
+                id="deals-list"
+                class="deals"
+                aria-live="polite"
+                hidden
+            >
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <p>
+                As an Amazon Associate we earn
+                from qualifying purchases.
+            </p>
+
+            <p>
+                Offers are updated periodically.
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+</body>
+
+</html>
