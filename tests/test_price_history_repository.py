@@ -1,4 +1,7 @@
+import sqlite3
 from datetime import datetime, timedelta
+
+import pytest
 
 from app.models.price_history import PriceHistory
 from app.services.price_history_repository import PriceHistoryRepository
@@ -313,3 +316,207 @@ def test_get_by_product_uses_the_composite_index(tmp_path):
 
     assert "SCAN price_history" not in detail
     assert "USING INDEX" in detail
+
+
+def test_count_older_than(tmp_path):
+    repository = PriceHistoryRepository(
+        str(tmp_path / "count.db")
+    )
+
+    now = datetime(2026, 8, 15)
+
+    entries = [
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=now - timedelta(days=days),
+        )
+        for days in (200, 91, 90, 45, 0)
+    ]
+
+    for item in entries:
+        repository.save(item)
+
+    assert repository.count_older_than(
+        now - timedelta(days=90)
+    ) == 2
+    assert repository.count_older_than(
+        now + timedelta(days=1)
+    ) == 5
+
+
+def test_prune_older_than_backs_up_before_deleting(tmp_path):
+
+    repository = PriceHistoryRepository(
+        str(tmp_path / "backup.db")
+    )
+
+    now = datetime(2026, 8, 15)
+
+    old = PriceHistory(
+        "123",
+        100.0,
+        recorded_at=now - timedelta(days=200),
+    )
+
+    recent = PriceHistory(
+        "123",
+        70.0,
+        recorded_at=now - timedelta(days=10),
+    )
+
+    repository.save(old)
+    repository.save(recent)
+
+    removed = repository.prune_older_than(
+        now - timedelta(days=90)
+    )
+
+    backups = sorted(
+        (tmp_path / "backups").glob("backup-*.db")
+    )
+
+    assert removed == 1
+    # one backup from the baseline migration plus the copy
+    # taken immediately before the prune
+    assert len(backups) == 2
+
+    restored = sqlite3.connect(str(backups[-1]))
+
+    count = restored.execute(
+        "SELECT COUNT(*) FROM price_history"
+    ).fetchone()[0]
+
+    restored.close()
+
+    assert count == 2
+    assert repository.get_by_product("123") == [recent]
+
+
+def test_save_updates_the_entry_of_the_same_day(tmp_path):
+    repository = PriceHistoryRepository(
+        str(tmp_path / "upsert.db")
+    )
+
+    first = PriceHistory(
+        "123",
+        100.0,
+        recorded_at=datetime(2026, 8, 15, 10, 0),
+    )
+
+    second = PriceHistory(
+        "123",
+        95.0,
+        recorded_at=datetime(2026, 8, 15, 18, 0),
+    )
+
+    repository.save(first)
+    repository.save(second)
+
+    assert repository.count("123") == 1
+    assert repository.get_by_product("123") == [second]
+
+
+def test_save_keeps_entries_of_other_days(tmp_path):
+    repository = PriceHistoryRepository(
+        str(tmp_path / "days.db")
+    )
+
+    first = PriceHistory(
+        "123",
+        100.0,
+        recorded_at=datetime(2026, 8, 15, 10, 0),
+    )
+
+    second = PriceHistory(
+        "123",
+        95.0,
+        recorded_at=datetime(2026, 8, 16, 10, 0),
+    )
+
+    repository.save(first)
+    repository.save(second)
+
+    assert repository.get_by_product("123") == [
+        first,
+        second,
+    ]
+
+
+def test_price_history_rejects_duplicate_days(tmp_path):
+    repository = PriceHistoryRepository(
+        str(tmp_path / "unique.db")
+    )
+
+    repository.save(
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=datetime(2026, 8, 15, 10, 0),
+        )
+    )
+
+    with pytest.raises(sqlite3.IntegrityError):
+        repository._connection.execute(
+            """
+            INSERT INTO price_history (
+                product_id,
+                price,
+                currency,
+                recorded_at
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            ("123", 90.0, "USD", "2026-08-15T20:00:00"),
+        )
+
+    assert repository.count("123") == 1
+
+
+def test_repository_closes_connection_as_context_manager(tmp_path):
+    db_path = tmp_path / "context.db"
+
+    with PriceHistoryRepository(str(db_path)) as repository:
+        repository.save(
+            PriceHistory(
+                "123",
+                100.0,
+                recorded_at=datetime(2026, 8, 15, 10, 0),
+            )
+        )
+
+        assert repository.count("123") == 1
+        assert (
+            repository._connection.execute(
+                "PRAGMA journal_mode"
+            ).fetchone()[0]
+            == "wal"
+        )
+
+    with pytest.raises(sqlite3.ProgrammingError):
+        repository.count("123")
+
+    repository.close()
+
+    assert not db_path.with_name(
+        f"{db_path.name}-wal"
+    ).exists()
+    assert not db_path.with_name(
+        f"{db_path.name}-shm"
+    ).exists()
+
+
+def test_repository_close_supports_memory_database():
+    with PriceHistoryRepository(":memory:") as repository:
+        repository.save(
+            PriceHistory(
+                "123",
+                100.0,
+                recorded_at=datetime(2026, 8, 15, 10, 0),
+            )
+        )
+
+        assert repository.count("123") == 1
+
+    with pytest.raises(sqlite3.ProgrammingError):
+        repository.count("123")

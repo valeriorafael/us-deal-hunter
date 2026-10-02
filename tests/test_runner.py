@@ -366,3 +366,122 @@ def test_runner_wires_deduplication_cooldown(monkeypatch):
             == DEFAULT_PUBLICATION_COOLDOWN
             == timedelta(hours=24)
         )
+
+
+def test_prune_old_history_aborts_when_backup_fails(
+    tmp_path,
+    monkeypatch,
+    capsys,
+):
+    from datetime import datetime, timedelta
+
+    from app.models.price_history import PriceHistory
+    from app.runner import _prune_old_history
+    from app.services import price_history_repository
+    from app.services.database import DatabaseBackupError
+    from app.services.price_history_repository import (
+        PriceHistoryRepository,
+    )
+
+    now = datetime(2026, 8, 15)
+
+    repository = PriceHistoryRepository(
+        str(tmp_path / "backup_failure.db")
+    )
+
+    repository.save(
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=now - timedelta(days=200),
+        )
+    )
+
+    def fail_backup(connection, db_path):
+        raise DatabaseBackupError("disk full")
+
+    monkeypatch.setattr(
+        price_history_repository,
+        "backup_database",
+        fail_backup,
+    )
+
+    _prune_old_history(repository, now)
+
+    captured = capsys.readouterr()
+
+    assert "History prune aborted" in captured.out
+    assert "disk full" in captured.out
+    assert len(repository.get_by_product("123")) == 1
+
+
+def test_prune_old_history_skips_backup_without_old_rows(
+    tmp_path,
+    monkeypatch,
+    capsys,
+):
+    from datetime import datetime, timedelta
+
+    from app.models.price_history import PriceHistory
+    from app.runner import _prune_old_history
+    from app.services import price_history_repository
+    from app.services.database import DatabaseBackupError
+    from app.services.price_history_repository import (
+        PriceHistoryRepository,
+    )
+
+    now = datetime(2026, 8, 15)
+
+    repository = PriceHistoryRepository(
+        str(tmp_path / "recent_only.db")
+    )
+
+    repository.save(
+        PriceHistory(
+            "123",
+            100.0,
+            recorded_at=now - timedelta(days=10),
+        )
+    )
+
+    def fail_backup(connection, db_path):
+        raise DatabaseBackupError("should not run")
+
+    monkeypatch.setattr(
+        price_history_repository,
+        "backup_database",
+        fail_backup,
+    )
+
+    _prune_old_history(repository, now)
+
+    captured = capsys.readouterr()
+
+    assert captured.out == ""
+    assert len(repository.get_by_product("123")) == 1
+
+
+def test_main_reports_backup_errors_without_traceback(
+    monkeypatch,
+    capsys,
+):
+    import app.runner as runner_module
+    from app.services.database import DatabaseBackupError
+
+    def failing_run(args):
+        raise DatabaseBackupError("disk full")
+
+    monkeypatch.setattr(runner_module, "run", failing_run)
+    monkeypatch.setattr(
+        "sys.argv",
+        ["run.py", "--keywords", "gaming mouse"],
+    )
+
+    code = runner_module.main()
+
+    captured = capsys.readouterr()
+
+    assert code == 3
+    assert "Database backup error" in captured.out
+    assert "disk full" in captured.out
+    assert "Traceback" not in captured.out

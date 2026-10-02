@@ -287,3 +287,26 @@ def test_was_published_isolates_products(tmp_path):
     assert repository.was_published("123") is True
     assert repository.was_published("456") is False
     assert repository.was_published("does-not-exist") is False
+
+
+def test_publication_repository_closes_connection(tmp_path):
+    import sqlite3
+
+    import pytest
+
+    db_path = tmp_path / "context.db"
+
+    with PublicationRepository(str(db_path)) as repository:
+        repository.record(
+            product_id="123",
+            affiliate_url="https://example.com",
+            price=75.0,
+            published_at=datetime(2026, 8, 15, 12, 0),
+        )
+
+        assert repository.count("123") == 1
+
+    with pytest.raises(sqlite3.ProgrammingError):
+        repository.count("123")
+
+    repository.close()

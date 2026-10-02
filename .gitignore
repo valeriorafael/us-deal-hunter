@@ -4,8 +4,11 @@ __pycache__/
 .pytest_cache/
 .env
 data/*.db
+data/*.db-wal
+data/*.db-shm
 data/*.sqlite
 data/*.sqlite3
+data/backups/
 
 # Hunt logs
 logs/*.log

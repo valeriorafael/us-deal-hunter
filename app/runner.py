@@ -6,6 +6,7 @@ from app.models.price_history import PriceHistory
 from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
 from app.publication.service import PublicationService
 from app.services.amazon_discovery import AmazonDiscovery
+from app.services.database import DatabaseBackupError
 from app.services.deal_pipeline import DealPipeline
 from app.services.demo_discovery import DemoAmazonDiscovery
 from app.services.discovery_workflow import DiscoveryWorkflow
@@ -154,9 +155,15 @@ def _prune_old_history(
         days=HISTORY_RETENTION_DAYS
     )
 
-    removed = repository.delete_older_than(
-        cutoff
-    )
+    if repository.count_older_than(cutoff) == 0:
+        return
+
+    try:
+        removed = repository.prune_older_than(cutoff)
+    except DatabaseBackupError as exc:
+        print(f"History prune aborted: {exc}")
+
+        return
 
     if removed:
         print(
@@ -530,6 +537,9 @@ def main() -> int:
     except ValueError as exc:
         print(f"Configuration error: {exc}")
         return 2
+    except DatabaseBackupError as exc:
+        print(f"Database backup error: {exc}")
+        return 3
 
 
 if __name__ == "__main__":

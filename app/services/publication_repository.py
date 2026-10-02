@@ -1,7 +1,7 @@
-import sqlite3
 from datetime import datetime, timedelta
 
 from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
+from app.services.database import connect
 
 
 class PublicationRepository:
@@ -11,65 +11,7 @@ class PublicationRepository:
     ):
         self.db_path = db_path
 
-        self._connection = sqlite3.connect(
-            self.db_path
-        )
-
-        self._create_table()
-        self._migrate_table()
-
-    def _create_table(self) -> None:
-        self._connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS publications (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                product_id TEXT NOT NULL,
-                affiliate_url TEXT NOT NULL,
-                price REAL NOT NULL,
-                published_at TEXT NOT NULL,
-                title TEXT,
-                score REAL,
-                label TEXT,
-                discount_vs_30d REAL,
-                source_query TEXT,
-                status TEXT NOT NULL DEFAULT 'PUBLISHED'
-            )
-            """
-        )
-
-        self._connection.commit()
-
-    def _migrate_table(self) -> None:
-        columns = {
-            row[1]
-            for row in self._connection.execute(
-                "PRAGMA table_info(publications)"
-            ).fetchall()
-        }
-
-        migrations = {
-            "title": "ALTER TABLE publications ADD COLUMN title TEXT",
-            "score": "ALTER TABLE publications ADD COLUMN score REAL",
-            "label": "ALTER TABLE publications ADD COLUMN label TEXT",
-            "discount_vs_30d": (
-                "ALTER TABLE publications "
-                "ADD COLUMN discount_vs_30d REAL"
-            ),
-            "source_query": (
-                "ALTER TABLE publications "
-                "ADD COLUMN source_query TEXT"
-            ),
-            "status": (
-                "ALTER TABLE publications "
-                "ADD COLUMN status TEXT NOT NULL DEFAULT 'PUBLISHED'"
-            ),
-        }
-
-        for column, statement in migrations.items():
-            if column not in columns:
-                self._connection.execute(statement)
-
-        self._connection.commit()
+        self._connection = connect(self.db_path)
 
     def record(
         self,
@@ -231,3 +173,12 @@ class PublicationRepository:
             (row[0], row[1])
             for row in rows
         ]
+
+    def close(self) -> None:
+        self._connection.close()
+
+    def __enter__(self) -> "PublicationRepository":
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        self.close()
