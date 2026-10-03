@@ -5,9 +5,11 @@ from app.models.product import Product
 from app.publication.base import (
     CHANNEL_TELEGRAM,
     CHANNEL_WEBSITE,
+    STATUS_PUBLICATION_ERROR,
     PublicationResult,
 )
 from app.publication.service import PublicationService
+from app.publication.website import WebsitePublisher
 from app.services import database
 from app.services.database import connect
 from app.services.publication_repository import (
@@ -627,3 +629,216 @@ def test_legacy_positional_calls_remain_supported(tmp_path):
     assert repository.was_published("123") is True
     assert repository.has_inflight_attempt("123") is False
     repository.close()
+
+
+# ------------------------------------------------------------------
+# E) Isolation with the real WebsitePublisher
+# ------------------------------------------------------------------
+
+
+class CountingWebsitePublisher(WebsitePublisher):
+    """Real publisher plus a call counter (spy, no state kept)."""
+
+    def __init__(self):
+        self.calls = []
+
+    def publish(self, deal):
+        self.calls.append(deal)
+
+        return super().publish(deal)
+
+
+def test_real_website_publication_does_not_block_telegram(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "real_website_first.db")
+    )
+    deal = build_valid_deal()
+
+    website = PublicationService(
+        publisher=WebsitePublisher(),
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+    telegram = PublicationService(
+        publisher=FakePublisher(message_id=456),
+        repository=repository,
+        channel=CHANNEL_TELEGRAM,
+    )
+
+    first = website.publish(deal, now=NOW)
+    second = telegram.publish(deal, now=NOW + timedelta(hours=1))
+    repository.close()
+
+    assert first.success is True
+    assert first.message_id is None
+    assert second.success is True
+    assert second.message_id == 456
+
+
+def test_real_telegram_publication_does_not_block_website(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "real_telegram_first.db")
+    )
+    deal = build_valid_deal()
+
+    telegram = PublicationService(
+        publisher=FakePublisher(),
+        repository=repository,
+        channel=CHANNEL_TELEGRAM,
+    )
+    website = PublicationService(
+        publisher=WebsitePublisher(),
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+
+    first = telegram.publish(deal, now=NOW)
+    second = website.publish(deal, now=NOW + timedelta(hours=1))
+    repository.close()
+
+    assert first.success is True
+    assert second.success is True
+    assert second.status == "PUBLISHED"
+
+
+def test_real_website_publication_stays_channel_scoped(tmp_path):
+    repository = PublicationRepository(
+        str(tmp_path / "real_website_scope.db")
+    )
+    deal = build_valid_deal()
+
+    result = PublicationService(
+        publisher=WebsitePublisher(),
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    ).publish(deal, now=NOW)
+
+    telegram_scope = repository.was_published(deal.product.product_id)
+    website_scope = repository.was_published(
+        deal.product.product_id, channel=CHANNEL_WEBSITE
+    )
+    repository.close()
+
+    assert result.success is True
+    assert telegram_scope is False
+    assert website_scope is True
+
+
+def test_real_website_rejected_url_does_not_block_telegram(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "real_website_rejected.db")
+    )
+    broken = build_valid_deal()
+    # non-Amazon platform so DealValidator accepts the deal and the
+    # website publisher is the one rejecting the URL
+    broken.product.platform = "other"
+    broken.product.affiliate_url = "notaurl"
+
+    website = PublicationService(
+        publisher=WebsitePublisher(),
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+    telegram = PublicationService(
+        publisher=FakePublisher(message_id=456),
+        repository=repository,
+        channel=CHANNEL_TELEGRAM,
+    )
+
+    rejected = website.publish(broken, now=NOW)
+    accepted = telegram.publish(build_valid_deal(), now=NOW)
+    rows = repository._connection.execute(
+        "SELECT channel, status FROM publications ORDER BY id"
+    ).fetchall()
+    repository.close()
+
+    assert rejected.success is False
+    assert rejected.status == STATUS_PUBLICATION_ERROR
+    assert accepted.success is True
+    assert rows == [(CHANNEL_TELEGRAM, "PUBLISHED")]
+
+
+# ------------------------------------------------------------------
+# F) Idempotence with the real WebsitePublisher
+# ------------------------------------------------------------------
+
+
+def test_real_website_publisher_called_once_within_cooldown(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "website_cooldown_once.db")
+    )
+    deal = build_valid_deal()
+    publisher = CountingWebsitePublisher()
+
+    service = PublicationService(
+        publisher=publisher,
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+
+    first = service.publish(deal, now=NOW)
+    second = service.publish(deal, now=NOW + timedelta(hours=1))
+    repository.close()
+
+    assert first.success is True
+    assert first.status == "PUBLISHED"
+    assert second.success is False
+    assert second.status == "DUPLICATE_PUBLICATION"
+    # the rule belongs to PublicationService: the publisher is
+    # invoked once and holds no state of its own
+    assert len(publisher.calls) == 1
+
+
+def test_real_website_publisher_republishes_after_cooldown(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "website_cooldown_expired.db")
+    )
+    deal = build_valid_deal()
+    publisher = CountingWebsitePublisher()
+
+    service = PublicationService(
+        publisher=publisher,
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+
+    first = service.publish(deal, now=NOW)
+    second = service.publish(deal, now=NOW + timedelta(hours=25))
+    repository.close()
+
+    assert first.success is True
+    assert second.success is True
+    assert len(publisher.calls) == 2
+
+
+def test_real_website_publisher_is_stateless_across_products(
+    tmp_path,
+):
+    repository = PublicationRepository(
+        str(tmp_path / "website_two_products.db")
+    )
+    publisher = CountingWebsitePublisher()
+
+    service = PublicationService(
+        publisher=publisher,
+        repository=repository,
+        channel=CHANNEL_WEBSITE,
+    )
+
+    first = service.publish(build_valid_deal("111"), now=NOW)
+    second = service.publish(build_valid_deal("222"), now=NOW)
+    repository.close()
+
+    assert first.success is True
+    assert second.success is True
+    assert len(publisher.calls) == 2
