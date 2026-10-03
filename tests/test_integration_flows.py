@@ -59,6 +59,19 @@ def rows(db_path, product_id="123"):
         connection.close()
 
 
+def channel_rows(db_path, product_id="123"):
+    connection = sqlite3.connect(db_path)
+
+    try:
+        return connection.execute(
+            "SELECT channel, status, message_id "
+            "FROM publications WHERE product_id = ? ORDER BY id",
+            (product_id,),
+        ).fetchall()
+    finally:
+        connection.close()
+
+
 class Publisher:
     def __init__(self, *, mode="ok", message_id=7):
         self.mode = mode
@@ -398,9 +411,16 @@ def test_flow_curated_runs_verification_reconcile_and_summary(
             42,
         )
     ], stale_row
-    assert len(fresh_row) == 1
+    # one row per channel: telegram and website are published
+    # independently from the same curated deal (spec 2.2/18.3)
+    assert len(fresh_row) == 2
+    assert channel_rows(db_path, "B0CUR9") == [
+        ("TELEGRAM", "PUBLISHED", 9),
+        ("WEBSITE", "PUBLISHED", None),
+    ]
     assert fresh_row[0][0] == "PUBLISHED"
     assert fresh_row[0][2] == 9
+    assert "Website published: 1/1." in out
     assert "SUMMARY" in out
     assert "Publications successful: 1" in out
     assert "Publication complete: 1/1 published." in out

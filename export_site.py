@@ -5,8 +5,8 @@ Reads the existing database strictly read-only (``mode=ro``) and
 writes the public document through :mod:`app.services.site_export`.
 
 The exporter never migrates, never writes back to the database
-and never distinguishes channels: there is no ``channel`` column
-yet (that separation belongs to a later mission).
+and projects a single channel: ``channel`` exists since the schema
+migration 5 and only ``WEBSITE`` publications reach the site.
 """
 
 from __future__ import annotations
@@ -17,7 +17,10 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.publication.base import STATUS_PUBLISHED
+from app.publication.base import (
+    CHANNEL_WEBSITE,
+    STATUS_PUBLISHED,
+)
 from app.services.site_export import (
     SiteHistoryPoint,
     SitePublication,
@@ -40,7 +43,7 @@ SELECT
     discount_vs_30d,
     source_query
 FROM publications
-WHERE status = ?
+WHERE status = ? AND channel = ?
 ORDER BY published_at DESC, id DESC
 """
 
@@ -69,9 +72,10 @@ def open_read_only(db_path: str | Path) -> sqlite3.Connection:
 def load_publications(
     connection: sqlite3.Connection,
 ) -> list[SitePublication]:
+    """PUBLISHED rows of the WEBSITE channel only (spec 18.1)."""
     rows = connection.execute(
         PUBLICATIONS_SQL,
-        (STATUS_PUBLISHED,),
+        (STATUS_PUBLISHED, CHANNEL_WEBSITE),
     ).fetchall()
 
     return [

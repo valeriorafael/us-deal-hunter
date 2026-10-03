@@ -75,8 +75,8 @@ _DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 class SitePublication:
     """Whitelisted projection of one ``publications`` row.
 
-    Field names mirror the persisted columns (there is no channel
-    column yet -- M1 exports every PUBLISHED row as-is).
+    Field names mirror the persisted columns; ``channel`` is not
+    projected because the export only receives WEBSITE rows.
     """
 
     product_id: str

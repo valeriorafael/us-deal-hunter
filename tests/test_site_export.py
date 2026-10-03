@@ -595,9 +595,10 @@ def create_database(path, rows):
                     label,
                     discount_vs_30d,
                     source_query,
-                    status
+                    status,
+                    channel
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 row,
             )
@@ -612,6 +613,7 @@ def publication_row(
     status="PUBLISHED",
     published_at="2026-09-28T17:02:19.945242",
     title="Test Product",
+    channel="WEBSITE",
 ):
     return (
         product_id,
@@ -625,6 +627,7 @@ def publication_row(
         0.25,
         "gaming mouse",
         status,
+        channel,
     )
 
 
@@ -783,3 +786,145 @@ def test_cli_empty_database_exports_empty_deals(
 
     assert document["deals"] == []
     assert "Exported 0 deals" in capsys.readouterr().out
+
+
+def test_cli_exports_only_website_channel_rows(
+    tmp_path,
+    capsys,
+):
+    """Only WEBSITE rows are projected (spec 2.2/18.1)."""
+    import export_site
+
+    db = tmp_path / "deal_hunter.db"
+
+    create_database(
+        db,
+        [
+            publication_row(
+                "B0WEB1",
+                published_at="2026-09-28T17:02:19.945242",
+                channel="WEBSITE",
+            ),
+            publication_row(
+                "B0TEL1",
+                published_at="2026-09-28T18:00:00.000000",
+                channel="TELEGRAM",
+            ),
+            publication_row(
+                "B0TEL2",
+                published_at="2026-09-27T09:00:00.000000",
+                channel="TELEGRAM",
+            ),
+        ],
+    )
+
+    output = tmp_path / "site" / "deals.json"
+
+    code = export_site.main(
+        ["--db", str(db), "--out", str(output)]
+    )
+
+    captured = capsys.readouterr()
+
+    assert code == 0
+    assert "Exported 1 deals" in captured.out
+
+    document = json.loads(
+        output.read_text(encoding="utf-8")
+    )
+
+    validate_document(document)
+
+    ids = [deal["id"] for deal in document["deals"]]
+
+    assert ids == ["B0WEB1"]
+    assert "B0TEL1" not in ids
+    assert "B0TEL2" not in ids
+
+
+def test_cli_telegram_only_database_exports_nothing(
+    tmp_path,
+    capsys,
+):
+    """A telegram-only run leaves the public site empty."""
+    import export_site
+
+    db = tmp_path / "deal_hunter.db"
+
+    create_database(
+        db,
+        [
+            publication_row("B0TEL1", channel="TELEGRAM"),
+            publication_row("B0TEL2", channel="TELEGRAM"),
+        ],
+    )
+
+    output = tmp_path / "site" / "deals.json"
+
+    code = export_site.main(
+        ["--db", str(db), "--out", str(output)]
+    )
+
+    captured = capsys.readouterr()
+
+    assert code == 0
+    assert "Exported 0 deals" in captured.out
+
+    document = json.loads(
+        output.read_text(encoding="utf-8")
+    )
+
+    validate_document(document)
+
+    assert document["deals"] == []
+
+
+def test_cli_channel_filter_keeps_website_row_per_product(
+    tmp_path,
+):
+    """The newest WEBSITE row wins, telegram rows never shadow it."""
+    import export_site
+
+    db = tmp_path / "deal_hunter.db"
+
+    create_database(
+        db,
+        [
+            publication_row(
+                "B0SAME",
+                title="Telegram newest",
+                published_at="2026-09-29T10:00:00.000000",
+                channel="TELEGRAM",
+            ),
+            publication_row(
+                "B0SAME",
+                title="Website older",
+                published_at="2026-09-27T10:00:00.000000",
+                channel="WEBSITE",
+            ),
+            publication_row(
+                "B0SAME",
+                title="Website newest",
+                published_at="2026-09-28T10:00:00.000000",
+                channel="WEBSITE",
+            ),
+        ],
+    )
+
+    output = tmp_path / "site" / "deals.json"
+
+    assert (
+        export_site.main(
+            ["--db", str(db), "--out", str(output)]
+        )
+        == 0
+    )
+
+    document = json.loads(
+        output.read_text(encoding="utf-8")
+    )
+
+    validate_document(document)
+
+    assert [deal["id"] for deal in document["deals"]] == ["B0SAME"]
+    assert document["deals"][0]["title"] == "Website newest"

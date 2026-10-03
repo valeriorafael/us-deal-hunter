@@ -7,10 +7,12 @@ from app.config import AmazonConfig, TelegramConfig
 from app.models.price_history import PriceHistory
 from app.publication.base import (
     CHANNEL_TELEGRAM,
+    CHANNEL_WEBSITE,
     DEFAULT_PUBLICATION_COOLDOWN,
     is_failure_status,
 )
 from app.publication.service import PublicationService
+from app.publication.website import WebsitePublisher
 from app.services.amazon_discovery import AmazonDiscovery
 from app.services.database import (
     DatabaseBackupError,
@@ -421,6 +423,18 @@ def run(
             channel=CHANNEL_TELEGRAM,
         )
 
+        # second channel: the website publisher shares the
+        # same decision/cooldown pipeline, keyed by
+        # CHANNEL_WEBSITE (spec 2.2/18.3). No verifier: the
+        # static site carries no message handle to probe.
+        website_service = PublicationService(
+            publisher=WebsitePublisher(),
+            deal_validator=CuratedDealValidator(),
+            repository=PublicationRepository(),
+            cooldown=DEDUPLICATION_COOLDOWN,
+            channel=CHANNEL_WEBSITE,
+        )
+
         verified = _verify_channel_attempts(
             publication_service
         )
@@ -443,6 +457,20 @@ def run(
         )
 
         result = workflow.publish_deals(
+            deals,
+            now=datetime.now(),
+            deadline=deadline,
+        )
+
+        website_workflow = HuntWorkflow(
+            discovery_workflow=None,
+            publication_service=website_service,
+            policy=HuntPublicationPolicy(
+                max_publications_per_run=publication_limit
+            ),
+        )
+
+        website_result = website_workflow.publish_deals(
             deals,
             now=datetime.now(),
             deadline=deadline,
@@ -494,6 +522,12 @@ def run(
         for line in summary.lines():
             print(line)
 
+        print(
+            f"Website published: "
+            f"{website_result.published_count}/"
+            f"{len(website_result.results)}."
+        )
+
         print("")
         print(
             f"Publication complete: "
@@ -544,6 +578,7 @@ def run(
     )
 
     publication_service = None
+    website_service = None
 
     if not args.dry_run and (
         not args.demo or args.publish_demo
@@ -566,6 +601,17 @@ def run(
             cooldown=DEDUPLICATION_COOLDOWN,
             verifier=publisher,
             channel=CHANNEL_TELEGRAM,
+        )
+
+        # same gate as telegram on purpose: the website
+        # channel publishes whenever telegram publishes
+        # (spec 2.2/18.3). No verifier: the static site
+        # carries no message handle to probe.
+        website_service = PublicationService(
+            publisher=WebsitePublisher(),
+            repository=repository,
+            cooldown=DEDUPLICATION_COOLDOWN,
+            channel=CHANNEL_WEBSITE,
         )
 
     all_deals = []
@@ -666,6 +712,7 @@ def run(
     duplicates_blocked = 0
     reconciled = 0
     verified = 0
+    website_result = None
     deadline_flag = deadline.expired
 
     if publication_service is not None:
@@ -725,6 +772,23 @@ def run(
                     f"{sanitize_text(publication_result.reason)}"
                 )
 
+        if website_service is not None:
+            # second channel: same deals, same deadline and
+            # same per-run limit (spec 2.2/18.3)
+            website_hunt = HuntWorkflow(
+                discovery_workflow=discovery_workflow,
+                publication_service=website_service,
+                policy=HuntPublicationPolicy(
+                    max_publications_per_run=max_publications
+                ),
+            )
+
+            website_result = website_hunt.publish_deals(
+                all_deals,
+                now=now,
+                deadline=deadline,
+            )
+
     summary = RunSummary(
         keyword_outcomes=outcomes,
         deals_found=total_deals,
@@ -743,6 +807,13 @@ def run(
 
     for line in summary.lines():
         print(line)
+
+    if website_result is not None:
+        print(
+            f"Website published: "
+            f"{website_result.published_count}/"
+            f"{len(website_result.results)}."
+        )
 
     if args.dry_run or (
         args.demo and not args.publish_demo

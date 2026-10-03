@@ -270,7 +270,11 @@ def test_runner_wires_deduplication_cooldown(monkeypatch):
 
     import app.runner as runner_module
     import app.services.curated_deals as curated_deals
-    from app.publication.base import DEFAULT_PUBLICATION_COOLDOWN
+    from app.publication.base import (
+        CHANNEL_TELEGRAM,
+        CHANNEL_WEBSITE,
+        DEFAULT_PUBLICATION_COOLDOWN,
+    )
 
     recorded = []
 
@@ -357,15 +361,32 @@ def test_runner_wires_deduplication_cooldown(monkeypatch):
 
     assert demo_result == 0
     assert curated_result == 0
-    assert len(recorded) == 2
 
-    for call in recorded:
+    telegram_calls = [
+        call for call in recorded
+        if call["channel"] == CHANNEL_TELEGRAM
+    ]
+    website_calls = [
+        call for call in recorded
+        if call["channel"] == CHANNEL_WEBSITE
+    ]
+
+    # one service per channel on each publication path
+    # (demo/keywords and curated)
+    assert len(telegram_calls) == 2
+    assert len(website_calls) == 2
+
+    for call in telegram_calls + website_calls:
         assert (
             call["cooldown"]
             == runner_module.DEDUPLICATION_COOLDOWN
             == DEFAULT_PUBLICATION_COOLDOWN
             == timedelta(hours=24)
         )
+
+    for call in website_calls:
+        # the static site carries no message handle
+        assert "verifier" not in call
 
 
 def test_prune_old_history_aborts_when_backup_fails(
@@ -966,12 +987,19 @@ def test_runner_surfaces_publication_exception_sanitized(
     )
 
     captured = capsys.readouterr().out
-    row = repository._connection.execute(
-        "SELECT status FROM publications",
-    ).fetchone()
+    rows_by_channel = {
+        channel: status
+        for channel, status in repository._connection.execute(
+            "SELECT channel, status FROM publications "
+            "ORDER BY id"
+        )
+    }
 
     assert code == 0
-    assert row[0] == "RECONCILIATION"
+    assert rows_by_channel == {
+        "TELEGRAM": "RECONCILIATION",
+        "WEBSITE": "PUBLISHED",
+    }
     assert (
         "publication: B08ERR1: RuntimeError: boom"
         in captured
@@ -1419,3 +1447,210 @@ def test_prune_old_history_aborts_when_delete_fails(
     assert "History prune aborted" in captured.out
     assert "database is locked" in captured.out
     assert len(repository.get_by_product("123")) == 1
+
+
+def test_runner_publishes_website_channel_beside_telegram(
+    tmp_path,
+    monkeypatch,
+    capsys,
+):
+    """Spec 2.2/18.3: the run publishes one row per channel."""
+    import app.runner as runner_module
+    from app.publication.base import PublicationResult
+    from app.services.publication_repository import (
+        PublicationRepository,
+    )
+
+    class FakePublisher:
+        def publish(self, deal):
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+                message_id=99,
+            )
+
+    class FakeTelegramConfig:
+        @classmethod
+        def from_environment(cls):
+            return cls()
+
+        def create_publisher(self):
+            return FakePublisher()
+
+    class DealDiscovery:
+        def __init__(self):
+            self.product_errors = []
+
+        def discover_deals(self, **kwargs):
+            return [build_runner_deal("B08WEB1")]
+
+    repository = PublicationRepository(
+        str(tmp_path / "website_channel.db")
+    )
+
+    monkeypatch.setattr(
+        runner_module,
+        "build_discovery_workflow",
+        lambda **kwargs: DealDiscovery(),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "build_keyword_configs",
+        build_keyword_configs_stub(["mouse"]),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "TelegramConfig",
+        FakeTelegramConfig,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "PublicationRepository",
+        lambda *args, **kwargs: repository,
+    )
+
+    code = runner_module.run(
+        build_runner_namespace(
+            dry_run=False,
+            demo=True,
+            publish_demo=True,
+        )
+    )
+
+    captured = capsys.readouterr().out
+    rows_by_channel = {
+        channel: (status, message_id)
+        for channel, status, message_id in (
+            repository._connection.execute(
+                "SELECT channel, status, message_id "
+                "FROM publications ORDER BY id"
+            )
+        )
+    }
+
+    assert code == 0
+    assert rows_by_channel == {
+        "TELEGRAM": ("PUBLISHED", 99),
+        "WEBSITE": ("PUBLISHED", None),
+    }
+    assert "Website published: 1/1." in captured
+    # the summary stays telegram-scoped
+    assert "Publications successful: 1" in captured
+    assert "Publication complete: 1/1 published." in captured
+
+
+def test_runner_dry_run_does_not_publish_website(
+    monkeypatch,
+    capsys,
+):
+    """Dry run wires no service at all, website included."""
+    import app.runner as runner_module
+
+    recorded = []
+
+    class FakeTelegramConfig:
+        @classmethod
+        def from_environment(cls):
+            return cls()
+
+        def create_publisher(self):
+            return object()
+
+    class EmptyDiscovery:
+        def __init__(self):
+            self.product_errors = []
+
+        def discover_deals(self, **kwargs):
+            return []
+
+    monkeypatch.setattr(
+        runner_module,
+        "build_discovery_workflow",
+        lambda **kwargs: EmptyDiscovery(),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "build_keyword_configs",
+        build_keyword_configs_stub(["mouse"]),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "TelegramConfig",
+        FakeTelegramConfig,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "PublicationService",
+        lambda **kwargs: recorded.append(kwargs),
+    )
+
+    code = runner_module.run(build_runner_namespace(dry_run=True))
+
+    captured = capsys.readouterr().out
+
+    assert code == 0
+    assert recorded == []
+    assert "Website published" not in captured
+    assert "DRY RUN: nothing was published." in captured
+
+
+def test_runner_demo_without_publish_demo_publishes_no_channel(
+    monkeypatch,
+    capsys,
+):
+    """--demo without --publish-demo gates every channel off."""
+    import app.runner as runner_module
+
+    recorded = []
+
+    class FakeTelegramConfig:
+        @classmethod
+        def from_environment(cls):
+            return cls()
+
+        def create_publisher(self):
+            return object()
+
+    class EmptyDiscovery:
+        def __init__(self):
+            self.product_errors = []
+
+        def discover_deals(self, **kwargs):
+            return []
+
+    monkeypatch.setattr(
+        runner_module,
+        "build_discovery_workflow",
+        lambda **kwargs: EmptyDiscovery(),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "build_keyword_configs",
+        build_keyword_configs_stub(["mouse"]),
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "TelegramConfig",
+        FakeTelegramConfig,
+    )
+    monkeypatch.setattr(
+        runner_module,
+        "PublicationService",
+        lambda **kwargs: recorded.append(kwargs),
+    )
+
+    code = runner_module.run(
+        build_runner_namespace(
+            dry_run=False,
+            demo=True,
+            publish_demo=False,
+        )
+    )
+
+    captured = capsys.readouterr().out
+
+    assert code == 0
+    assert recorded == []
+    assert "Website published" not in captured
+    assert "DRY RUN: nothing was published." in captured
