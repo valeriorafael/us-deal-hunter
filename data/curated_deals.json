@@ -10,6 +10,7 @@
       "review_count": 121,
       "source_name": "Slickdeals",
       "source_url": "https://slickdeals.net/f/20066469-lego-star-wars-smart-play-at-st-attack-on-endor-75424-2026-39-95-free-shipping",
+      "image_url": "https://m.media-amazon.com/images/I/81rE46IVTHL._AC_SL1500_.jpg",
       "expires_at": null
     },
     {
@@ -21,18 +22,20 @@
       "review_count": 55,
       "source_name": "Slickdeals",
       "source_url": "https://slickdeals.net/f/20057619-amazon-bltend-10x7-ft-heavy-duty-golf-practice-net-98-98-deal",
+      "image_url": "https://m.media-amazon.com/images/I/91xJaR22sKL._AC_SL1500_.jpg",
       "expires_at": "2026-09-28T03:59:00-03:00"
     },
-{
-  "asin": "B0GYTS2QL2",
-  "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
-  "current_price": 29.99,
-  "reference_price": 40.00,
-  "rating": null,
-  "review_count": 0,
-  "source_name": "Slickdeals",
-  "source_url": "",
-  "expires_at": null
-}
+    {
+      "asin": "B0GYTS2QL2",
+      "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
+      "current_price": 29.99,
+      "reference_price": 40.00,
+      "rating": null,
+      "review_count": 0,
+      "source_name": "Slickdeals",
+      "source_url": "",
+      "image_url": "https://m.media-amazon.com/images/I/61tTXKuWKeL._AC_SL1500_.jpg",
+      "expires_at": null
+    }
   ]
 }

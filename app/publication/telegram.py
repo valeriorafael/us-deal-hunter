@@ -65,6 +65,39 @@ _COMPLETE_TAG = re.compile(r"<[^<>]*>")
 _UNTERMINATED_TAG = re.compile(r"<[^<>]*$")
 _TRAILING_ENTITY = re.compile(r"&[A-Za-z0-9#]*$")
 
+# Only these modelled, deterministic Telegram outcomes may turn a
+# failed sendPhoto into a text fallback. Everything else - an
+# indeterminate outcome, a rate limit, or a status this module does
+# not model - is returned unchanged, so a fallback never masks an
+# unexpected error and never risks a duplicate post.
+PHOTO_FALLBACK_STATUSES = frozenset(
+    {
+        STATUS_TELEGRAM_API_ERROR,
+        STATUS_TELEGRAM_HTTP_ERROR,
+        STATUS_TELEGRAM_INVALID_RESPONSE,
+    }
+)
+
+_IMAGE_SCHEMES = ("http", "https")
+
+
+def _usable_image_url(image_url: Any) -> bool:
+    """True only for an absolute http(s) URL Telegram can fetch.
+
+    A missing or non-http image_url would make sendPhoto fail for a
+    reason that has nothing to do with the photo, so the text path
+    is chosen up front instead of relying on the fallback.
+    """
+    if not isinstance(image_url, str):
+        return False
+
+    scheme, separator, rest = image_url.partition("://")
+
+    if not separator or scheme not in _IMAGE_SCHEMES:
+        return False
+
+    return bool(rest.strip())
+
 
 def _strip_html_tags(text: str) -> str:
     """Remove closed tags and any tag cut off mid-way."""
@@ -432,7 +465,7 @@ class TelegramPublisher(Publisher):
             "inline_keyboard": [
                 [
                     {
-                        "text": "🛒 VER OFERTA",
+                        "text": "🛒 VIEW DEAL",
                         "url": affiliate_url,
                     }
                 ]
@@ -447,7 +480,7 @@ class TelegramPublisher(Publisher):
     ) -> dict:
         return {
             "chat_id": self.chat_id,
-            "photo": deal.product.image_url,
+            "photo": (deal.product.image_url or "").strip(),
             "caption": fit_message(
                 caption, MAX_CAPTION_LENGTH
             ),
@@ -494,7 +527,15 @@ class TelegramPublisher(Publisher):
             reply_markup,
         )
 
-        if not deal.product.image_url:
+        if not _usable_image_url(deal.product.image_url):
+            logger.warning(
+                "telegram product_id=%s sent as text: "
+                "image_url=%r is missing or is not an "
+                "absolute http(s) url.",
+                deal.product.product_id,
+                deal.product.image_url,
+            )
+
             return self._send_with_retry(
                 self.send_message_endpoint,
                 message_payload,
@@ -514,15 +555,27 @@ class TelegramPublisher(Publisher):
         if photo_result.success:
             return photo_result
 
-        # H2 (A-2): an unknown or rate-limited photo attempt must
-        # not be followed by sendMessage - the photo may already
-        # be in the channel and a second post would duplicate it.
+        # H2 (A-2): only an outcome Telegram itself stated may
+        # trigger a text fallback. An unknown, rate-limited or
+        # unmodelled photo attempt must not be followed by
+        # sendMessage - the photo may already be in the channel
+        # and a second post would duplicate it, and a fallback
+        # must never mask an unexpected error.
         if (
             photo_result.indeterminate
             or photo_result.status
-            == STATUS_TELEGRAM_RATE_LIMITED
+            not in PHOTO_FALLBACK_STATUSES
         ):
             return photo_result
+
+        logger.warning(
+            "telegram photo failed product_id=%s "
+            "status=%s reason=%s; falling back to "
+            "sendMessage.",
+            deal.product.product_id,
+            photo_result.status,
+            photo_result.reason,
+        )
 
         fallback_result = self._send_with_retry(
             self.send_message_endpoint,

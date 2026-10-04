@@ -26,7 +26,7 @@ class DealMessageFormatter:
         )
 
         lines = [
-            "🔥 <b>OFERTA ENCONTRADA</b>",
+            "🔥 <b>DEAL FOUND</b>",
             "",
             f"<b>{title}</b>",
             "",
@@ -39,25 +39,25 @@ class DealMessageFormatter:
             )
 
             lines.append(
-                f"De: <s>${deal.reference_price:.2f}</s>"
+                f"Was: <s>${deal.reference_price:.2f}</s>"
             )
 
         if deal.discount_vs_30d is not None:
             lines.append(
-                f"📉 {deal.discount_vs_30d:.0%} abaixo "
-                "da média de 30 dias"
+                f"📉 {deal.discount_vs_30d:.0%} below "
+                "the 30-day average"
             )
 
         if product.lowest_price_90d is not None:
             lines.append(
-                f"📊 Menor preço 90d: "
+                f"📊 Lowest price in 90d: "
                 f"${product.lowest_price_90d:.2f}"
             )
 
         if product.rating is not None:
             lines.append(
                 f"⭐ {product.rating:.1f}/5"
-                f" ({product.review_count:,} avaliações)"
+                f" ({product.review_count:,} reviews)"
             )
 
         if deal.score > 0:
@@ -66,18 +66,18 @@ class DealMessageFormatter:
             )
         else:
             lines.append(
-                "✅ <b>Oferta verificada</b>"
+                "✅ <b>Verified deal</b>"
             )
 
         if deal.source_name:
             lines.append(
-                f"🔎 Fonte: {escape(deal.source_name)}"
+                f"🔎 Source: {escape(deal.source_name)}"
             )
 
         lines.extend(
             [
                 "",
-                f'👉 <a href="{affiliate_url}">VER OFERTA</a>',
+                f'👉 <a href="{affiliate_url}">VIEW DEAL</a>',
             ]
         )
 
