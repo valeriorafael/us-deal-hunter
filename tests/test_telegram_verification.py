@@ -168,7 +168,7 @@ def test_probe_sends_the_identical_reply_markup():
         "inline_keyboard": [
             [
                 {
-                    "text": "🛒 VER OFERTA",
+                    "text": "🛒 VIEW DEAL",
                     "url": AFFILIATE_URL,
                 }
             ]

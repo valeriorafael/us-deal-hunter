@@ -1,3 +1,5 @@
+import pytest
+
 import requests
 
 from app.models.deal import Deal
@@ -9,6 +11,7 @@ from app.publication.formatter import (
 from app.publication.telegram import (
     MAX_CAPTION_LENGTH,
     MAX_MESSAGE_LENGTH,
+    PHOTO_FALLBACK_STATUSES,
     TelegramPublisher,
     fit_message,
 )
@@ -136,7 +139,7 @@ def test_deal_message_formatter_contains_offer_data():
     assert "$75.00" in message
     assert "25%" in message
     assert "88/100" in message
-    assert "VER OFERTA" in message
+    assert "VIEW DEAL" in message
     assert "tag=test-20" in message
 
 
@@ -182,7 +185,7 @@ def test_telegram_publisher_sends_photo():
         "inline_keyboard": [
             [
                 {
-                    "text": "🛒 VER OFERTA",
+                    "text": "🛒 VIEW DEAL",
                     "url": (
                         "https://www.amazon.com/dp/"
                         "B08N5WRWNW?tag=test-20"
@@ -724,7 +727,7 @@ def test_request_error_reason_never_exposes_secrets():
 
 
 def test_fit_message_leaves_short_text_unchanged():
-    text = "<b>Deal</b>\n👉 VER OFERTA"
+    text = "<b>Deal</b>\n👉 VIEW DEAL"
 
     assert fit_message(text, 100) == text
 
@@ -732,7 +735,7 @@ def test_fit_message_leaves_short_text_unchanged():
 def test_fit_message_keeps_footer_and_respects_limit():
     footer = (
         '👉 <a href="https://www.amazon.com/dp/'
-        'B1?tag=t-20">VER OFERTA</a>'
+        'B1?tag=t-20">VIEW DEAL</a>'
     )
     text = f"<b>{'A' * 500}</b>\n{footer}"
     limit = 400
@@ -776,9 +779,9 @@ def _huge_formatter():
     class HugeFormatter:
         def format(self, deal):
             return (
-                "🔥 <b>OFERTA</b>\n" * 500
+                "🔥 <b>DEAL</b>\n" * 500
                 + '👉 <a href="https://example.com/x">'
-                "VER OFERTA</a>"
+                "VIEW DEAL</a>"
             )
 
     return HugeFormatter()
@@ -803,7 +806,7 @@ def test_photo_caption_never_exceeds_the_caption_limit():
     assert result.success is True
     assert len(caption) <= MAX_CAPTION_LENGTH
     assert caption.endswith(
-        '👉 <a href="https://example.com/x">VER OFERTA</a>'
+        '👉 <a href="https://example.com/x">VIEW DEAL</a>'
     )
 
 
@@ -826,7 +829,7 @@ def test_text_message_never_exceeds_the_message_limit():
     assert result.success is True
     assert len(text) <= MAX_MESSAGE_LENGTH
     assert text.endswith(
-        '👉 <a href="https://example.com/x">VER OFERTA</a>'
+        '👉 <a href="https://example.com/x">VIEW DEAL</a>'
     )
 
 
@@ -878,3 +881,185 @@ def test_http_400_json_error_is_not_retried():
     assert result.success is False
     assert result.status == "TELEGRAM_API_ERROR"
     assert result.indeterminate is False
+
+
+def test_formatter_message_is_english():
+    deal = Deal(
+        product=build_deal().product,
+        score=88.0,
+        label="GREAT",
+        confidence="HIGH",
+        reference_price=100.0,
+    )
+
+    message = DealMessageFormatter().format(deal)
+
+    assert "DEAL FOUND" in message
+    assert "Was: <s>$100.00</s>" in message
+    assert "below the 30-day average" in message
+    assert "Lowest price in 90d: $70.00" in message
+    assert "(8,500 reviews)" in message
+    assert "VIEW DEAL" in message
+
+    assert "OFERTA ENCONTRADA" not in message
+    assert "avalia" not in message
+    assert "abaixo" not in message
+    assert "Menor pre\u00e7o" not in message
+    assert "VER OFERTA" not in message
+
+
+def test_formatter_uses_english_verified_deal_when_there_is_no_score():
+    deal = Deal(
+        product=build_deal().product,
+        score=0.0,
+        label="CURATED",
+        confidence="VERIFIED",
+    )
+
+    message = DealMessageFormatter().format(deal)
+
+    assert "Verified deal" in message
+    assert "Oferta verificada" not in message
+
+
+def test_reply_markup_button_is_english():
+    publisher = TelegramPublisher(
+        bot_token="123:test-token",
+        chat_id="@testchannel",
+        post=None,
+    )
+
+    markup = publisher._reply_markup("https://example.com/x")
+
+    assert markup["inline_keyboard"][0][0]["text"] == (
+        "\U0001f6d2 VIEW DEAL"
+    )
+
+
+@pytest.mark.parametrize(
+    "image_url",
+    [
+        None,
+        "",
+        "   ",
+        "not-a-url",
+        "/local/path.jpg",
+        "ftp://example.com/x.jpg",
+        "javascript:alert(1)",
+        "http://",
+        123,
+    ],
+)
+def test_unusable_image_url_goes_straight_to_send_message(
+    image_url,
+):
+    calls, fake_post = build_recorder([build_ok_response()])
+
+    publisher = TelegramPublisher(
+        bot_token="123:test-token",
+        chat_id="@testchannel",
+        post=fake_post,
+    )
+
+    result = publisher.publish(build_deal(image_url=image_url))
+
+    assert len(calls) == 1
+    assert calls[0]["url"].endswith("/sendMessage")
+    assert result.success is True
+    assert "photo" not in calls[0]["json"]
+    assert "text" in calls[0]["json"]
+
+
+def test_usable_image_url_is_sent_as_photo_in_a_single_call():
+    calls, fake_post = build_recorder([build_ok_response()])
+
+    publisher = TelegramPublisher(
+        bot_token="123:test-token",
+        chat_id="@testchannel",
+        post=fake_post,
+    )
+
+    result = publisher.publish(build_deal(image_url=IMAGE_URL))
+
+    assert len(calls) == 1
+    assert calls[0]["url"].endswith("/sendPhoto")
+    assert calls[0]["json"]["photo"] == IMAGE_URL
+    assert result.success is True
+
+
+def test_unknown_photo_outcome_does_not_fall_back_to_text():
+    calls, fake_post = build_recorder(
+        [build_invalid_json_response(status_code=500)]
+    )
+
+    publisher = TelegramPublisher(
+        bot_token="123:test-token",
+        chat_id="@testchannel",
+        post=fake_post,
+    )
+
+    result = publisher.publish(build_deal())
+
+    assert len(calls) == 1
+    assert calls[0]["url"].endswith("/sendPhoto")
+    assert result.success is False
+    assert result.indeterminate is True
+
+
+def test_fallback_only_allows_modelled_telegram_outcomes():
+    assert "TELEGRAM_RATE_LIMITED" not in PHOTO_FALLBACK_STATUSES
+    assert "TELEGRAM_REQUEST_ERROR" not in PHOTO_FALLBACK_STATUSES
+    assert "PUBLISHED" not in PHOTO_FALLBACK_STATUSES
+
+
+def test_curated_file_publishes_as_photo_with_english_text(
+    monkeypatch,
+):
+    from app.services.curated_deals import CuratedDealLoader
+
+    class ExplodingResolver:
+        def resolve(self, source_url, fallback_urls=None):
+            raise AssertionError(
+                "data/curated_deals.json must already carry "
+                "a usable image_url."
+            )
+
+    monkeypatch.setenv(
+        "AMAZON_PARTNER_TAG",
+        "dealhunter0e2-20",
+    )
+
+    config = CuratedDealLoader(
+        image_resolver=ExplodingResolver()
+    ).load("data/curated_deals.json")
+
+    assert len(config.deals) == 2
+
+    deal = config.deals[0]
+
+    calls, fake_post = build_recorder(
+        [build_ok_response(message_id=4242)]
+    )
+
+    publisher = TelegramPublisher(
+        bot_token="123:test-token",
+        chat_id="@testchannel",
+        post=fake_post,
+    )
+
+    result = publisher.publish(deal)
+
+    assert len(calls) == 1
+    assert calls[0]["url"].endswith("/sendPhoto")
+    assert calls[0]["json"]["photo"] == deal.product.image_url
+
+    caption = calls[0]["json"]["caption"]
+    assert caption.startswith("\U0001f525 <b>DEAL FOUND</b>")
+    assert "VIEW DEAL" in caption
+    assert "VER OFERTA" not in caption
+    assert "OFERTA ENCONTRADA" not in caption
+    assert "tag=dealhunter0e2-20" in caption
+    assert "Source: Slickdeals" in caption
+
+    assert result.success is True
+    assert result.message_id == 4242

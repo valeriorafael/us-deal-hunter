@@ -1,4 +1,5 @@
 import itertools
+import json
 import logging
 import os
 import sqlite3
@@ -28,6 +29,7 @@ class Migration:
     statements: tuple[str, ...]
     requires_backup: bool = False
     adopt_legacy: bool = False
+    backfill_images: bool = False
 
 
 LEGACY_PUBLICATION_COLUMNS = {
@@ -166,6 +168,19 @@ MIGRATIONS: tuple[Migration, ...] = (
         requires_backup=False,
         adopt_legacy=False,
     ),
+    Migration(
+        version=6,
+        name="publication_image_url",
+        statements=(
+            """
+            ALTER TABLE publications
+            ADD COLUMN image_url TEXT
+            """,
+        ),
+        requires_backup=False,
+        adopt_legacy=False,
+        backfill_images=True,
+    ),
 )
 
 LATEST_SCHEMA_VERSION = max(
@@ -244,7 +259,7 @@ def run_migrations(
         if migration.requires_backup and db_path != ":memory:":
             backup_database(connection, db_path)
 
-        _apply_migration(connection, migration)
+        _apply_migration(connection, migration, db_path)
 
 
 def backup_database(
@@ -432,6 +447,7 @@ def _assert_database_is_healthy(
 def _apply_migration(
     connection: sqlite3.Connection,
     migration: Migration,
+    db_path: str | None = None,
 ) -> None:
     # BEGIN IMMEDIATE + in-transaction version check: a concurrent
     # process may have applied this migration after run_migrations
@@ -461,6 +477,9 @@ def _apply_migration(
 
         if migration.adopt_legacy:
             _adopt_legacy_publications(connection)
+
+        if migration.backfill_images:
+            _backfill_publication_images(connection, db_path)
 
         connection.execute(
             f"PRAGMA user_version = {migration.version}"
@@ -500,3 +519,90 @@ def _adopt_legacy_publications(
     for column, statement in LEGACY_PUBLICATION_COLUMNS.items():
         if column not in columns:
             connection.execute(statement)
+
+
+def _backfill_publication_images(
+    connection: sqlite3.Connection,
+    db_path: str | None,
+) -> int:
+    """Seed ``publications.image_url`` for rows written before
+    migration 6 (the column, and therefore the value, did not
+    exist yet).
+
+    The curated catalogue sitting next to the database is the
+    same source the Telegram photo was published from, so the
+    URL is copied, never invented, and nothing is downloaded.
+    Only absolute http(s) URLs are stored; products that are not
+    curated keep ``NULL``. Never fills a value that is already
+    there, so re-running the migration cannot overwrite a newer
+    image.
+    """
+    if not db_path or db_path == ":memory:":
+        return 0
+
+    catalogue = (
+        Path(db_path).resolve().parent / "curated_deals.json"
+    )
+
+    if not catalogue.is_file():
+        return 0
+
+    try:
+        data = json.loads(
+            catalogue.read_text(encoding="utf-8-sig")
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning(
+            "could not read %s (%s); publication images "
+            "left untouched.",
+            catalogue,
+            exc,
+        )
+        return 0
+
+    items = data.get("deals", []) if isinstance(data, dict) else []
+
+    images: dict[str, str] = {}
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+
+        product_id = item.get("asin")
+        image_url = item.get("image_url")
+
+        if not isinstance(product_id, str) or not product_id:
+            continue
+
+        if not isinstance(image_url, str):
+            continue
+
+        image_url = image_url.strip()
+
+        if not image_url.startswith(("http://", "https://")):
+            continue
+
+        images[product_id] = image_url
+
+    updated = 0
+
+    for product_id, image_url in images.items():
+        cursor = connection.execute(
+            """
+            UPDATE publications
+            SET image_url = ?
+            WHERE product_id = ?
+              AND image_url IS NULL
+            """,
+            (image_url, product_id),
+        )
+
+        updated += max(cursor.rowcount, 0)
+
+    if updated:
+        logger.info(
+            "publication image_url backfilled for %d row(s)",
+            updated,
+        )
+
+    return updated

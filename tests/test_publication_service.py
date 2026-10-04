@@ -232,6 +232,60 @@ def test_publication_service_records_successful_publication(
     ) is True
 
 
+def test_publish_stores_the_product_image_url(tmp_path):
+    """The publication row carries the image the site exports."""
+    now = datetime(2026, 8, 15, 12, 0)
+
+    repository = PublicationRepository(
+        str(tmp_path / "publication.db")
+    )
+
+    class FakePublisher:
+        def publish(self, deal):
+            return PublicationResult(
+                success=True,
+                status="PUBLISHED",
+                reason="Published.",
+                message_id=123,
+            )
+
+    deal = Deal(
+        product=Product(
+            product_id="B0IMG1",
+            title="LEGO Star Wars 75424",
+            current_price=39.95,
+            average_price_30d=50.0,
+            lowest_price_90d=45.0,
+            rating=4.8,
+            review_count=1200,
+            platform="amazon",
+            affiliate_url=(
+                "https://www.amazon.com/dp/B0IMG1"
+                "?tag=test-20"
+            ),
+            image_url=(
+                "https://images.example.com/lego.jpg"
+            ),
+        ),
+        score=88.0,
+        label="GREAT",
+        confidence="HIGH",
+    )
+
+    result = PublicationService(
+        publisher=FakePublisher(),
+        repository=repository,
+    ).publish(deal, now=now)
+
+    row = repository._connection.execute(
+        "SELECT image_url FROM publications "
+        "WHERE product_id = 'B0IMG1'"
+    ).fetchone()
+
+    assert result.success is True
+    assert row[0] == "https://images.example.com/lego.jpg"
+
+
 def test_publication_service_is_agnostic_to_publisher_fallback(
     tmp_path,
 ):

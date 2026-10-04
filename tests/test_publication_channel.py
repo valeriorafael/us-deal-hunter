@@ -80,7 +80,7 @@ def test_migration_5_adds_channel_column(tmp_path):
     assert columns["channel"][4] == "'TELEGRAM'"
 
 
-def test_migration_5_sets_user_version_to_five(tmp_path):
+def test_migration_5_sets_user_version_to_latest(tmp_path):
     connection = connect(str(tmp_path / "version.db"))
 
     version = connection.execute(
@@ -88,7 +88,7 @@ def test_migration_5_sets_user_version_to_five(tmp_path):
     ).fetchone()[0]
     connection.close()
 
-    assert version == 5
+    assert version >= 5
     assert version == database.LATEST_SCHEMA_VERSION
 
 
@@ -136,7 +136,7 @@ def test_migration_5_backfills_legacy_rows_with_telegram(
     migrated.close()
 
     assert rows == [("B00001", CHANNEL_TELEGRAM)]
-    assert version == 5
+    assert version == database.LATEST_SCHEMA_VERSION
 
 
 def test_migration_5_is_idempotent_on_reopen(tmp_path):
@@ -158,7 +158,7 @@ def test_migration_5_is_idempotent_on_reopen(tmp_path):
     reopened.close()
 
     assert len(channel_columns) == 1
-    assert version == 5
+    assert version == database.LATEST_SCHEMA_VERSION
 
 
 def test_migration_5_creates_channel_index(tmp_path):

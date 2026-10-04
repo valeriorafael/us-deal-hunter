@@ -353,6 +353,49 @@ def test_begin_attempt_creates_pending_row(tmp_path):
     assert repository.count("123") == 1
 
 
+def test_begin_attempt_persists_image_url(tmp_path):
+    repository = PublicationRepository(
+        str(tmp_path / "publication.db")
+    )
+
+    attempt_id = repository.begin_attempt(
+        product_id="B0IMG1",
+        affiliate_url="https://example.com",
+        price=39.95,
+        attempted_at=datetime(2026, 8, 15, 12, 0),
+        image_url="https://images.example.com/lego.jpg",
+    )
+
+    row = repository._connection.execute(
+        "SELECT image_url FROM publications WHERE id = ?",
+        (attempt_id,),
+    ).fetchone()
+
+    assert (
+        row[0] == "https://images.example.com/lego.jpg"
+    )
+
+
+def test_begin_attempt_without_image_stores_null(tmp_path):
+    repository = PublicationRepository(
+        str(tmp_path / "publication.db")
+    )
+
+    attempt_id = repository.begin_attempt(
+        product_id="B0NOIMG",
+        affiliate_url="https://example.com",
+        price=39.95,
+        attempted_at=datetime(2026, 8, 15, 12, 0),
+    )
+
+    row = repository._connection.execute(
+        "SELECT image_url FROM publications WHERE id = ?",
+        (attempt_id,),
+    ).fetchone()
+
+    assert row[0] is None
+
+
 def test_attempt_lifecycle_reaches_published(tmp_path):
     repository = PublicationRepository(
         str(tmp_path / "publication.db")
@@ -567,6 +610,27 @@ def test_record_persists_message_id(tmp_path):
 
     assert with_id[0] == 42
     assert without_id[0] is None
+
+
+def test_record_persists_image_url(tmp_path):
+    repository = PublicationRepository(
+        str(tmp_path / "publication.db")
+    )
+
+    repository.record(
+        product_id="B0IMG2",
+        affiliate_url="https://example.com",
+        price=29.99,
+        published_at=datetime(2026, 8, 15, 12, 0),
+        image_url="https://images.example.com/razer.jpg",
+    )
+
+    row = repository._connection.execute(
+        "SELECT image_url FROM publications "
+        "WHERE product_id = 'B0IMG2'"
+    ).fetchone()
+
+    assert row[0] == "https://images.example.com/razer.jpg"
 
 
 def test_fresh_pending_row_is_not_reconciled(tmp_path):

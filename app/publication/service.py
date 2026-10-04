@@ -317,6 +317,7 @@ class PublicationService:
                     label=deal.label,
                     discount_vs_30d=deal.discount_vs_30d,
                     source_query=deal.source_query,
+                    image_url=deal.product.image_url,
                     channel=self.channel,
                 )
             )

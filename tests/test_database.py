@@ -1,3 +1,4 @@
+import json
 import logging
 import sqlite3
 from datetime import datetime
@@ -317,6 +318,7 @@ def test_migration_baseline_adopts_legacy_publications_table(
         "status",
         "message_id",
         "channel",
+        "image_url",
     ]
     assert defaults["status"] == "'PUBLISHED'"
     assert (
@@ -409,8 +411,8 @@ def test_migrations_are_complete_and_ordered():
     ]
 
     assert versions == sorted(set(versions))
-    assert versions == [1, 2, 3, 4, 5]
-    assert database.LATEST_SCHEMA_VERSION == 5
+    assert versions == [1, 2, 3, 4, 5, 6]
+    assert database.LATEST_SCHEMA_VERSION == 6
     assert database.LATEST_SCHEMA_VERSION == max(versions)
 
 
@@ -877,7 +879,7 @@ def test_migration_4_adds_message_id_column(tmp_path):
     connection.close()
 
     assert "message_id" in columns
-    assert version == database.LATEST_SCHEMA_VERSION == 5
+    assert version == database.LATEST_SCHEMA_VERSION
 
 
 def test_migration_4_preserves_existing_publication_rows(
@@ -916,7 +918,7 @@ def test_migration_4_preserves_existing_publication_rows(
     assert rows == [
         ("B00001", 99.5, "PUBLISHED", None)
     ]
-    assert version == 5
+    assert version == database.LATEST_SCHEMA_VERSION
 
 
 def test_migration_4_is_idempotent_on_reopen(tmp_path):
@@ -940,7 +942,7 @@ def test_migration_4_is_idempotent_on_reopen(tmp_path):
     second.close()
 
     assert len(message_id_columns) == 1
-    assert version == 5
+    assert version == database.LATEST_SCHEMA_VERSION
 
 
 def test_migration_4_creates_no_new_backup(
@@ -969,11 +971,11 @@ def test_migration_4_creates_no_new_backup(
     assert after == before
 
 
-def test_migrations_reject_version_six(tmp_path):
-    db_path = str(tmp_path / "future6.db")
+def test_migrations_reject_version_seven(tmp_path):
+    db_path = str(tmp_path / "future7.db")
 
     future = sqlite3.connect(db_path)
-    future.execute("PRAGMA user_version = 6")
+    future.execute("PRAGMA user_version = 7")
     future.commit()
     future.close()
 
@@ -982,7 +984,187 @@ def test_migrations_reject_version_six(tmp_path):
     ) as excinfo:
         connect(db_path)
 
-    assert "6" in str(excinfo.value)
+    assert "7" in str(excinfo.value)
+
+
+def _write_catalogue(tmp_path, deals) -> None:
+    (tmp_path / "curated_deals.json").write_text(
+        json.dumps({"deals": deals}),
+        encoding="utf-8",
+    )
+
+
+def test_migration_6_adds_image_url_column(tmp_path):
+    connection = connect(str(tmp_path / "image_url.db"))
+
+    columns = {
+        row[1]
+        for row in connection.execute(
+            "PRAGMA table_info(publications)"
+        )
+    }
+    version = connection.execute(
+        "PRAGMA user_version"
+    ).fetchone()[0]
+    connection.close()
+
+    assert "image_url" in columns
+    assert version == database.LATEST_SCHEMA_VERSION == 6
+
+
+def test_migration_6_backfills_image_url_from_catalogue(
+    tmp_path,
+    monkeypatch,
+):
+    db_path = str(tmp_path / "legacy_images.db")
+    original = database.MIGRATIONS
+
+    monkeypatch.setattr(
+        database,
+        "MIGRATIONS",
+        tuple(
+            migration
+            for migration in original
+            if migration.version <= 5
+        ),
+    )
+
+    legacy = connect(db_path)
+    legacy.execute(
+        """
+        INSERT INTO publications (
+            product_id, affiliate_url, price,
+            published_at, status
+        ) VALUES
+            ('B0IMG1', 'https://example.com', 9.99,
+             '2026-08-15T12:00:00', 'PUBLISHED'),
+            ('B0NONE', 'https://example.com', 5.0,
+             '2026-08-15T12:00:00', 'PUBLISHED')
+        """
+    )
+    legacy.commit()
+    legacy.close()
+
+    _write_catalogue(
+        tmp_path,
+        [
+            {
+                "asin": "B0IMG1",
+                "image_url": (
+                    "https://images.example.com/lego.jpg"
+                ),
+            },
+            {
+                "asin": "B0NONE",
+                "image_url": "javascript:alert(1)",
+            },
+        ],
+    )
+
+    monkeypatch.setattr(database, "MIGRATIONS", original)
+
+    migrated = connect(db_path)
+    rows = dict(
+        migrated.execute(
+            "SELECT product_id, image_url FROM publications"
+        ).fetchall()
+    )
+    version = migrated.execute(
+        "PRAGMA user_version"
+    ).fetchone()[0]
+    migrated.close()
+
+    assert version == database.LATEST_SCHEMA_VERSION
+    assert rows["B0IMG1"] == (
+        "https://images.example.com/lego.jpg"
+    )
+    assert rows["B0NONE"] is None
+
+
+def test_migration_6_without_catalogue_keeps_null(tmp_path):
+    connection = connect(str(tmp_path / "no_catalogue.db"))
+
+    connection.execute(
+        """
+        INSERT INTO publications (
+            product_id, affiliate_url, price,
+            published_at, status
+        ) VALUES ('B0NULL', 'https://example.com', 5.0,
+                  '2026-08-15T12:00:00', 'PUBLISHED')
+        """
+    )
+    connection.commit()
+
+    image_url = connection.execute(
+        "SELECT image_url FROM publications"
+    ).fetchone()[0]
+    connection.close()
+
+    assert image_url is None
+
+
+def test_backfill_publication_images_never_overwrites(
+    tmp_path,
+):
+    db_path = str(tmp_path / "keep_image.db")
+    connection = connect(db_path)
+
+    connection.execute(
+        """
+        INSERT INTO publications (
+            product_id, affiliate_url, price,
+            published_at, status, image_url
+        ) VALUES ('B0OLD', 'https://example.com', 5.0,
+                  '2026-08-15T12:00:00', 'PUBLISHED',
+                  'https://images.example.com/old.jpg')
+        """
+    )
+    connection.commit()
+
+    _write_catalogue(
+        tmp_path,
+        [
+            {
+                "asin": "B0OLD",
+                "image_url": (
+                    "https://images.example.com/new.jpg"
+                ),
+            }
+        ],
+    )
+
+    updated = database._backfill_publication_images(
+        connection,
+        db_path,
+    )
+
+    image_url = connection.execute(
+        "SELECT image_url FROM publications"
+    ).fetchone()[0]
+    connection.close()
+
+    assert updated == 0
+    assert image_url == "https://images.example.com/old.jpg"
+
+
+def test_backfill_publication_images_ignores_unreadable_catalogue(
+    tmp_path,
+):
+    db_path = str(tmp_path / "broken_catalogue.db")
+    connection = connect(db_path)
+
+    (tmp_path / "curated_deals.json").write_text(
+        "{not json",
+        encoding="utf-8",
+    )
+
+    updated = database._backfill_publication_images(
+        connection,
+        db_path,
+    )
+    connection.close()
+
+    assert updated == 0
 
 
 def test_migration_rollback_failure_does_not_mask_original_error(

@@ -88,6 +88,7 @@ class SitePublication:
     label: str | None
     discount_vs_30d: float | None
     source_query: str | None
+    image_url: str | None = None
 
 
 @dataclass(frozen=True)
@@ -137,6 +138,25 @@ def _public_score(score: float | None) -> float | None:
         return None
 
     return float(score)
+
+
+def _site_image_url(image_url: str | None) -> str | None:
+    """Absolute http(s) image URL, or ``null``.
+
+    The renderer only paints an ``<img>`` for an https URL and
+    falls back to its emoji placeholder otherwise, so anything
+    that is not a usable absolute URL is dropped here instead of
+    reaching the document.
+    """
+    if not isinstance(image_url, str):
+        return None
+
+    image_url = image_url.strip()
+
+    if not image_url.startswith(("http://", "https://")):
+        return None
+
+    return image_url
 
 
 def _previous_price(
@@ -243,7 +263,7 @@ def build_document(
                 ),
                 "score": _public_score(item.score),
                 "label": item.label,
-                "image": None,
+                "image": _site_image_url(item.image_url),
                 "url": item.affiliate_url,
                 "published_at": utc_stamp(item.published_at),
                 "source_query": item.source_query,
@@ -358,11 +378,12 @@ def _validate_deal(deal: object, index: int) -> None:
             f"{where}.label must be null or a string"
         )
 
-    if deal["image"] is not None and not isinstance(
-        deal["image"], str
+    if deal["image"] is not None and (
+        not isinstance(deal["image"], str)
+        or not deal["image"].startswith("http")
     ):
         raise ValueError(
-            f"{where}.image must be null or a string"
+            f"{where}.image must be null or an http(s) URL"
         )
 
     if not isinstance(deal["url"], str) or not deal[

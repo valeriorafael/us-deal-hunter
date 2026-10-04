@@ -49,6 +49,7 @@ class PublicationRepository:
         source_query: str | None = None,
         status: str = STATUS_PUBLISHED,
         *,
+        image_url: str | None = None,
         message_id: int | None = None,
         channel: str = CHANNEL_TELEGRAM,
     ) -> None:
@@ -66,9 +67,10 @@ class PublicationRepository:
                 source_query,
                 status,
                 message_id,
-                channel
+                channel,
+                image_url
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 product_id,
@@ -83,6 +85,7 @@ class PublicationRepository:
                 status,
                 message_id,
                 channel,
+                image_url,
             ),
         )
 
@@ -100,6 +103,7 @@ class PublicationRepository:
         label: str | None = None,
         discount_vs_30d: float | None = None,
         source_query: str | None = None,
+        image_url: str | None = None,
         channel: str = CHANNEL_TELEGRAM,
     ) -> int:
         """T1: record the intent to publish (fail-closed).
@@ -122,9 +126,10 @@ class PublicationRepository:
                 source_query,
                 status,
                 message_id,
-                channel
+                channel,
+                image_url
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)
             """,
             (
                 product_id,
@@ -138,6 +143,7 @@ class PublicationRepository:
                 source_query,
                 STATUS_PENDING,
                 channel,
+                image_url,
             ),
         )
 

@@ -1,22 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-03T00:41:43Z",
+  "generated_at": "2026-10-04T01:06:19Z",
   "deals": [
-    {
-      "id": "B0GYTS2QL2",
-      "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
-      "price": 29.99,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": null,
-      "score": null,
-      "label": "CURATED",
-      "image": null,
-      "url": "https://www.amazon.com/dp/B0GYTS2QL2?tag=dealhunter0e2-20",
-      "published_at": "2026-10-03T00:41:33Z",
-      "source_query": "curated:Slickdeals",
-      "history": []
-    },
     {
       "id": "B0FMYWSMDF",
       "title": "LEGO Star Wars SMART Play: AT-ST Attack on Endor 75424",
@@ -26,8 +11,23 @@
       "discount_pct": null,
       "score": null,
       "label": "CURATED",
-      "image": null,
+      "image": "https://m.media-amazon.com/images/I/81rE46IVTHL._AC_SL1500_.jpg",
       "url": "https://www.amazon.com/dp/B0FMYWSMDF?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T00:42:24Z",
+      "source_query": "curated:Slickdeals",
+      "history": []
+    },
+    {
+      "id": "B0GYTS2QL2",
+      "title": "Razer Orochi V2 Wireless Gaming Mouse, PC & Mac, Portable, 60g, Quartz Pink",
+      "price": 29.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "CURATED",
+      "image": "https://m.media-amazon.com/images/I/61tTXKuWKeL._AC_SL1500_.jpg",
+      "url": "https://www.amazon.com/dp/B0GYTS2QL2?tag=dealhunter0e2-20",
       "published_at": "2026-10-03T00:41:33Z",
       "source_query": "curated:Slickdeals",
       "history": []

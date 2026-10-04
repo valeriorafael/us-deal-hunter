@@ -41,7 +41,8 @@ SELECT
     score,
     label,
     discount_vs_30d,
-    source_query
+    source_query,
+    image_url
 FROM publications
 WHERE status = ? AND channel = ?
 ORDER BY published_at DESC, id DESC
@@ -89,6 +90,7 @@ def load_publications(
             label=row[6],
             discount_vs_30d=row[7],
             source_query=row[8],
+            image_url=row[9],
         )
         for row in rows
     ]

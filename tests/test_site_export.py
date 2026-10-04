@@ -205,10 +205,56 @@ def test_null_title_exports_empty_string_and_null_source():
     validate_document(document)
 
 
-def test_image_is_always_null_in_v1():
+def test_image_is_null_when_the_publication_has_none():
     document = build_single(make_publication())
 
     assert document["deals"][0]["image"] is None
+
+
+def test_image_is_exported_when_the_publication_carries_it():
+    document = build_single(
+        make_publication(
+            image_url="https://images.example.com/lego.jpg"
+        )
+    )
+
+    deal = document["deals"][0]
+
+    assert (
+        deal["image"]
+        == "https://images.example.com/lego.jpg"
+    )
+    assert set(deal) == set(DEAL_KEYS)
+
+    validate_document(document)
+
+
+def test_image_is_dropped_unless_it_is_an_absolute_url():
+    unusable = (
+        None,
+        "",
+        "   ",
+        "images.example.com/lego.jpg",
+        "javascript:alert(1)",
+        42,
+    )
+
+    for value in unusable:
+        document = build_single(
+            make_publication(image_url=value)
+        )
+
+        assert document["deals"][0]["image"] is None, value
+
+
+def test_validate_rejects_a_non_http_image():
+    document = build_single(make_publication())
+    document["deals"][0]["image"] = (
+        "ftp://example.com/lego.jpg"
+    )
+
+    with pytest.raises(ValueError, match="image"):
+        validate_document(document)
 
 
 def test_price_is_rounded_to_two_decimals():
@@ -928,3 +974,64 @@ def test_cli_channel_filter_keeps_website_row_per_product(
 
     assert [deal["id"] for deal in document["deals"]] == ["B0SAME"]
     assert document["deals"][0]["title"] == "Website newest"
+
+
+def test_cli_exports_the_publication_image_url(tmp_path):
+    import export_site
+
+    db = tmp_path / "deal_hunter.db"
+    create_database(db, [publication_row("B0IMGED")])
+
+    connection = sqlite3.connect(str(db))
+    connection.execute(
+        "UPDATE publications SET image_url = ? "
+        "WHERE product_id = ?",
+        ("https://images.example.com/lego.jpg", "B0IMGED"),
+    )
+    connection.commit()
+    connection.close()
+
+    output = tmp_path / "site" / "deals.json"
+
+    assert (
+        export_site.main(
+            ["--db", str(db), "--out", str(output)]
+        )
+        == 0
+    )
+
+    document = json.loads(
+        output.read_text(encoding="utf-8")
+    )
+
+    validate_document(document)
+
+    assert document["deals"][0]["image"] == (
+        "https://images.example.com/lego.jpg"
+    )
+
+
+def test_cli_exports_null_image_for_a_row_without_one(
+    tmp_path,
+):
+    import export_site
+
+    db = tmp_path / "deal_hunter.db"
+    create_database(db, [publication_row("B0NOIMG")])
+
+    output = tmp_path / "site" / "deals.json"
+
+    assert (
+        export_site.main(
+            ["--db", str(db), "--out", str(output)]
+        )
+        == 0
+    )
+
+    document = json.loads(
+        output.read_text(encoding="utf-8")
+    )
+
+    validate_document(document)
+
+    assert document["deals"][0]["image"] is None

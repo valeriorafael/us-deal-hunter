@@ -116,6 +116,42 @@ def test_image_uses_lazy_loading() -> None:
     assert 'setAttribute("loading", "lazy")' in read_js()
 
 
+def test_image_is_painted_as_an_img_element() -> None:
+    js = read_js()
+
+    assert 'picture.setAttribute("src", deal.image)' in js
+    assert 'picture.setAttribute("alt", titleText)' in js
+
+
+def test_image_falls_back_when_the_field_is_unusable() -> None:
+    js = read_js()
+
+    assert 'imageBox.textContent = "🔥"' in js
+
+
+def test_renderer_paints_every_image_the_export_provides() -> None:
+    """Bridge between site_export and app.js.
+
+    Every image the exporter emits passes the renderer's https
+    gate, so it reaches the ``<img>`` branch; deals without one
+    keep the emoji fallback and the card still renders.
+    """
+    document = json.loads(DEALS.read_text(encoding="utf-8"))
+    js = read_js()
+
+    for deal in document["deals"]:
+        image = deal["image"]
+
+        if image is None:
+            continue
+
+        assert image.startswith("https://")
+        assert 'picture.setAttribute("src", deal.image)' in js
+
+    assert 'imageBox.textContent = "🔥"' in js
+    assert "renderDeal" in js
+
+
 def test_reads_offer_url() -> None:
     assert "deal.url" in read_js()
 
