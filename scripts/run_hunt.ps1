@@ -40,8 +40,8 @@ catch {
 
 $PythonArgs = @(
     ".\run.py",
-    "--keywords-file",
-    ".\data\keywords.json"
+    "--curated-file",
+    ".\data\curated_deals.json"
 )
 
 if ($Demo) {
@@ -75,6 +75,32 @@ $FinishedAt = Get-Date
 
 ("Exit code: {0}" -f $ExitCode) |
     Tee-Object -FilePath $LogFile -Append
+
+if ($ExitCode -eq 0) {
+    $ExportArgs = @(
+        ".\export_site.py",
+        "--db",
+        ".\data\deal_hunter.db",
+        "--out",
+        ".\site\deals.json"
+    )
+
+    $PreviousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+
+    try {
+        & $Python @ExportArgs 2>&1 |
+            Tee-Object -FilePath $LogFile -Append
+
+        $ExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $PreviousErrorActionPreference
+    }
+
+    ("Site export exit code: {0}" -f $ExitCode) |
+        Tee-Object -FilePath $LogFile -Append
+}
 
 "==================================================" |
     Tee-Object -FilePath $LogFile -Append
