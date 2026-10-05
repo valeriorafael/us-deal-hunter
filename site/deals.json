@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T11:00:31Z",
+  "generated_at": "2026-10-05T13:00:16Z",
   "deals": [
+    {
+      "id": "B0HFJ9BNPL",
+      "title": "Lenovo 15.6\" FHD Business Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
+      "currency": "USD",
+      "previous_price": 429.98,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71+qsPm3XbL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HFJ9BNPL?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T13:00:02Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 429.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 429.99
+        }
+      ]
+    },
+    {
+      "id": "B0HDHBQ98Q",
+      "title": "Wireless Earbuds, Bluetooth 5.3 Headphones HiFi Stereo 50H Playback LED Digital Display Ear Buds with ENC Noise Canceling Headset, IPX7 Waterproof Earphones for Gym/Running/Work（Rose Gold）",
+      "price": 19.97,
+      "currency": "USD",
+      "previous_price": 19.98,
+      "discount_pct": 0,
+      "score": 38.08760951188991,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/61Ep1QDS51L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HDHBQ98Q?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T13:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 19.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 19.97
+        }
+      ]
+    },
+    {
+      "id": "B0874XN4D8",
+      "title": "Samsung T7 Portable SSD 1TB Titan Gray, USB 3.2 Gen 2, Up to 1,050MB/s",
+      "price": 226.44,
+      "currency": "USD",
+      "previous_price": 229.88,
+      "discount_pct": 1,
+      "score": 42.63849929873773,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/91YfRIy7kYL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0874XN4D8?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T13:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 229.88
+        },
+        {
+          "date": "2026-10-05",
+          "price": 226.44
+        }
+      ]
+    },
     {
       "id": "B0HDSTJ9YB",
       "title": "Aurant 15.6 Inch Laptops, AMD Ryzen R5, 8GB RAM, 128GB SSD, Win11 Home",
