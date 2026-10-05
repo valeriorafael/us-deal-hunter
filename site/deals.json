@@ -1,7 +1,71 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T09:00:21Z",
+  "generated_at": "2026-10-05T11:00:31Z",
   "deals": [
+    {
+      "id": "B0HDSTJ9YB",
+      "title": "Aurant 15.6 Inch Laptops, AMD Ryzen R5, 8GB RAM, 128GB SSD, Win11 Home",
+      "price": 259.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 35.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/81E-XOtqbzL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HDSTJ9YB?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T11:00:02Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 259.99
+        }
+      ]
+    },
+    {
+      "id": "B0DX2DPJZ5",
+      "title": "Samsung SSD 9100 PRO 2TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
+      "price": 399.99,
+      "currency": "USD",
+      "previous_price": 399.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71qygJIcKnL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DX2DPJZ5?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T11:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 399.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 399.99
+        }
+      ]
+    },
+    {
+      "id": "B0DB9Q5G3R",
+      "title": "Samsung 27\" Essential S3 (S36GD) Series FHD 1800R Curved Computer Monitor",
+      "price": 109.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/619WSKm18ZL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DB9Q5G3R?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T11:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 109.99
+        }
+      ]
+    },
     {
       "id": "B0H34W2MS8",
       "title": "iRobot Roomba 115X Combo Robot Vacuum & Mop with AutoEmpty Dock, 15,000Pa, Self-Empties for 90 Days, Intense Power-Lifting Suction, LiDAR Navigation, Multiple Cleaning Modes, Avoids Mopping Carpet",
@@ -282,7 +346,7 @@
         },
         {
           "date": "2026-10-05",
-          "price": 454.35
+          "price": 459.99
         }
       ]
     },
