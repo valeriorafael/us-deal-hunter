@@ -1,21 +1,166 @@
 {
   "version": 1,
-  "generated_at": "2026-10-04T01:06:19Z",
+  "generated_at": "2026-10-04T23:00:21Z",
   "deals": [
     {
-      "id": "B0FMYWSMDF",
-      "title": "LEGO Star Wars SMART Play: AT-ST Attack on Endor 75424",
-      "price": 39.95,
+      "id": "B0HF7WTGSR",
+      "title": "Lenovo Business 15.6\" FHD Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": null,
-      "score": null,
-      "label": "CURATED",
-      "image": "https://m.media-amazon.com/images/I/81rE46IVTHL._AC_SL1500_.jpg",
-      "url": "https://www.amazon.com/dp/B0FMYWSMDF?tag=dealhunter0e2-20",
-      "published_at": "2026-10-04T00:42:24Z",
-      "source_query": "curated:Slickdeals",
-      "history": []
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71YodqcTw8L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HF7WTGSR?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T23:00:06Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 429.99
+        }
+      ]
+    },
+    {
+      "id": "B0BHJJ9Y77",
+      "title": "Samsung SSD 990 PRO 2TB, PCIe 4.0 M.2 2280, Up to 7,450 MB/s",
+      "price": 389.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71OWtcxKgvL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0BHJJ9Y77?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T23:00:06Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 389.99
+        }
+      ]
+    },
+    {
+      "id": "B09VD9P2Q3",
+      "title": "KOORUI 24-inch Computer Monitor FHD 100Hz VA HDMI/VGA, Audio Out",
+      "price": 79.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/81dL-e6kh5L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B09VD9P2Q3?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T23:00:06Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 79.99
+        }
+      ]
+    },
+    {
+      "id": "B0D9MK23S7",
+      "title": "Acer 27in FHD 1920x1080 IPS 120Hz Gaming Monitor | Office KB272 G0bi",
+      "price": 80.69,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71e5GgPXQzL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0D9MK23S7?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T18:08:40Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 80.69
+        }
+      ]
+    },
+    {
+      "id": "B094PS5RZQ",
+      "title": "Razer DeathAdder Essential Ergonomic Wired Gaming Mouse, Black",
+      "price": 20.98,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/8189uwDnMkL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B094PS5RZQ?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T17:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 20.98
+        }
+      ]
+    },
+    {
+      "id": "B07L4BM851",
+      "title": "Logitech G502 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 89.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/715BOo6P-BL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07L4BM851?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T17:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 89.99
+        }
+      ]
+    },
+    {
+      "id": "B07GBZ4Q68",
+      "title": "Logitech G502 Hero Wired Gaming Mouse - Black",
+      "price": 37.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07GBZ4Q68?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T17:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 37.99
+        }
+      ]
+    },
+    {
+      "id": "B07CMS5Q6P",
+      "title": "Logitech G305 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 29.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07CMS5Q6P?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T14:18:07Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 29.99
+        }
+      ]
     },
     {
       "id": "B0GYTS2QL2",
@@ -28,7 +173,22 @@
       "label": "CURATED",
       "image": "https://m.media-amazon.com/images/I/61tTXKuWKeL._AC_SL1500_.jpg",
       "url": "https://www.amazon.com/dp/B0GYTS2QL2?tag=dealhunter0e2-20",
-      "published_at": "2026-10-03T00:41:33Z",
+      "published_at": "2026-10-04T13:39:39Z",
+      "source_query": "curated:Slickdeals",
+      "history": []
+    },
+    {
+      "id": "B0FMYWSMDF",
+      "title": "LEGO Star Wars SMART Play: AT-ST Attack on Endor 75424",
+      "price": 39.95,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "CURATED",
+      "image": "https://m.media-amazon.com/images/I/81rE46IVTHL._AC_SL1500_.jpg",
+      "url": "https://www.amazon.com/dp/B0FMYWSMDF?tag=dealhunter0e2-20",
+      "published_at": "2026-10-04T00:42:24Z",
       "source_query": "curated:Slickdeals",
       "history": []
     }
