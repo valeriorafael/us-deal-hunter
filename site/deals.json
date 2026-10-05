@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T03:00:19Z",
+  "generated_at": "2026-10-05T05:00:16Z",
   "deals": [
+    {
+      "id": "B0HDB41H28",
+      "title": "Wireless Earbuds, Bluetooth 5.3 Headphones HiFi Stereo 50H Playback LED Digital Display Ear Buds with ENC Noise Canceling Headset, IPX7 Waterproof Earphones for Gym/Running/Work（White）",
+      "price": 19.98,
+      "currency": "USD",
+      "previous_price": 19.98,
+      "discount_pct": 0,
+      "score": 38.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/618n7fFdFXL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HDB41H28?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T05:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 19.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 19.98
+        }
+      ]
+    },
+    {
+      "id": "B0GF9TKQTW",
+      "title": "500lbs Big and Tall Office Chair Adjustable Lumbar Support for Back Pain, Extra Wide Seat Executive Office Chair Thick Armrest Pad, Heavy Duty Base&Upgraded Wheels, Ergonomic Desk Chair",
+      "price": 134.98,
+      "currency": "USD",
+      "previous_price": 134.98,
+      "discount_pct": 0,
+      "score": 38.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71apghzaq-L._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0GF9TKQTW?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T05:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 134.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 134.98
+        }
+      ]
+    },
+    {
+      "id": "B07NSSPV9S",
+      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 66.96,
+      "currency": "USD",
+      "previous_price": 68.49,
+      "discount_pct": 1,
+      "score": 43.95348837209303,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T05:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 68.49
+        },
+        {
+          "date": "2026-10-05",
+          "price": 66.96
+        }
+      ]
+    },
     {
       "id": "B0FP95S9XK",
       "title": "Amzfast 27 inch 240Hz Curved Monitor, FHD 1080p Gaming Monitor, Built-in Speakers, FreeSync, MPRT 1ms, 130% sRGB, 4000:1, 1500R, VESA Mount, HDMI 2.0&DP 1.4, 12 Months Warranty, AMZG27C1 Pro",
@@ -134,6 +206,10 @@
       "history": [
         {
           "date": "2026-10-04",
+          "price": 79.99
+        },
+        {
+          "date": "2026-10-05",
           "price": 79.99
         }
       ]
