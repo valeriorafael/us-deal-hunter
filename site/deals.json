@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T07:00:16Z",
+  "generated_at": "2026-10-05T09:00:21Z",
   "deals": [
+    {
+      "id": "B0H34W2MS8",
+      "title": "iRobot Roomba 115X Combo Robot Vacuum & Mop with AutoEmpty Dock, 15,000Pa, Self-Empties for 90 Days, Intense Power-Lifting Suction, LiDAR Navigation, Multiple Cleaning Modes, Avoids Mopping Carpet",
+      "price": 199.99,
+      "currency": "USD",
+      "previous_price": 199.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71m-IwdVvsL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0H34W2MS8?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T09:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 199.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 199.99
+        }
+      ]
+    },
+    {
+      "id": "B0DJFBDFZK",
+      "title": "Ninja Crispi Glass Air Fryer, 4-in-1, Stone, FN101ST",
+      "price": 152.99,
+      "currency": "USD",
+      "previous_price": 152.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71LIFg6xi2L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DJFBDFZK?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T09:00:02Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 152.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 152.99
+        }
+      ]
+    },
+    {
+      "id": "B0CV82HQW2",
+      "title": "DUMOS Small Desk Chair, Home Office Chair, Comfy Lumbar Support",
+      "price": 39.95,
+      "currency": "USD",
+      "previous_price": 39.95,
+      "discount_pct": 0,
+      "score": 38.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71+dsV1QgdL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0CV82HQW2?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T09:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 39.95
+        },
+        {
+          "date": "2026-10-05",
+          "price": 39.95
+        }
+      ]
+    },
     {
       "id": "B0H5BYM75Q",
       "title": "15.6\" FHD IPS Student Laptop, AI Assistant Included, Office 365",
