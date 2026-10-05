@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T13:00:16Z",
+  "generated_at": "2026-10-05T15:00:17Z",
   "deals": [
+    {
+      "id": "B0H34PBVQB",
+      "title": "iRobot Roomba 115X Combo Robot Vacuum & Mop, 15,000 Pa, Easy to use, Intense Power-Lifting Suction, LiDAR Navigation, Multiple Cleaning Modes, Avoids Mopping Carpets, Self-Charging",
+      "price": 139.99,
+      "currency": "USD",
+      "previous_price": 139.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/713aOvtWV7L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0H34PBVQB?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T15:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 139.99
+        }
+      ]
+    },
+    {
+      "id": "B0CP22DQQS",
+      "title": "Marsail Ergonomic Office Chair: Office Desk Chair with High Back Mesh and Adjustable Lumbar Support Rolling Work Swivel Task Chairs with Wheel 3D Armrests and Headrest",
+      "price": 112.99,
+      "currency": "USD",
+      "previous_price": 112.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/712kZm3lUrL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0CP22DQQS?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T15:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 112.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 112.99
+        }
+      ]
+    },
+    {
+      "id": "B08SHN3TZP",
+      "title": "Dell Chromebook 11 3100 11.6\" Chromebook - 1366 x 768 - Celeron N4020-4 GB RAM - 16 GB Flash Memory - Chrome OS - Intel HD Graphics - English (US) Keyboard - Bluetooth (Renewed)",
+      "price": 72.99,
+      "currency": "USD",
+      "previous_price": 95.99,
+      "discount_pct": 14,
+      "score": 84.63877381938691,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/61zTekYPPRL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B08SHN3TZP?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T15:00:02Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 95.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 72.99
+        }
+      ]
+    },
     {
       "id": "B0HFJ9BNPL",
       "title": "Lenovo 15.6\" FHD Business Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
@@ -70,7 +142,7 @@
         },
         {
           "date": "2026-10-05",
-          "price": 226.44
+          "price": 229.9
         }
       ]
     },
@@ -418,7 +490,7 @@
         },
         {
           "date": "2026-10-05",
-          "price": 459.99
+          "price": 461.91
         }
       ]
     },
