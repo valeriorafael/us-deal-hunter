@@ -1,7 +1,75 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T21:00:17Z",
+  "generated_at": "2026-10-05T23:00:16Z",
   "deals": [
+    {
+      "id": "B0FLG6D6Z3",
+      "title": "Ninja Crispi Pro Glass Air Fryer, 6-in-1, Cyberspace, AS101CY",
+      "price": 249.9,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/81NsZOh58WL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0FLG6D6Z3?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T23:00:02Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 249.9
+        }
+      ]
+    },
+    {
+      "id": "B0DYNW9SW6",
+      "title": "COMHOMA Big and Tall Office Chair Heavy Duty Wide Ergonomic Gaming Chair with Deluxe Embossing Designed Leather with Foot Rest, 145°Reclining Adjustable Armrests Pocket Spring Back Support and Pillow",
+      "price": 135.95,
+      "currency": "USD",
+      "previous_price": 135.95,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/61emIxdP2SL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0DYNW9SW6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T23:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 135.95
+        },
+        {
+          "date": "2026-10-05",
+          "price": 135.95
+        }
+      ]
+    },
+    {
+      "id": "B07GBZ4Q68",
+      "title": "Logitech G502 Hero Wired Gaming Mouse - Black",
+      "price": 37.99,
+      "currency": "USD",
+      "previous_price": 37.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07GBZ4Q68?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T23:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 37.99
+        }
+      ]
+    },
     {
       "id": "B0H94LG15F",
       "title": "15.6'' AI Laptop with Office 365 12GB RAM 256GB SSD Win 11 Laptops",
@@ -811,30 +879,6 @@
         {
           "date": "2026-10-05",
           "price": 89.99
-        }
-      ]
-    },
-    {
-      "id": "B07GBZ4Q68",
-      "title": "Logitech G502 Hero Wired Gaming Mouse - Black",
-      "price": 37.99,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07GBZ4Q68?tag=dealhunter0e2-20",
-      "published_at": "2026-10-04T17:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 37.99
         }
       ]
     },
