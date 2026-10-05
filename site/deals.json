@@ -1,7 +1,75 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T19:00:17Z",
+  "generated_at": "2026-10-05T21:00:17Z",
   "deals": [
+    {
+      "id": "B0H94LG15F",
+      "title": "15.6'' AI Laptop with Office 365 12GB RAM 256GB SSD Win 11 Laptops",
+      "price": 329.99,
+      "currency": "USD",
+      "previous_price": 329.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/714TSHAAQrL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0H94LG15F?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T21:00:03Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 329.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 329.99
+        }
+      ]
+    },
+    {
+      "id": "B0CKP6Y6KB",
+      "title": "Typhur Dome 2 Large AI Smart Air Fryer, 15-in-1 Dual Heating, Self-Cleaning",
+      "price": 299.95,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/6154mct-b7L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CKP6Y6KB?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T21:00:03Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 299.95
+        }
+      ]
+    },
+    {
+      "id": "B07CMS5Q6P",
+      "title": "Logitech G305 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 29.99,
+      "currency": "USD",
+      "previous_price": 29.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07CMS5Q6P?tag=dealhunter0e2-20",
+      "published_at": "2026-10-05T21:00:03Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 29.99
+        }
+      ]
+    },
     {
       "id": "B0F9T613DL",
       "title": "SANSUI 24 Inch Curved 160Hz Gaming Monitor,1500R Curved Gaming Monitor",
@@ -767,30 +835,6 @@
         {
           "date": "2026-10-05",
           "price": 37.99
-        }
-      ]
-    },
-    {
-      "id": "B07CMS5Q6P",
-      "title": "Logitech G305 Lightspeed Wireless Gaming Mouse - Black",
-      "price": 29.99,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07CMS5Q6P?tag=dealhunter0e2-20",
-      "published_at": "2026-10-04T14:18:07Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 29.99
         }
       ]
     },
