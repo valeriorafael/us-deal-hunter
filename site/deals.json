@@ -1,7 +1,87 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T15:00:18Z",
+  "generated_at": "2026-10-06T17:00:18Z",
   "deals": [
+    {
+      "id": "B0GGRSMXKN",
+      "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
+      "price": 384.99,
+      "currency": "USD",
+      "previous_price": 429.99,
+      "discount_pct": 7,
+      "score": 62.301814501554254,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/615KW-IyiHL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GGRSMXKN?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T17:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 384.99
+        }
+      ]
+    },
+    {
+      "id": "B0DB9Q5G3R",
+      "title": "Samsung 27\" Essential S3 (S36GD) Series FHD 1800R Curved Computer Monitor",
+      "price": 109.99,
+      "currency": "USD",
+      "previous_price": 109.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/619WSKm18ZL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DB9Q5G3R?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T17:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 109.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 109.99
+        }
+      ]
+    },
+    {
+      "id": "B07NSSPV9S",
+      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 53.98,
+      "currency": "USD",
+      "previous_price": 66.96,
+      "discount_pct": 15,
+      "score": 90.79184923190621,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T17:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 68.49
+        },
+        {
+          "date": "2026-10-05",
+          "price": 66.96
+        },
+        {
+          "date": "2026-10-06",
+          "price": 53.98
+        }
+      ]
+    },
     {
       "id": "B0FX3VC8S6",
       "title": "AreShark Office Chair - Ergonomic Breathable Mesh Desk Chair with Adjustable Lumbar Support and Flip-up Armrests - Executive High Back Rolling Swivel Comfortable Computer Gaming Chair for Home Office",
@@ -279,6 +359,10 @@
         {
           "date": "2026-10-05",
           "price": 135.95
+        },
+        {
+          "date": "2026-10-06",
+          "price": 135.95
         }
       ]
     },
@@ -331,6 +415,10 @@
         {
           "date": "2026-10-05",
           "price": 329.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 313.48
         }
       ]
     },
@@ -739,30 +827,6 @@
       ]
     },
     {
-      "id": "B0DB9Q5G3R",
-      "title": "Samsung 27\" Essential S3 (S36GD) Series FHD 1800R Curved Computer Monitor",
-      "price": 109.99,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/619WSKm18ZL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0DB9Q5G3R?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T11:00:02Z",
-      "source_query": "computer monitor",
-      "history": [
-        {
-          "date": "2026-10-05",
-          "price": 109.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 109.99
-        }
-      ]
-    },
-    {
       "id": "B0H34W2MS8",
       "title": "iRobot Roomba 115X Combo Robot Vacuum & Mop with AutoEmpty Dock, 15,000Pa, Self-Empties for 90 Days, Intense Power-Lifting Suction, LiDAR Navigation, Multiple Cleaning Modes, Avoids Mopping Carpet",
       "price": 199.99,
@@ -959,30 +1023,6 @@
         {
           "date": "2026-10-05",
           "price": 134.98
-        }
-      ]
-    },
-    {
-      "id": "B07NSSPV9S",
-      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
-      "price": 66.96,
-      "currency": "USD",
-      "previous_price": 68.49,
-      "discount_pct": 1,
-      "score": 43.95348837209303,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T05:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 68.49
-        },
-        {
-          "date": "2026-10-05",
-          "price": 66.96
         }
       ]
     },
