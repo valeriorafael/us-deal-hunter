@@ -1,7 +1,87 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T12:10:25Z",
+  "generated_at": "2026-10-06T13:00:33Z",
   "deals": [
+    {
+      "id": "B0F334DN9J",
+      "title": "roborock Q7 L5 Robot Vacuum and Mop Combo, 8,000Pa Suction",
+      "price": 119.99,
+      "currency": "USD",
+      "previous_price": 139.99,
+      "discount_pct": 8,
+      "score": 63.92514808831452,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/61T3QADwWuL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0F334DN9J?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T13:00:03Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 119.99
+        }
+      ]
+    },
+    {
+      "id": "B0DXTWTCWS",
+      "title": "GTPLAYER Big and Tall Gaming Chair 400lbs Heavy Duty Office Chair with Foot Rest & Ergonomic Pocket Spring Lumbar Support, High Back 3D Saddle Shaped Cushion for Back Pain Relief, Matte-Black",
+      "price": 161.47,
+      "currency": "USD",
+      "previous_price": 169.98,
+      "discount_pct": 3,
+      "score": 48.8800231338372,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71TLcAA1fTL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0DXTWTCWS?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T13:00:03Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 169.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 169.98
+        },
+        {
+          "date": "2026-10-06",
+          "price": 161.47
+        }
+      ]
+    },
+    {
+      "id": "B0CRTR3PMF",
+      "title": "Soundcore P30i by Anker Noise Cancelling Earbuds, Hands-Free Viewing",
+      "price": 23.68,
+      "currency": "USD",
+      "previous_price": 29.99,
+      "discount_pct": 10,
+      "score": 70.90541571319602,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/51013C6va8L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CRTR3PMF?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T13:00:03Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 24.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 23.68
+        }
+      ]
+    },
     {
       "id": "B0HJCRV1J6",
       "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
