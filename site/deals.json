@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T21:00:47Z",
+  "generated_at": "2026-10-06T23:00:18Z",
   "deals": [
+    {
+      "id": "B0HDCYL6MR",
+      "title": "KAIGERR 18.5 inch Light Gaming Laptop, ΑΜD Ryzen 7430U, 16GB RAM 512GB SSD",
+      "price": 569.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 36.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/715nB9V1UqL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HDCYL6MR?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T23:00:03Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "price": 569.99
+        }
+      ]
+    },
+    {
+      "id": "B0BXBC26X8",
+      "title": "Razer Basilisk V3 X HyperSpeed Customizable Wireless Gaming Mouse, Black",
+      "price": 42.73,
+      "currency": "USD",
+      "previous_price": 44.99,
+      "discount_pct": 3,
+      "score": 48.92072940999177,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71jvxQ6NoqL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0BXBC26X8?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T23:00:03Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 44.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 44.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 42.73
+        }
+      ]
+    },
+    {
+      "id": "B07GNDDNMW",
+      "title": "SIHOO M18 Ergonomic Office Chair, Mesh Back Desk Chair with Headrest",
+      "price": 125.9,
+      "currency": "USD",
+      "previous_price": 139.64,
+      "discount_pct": 5,
+      "score": 55.110265873314695,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61kPx4WEQ4L._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B07GNDDNMW?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T23:00:03Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 139.64
+        },
+        {
+          "date": "2026-10-06",
+          "price": 125.9
+        }
+      ]
+    },
     {
       "id": "B0G483FV7M",
       "title": "Misolant Big and Tall Office Chair with Footrest, High Back Executive Desk Chair with Adjustable Lift Armrest, 155°Recline，Lumbar Support Pillow, Faux Leather Gaming Chairs for Home or Office Brown",
@@ -54,7 +126,7 @@
         },
         {
           "date": "2026-10-06",
-          "price": 53.99
+          "price": 349.99
         }
       ]
     },
@@ -138,7 +210,7 @@
         },
         {
           "date": "2026-10-06",
-          "price": 59.99
+          "price": 39.99
         }
       ]
     },
