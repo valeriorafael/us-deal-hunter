@@ -1,7 +1,91 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T19:00:32Z",
+  "generated_at": "2026-10-06T21:00:47Z",
   "deals": [
+    {
+      "id": "B0G483FV7M",
+      "title": "Misolant Big and Tall Office Chair with Footrest, High Back Executive Desk Chair with Adjustable Lift Armrest, 155°Recline，Lumbar Support Pillow, Faux Leather Gaming Chairs for Home or Office Brown",
+      "price": 132.99,
+      "currency": "USD",
+      "previous_price": 139.99,
+      "discount_pct": 3,
+      "score": 46.86526866358329,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71PSfj-i1EL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0G483FV7M?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T21:00:03Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 132.99
+        }
+      ]
+    },
+    {
+      "id": "B0DX2DPJZ5",
+      "title": "Samsung SSD 9100 PRO 2TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
+      "price": 53.99,
+      "currency": "USD",
+      "previous_price": 399.99,
+      "discount_pct": 81,
+      "score": 100.0,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71qygJIcKnL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DX2DPJZ5?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T21:00:03Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 399.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 399.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 53.99
+        }
+      ]
+    },
+    {
+      "id": "B0CF4DJM7F",
+      "title": "Razer Viper V3 HyperSpeed Wireless PC Gaming Mouse, 82g, Black",
+      "price": 42.99,
+      "currency": "USD",
+      "previous_price": 47.99,
+      "discount_pct": 7,
+      "score": 62.18529178959484,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/61LI6E0sJwL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CF4DJM7F?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T21:00:03Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 47.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 47.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 42.99
+        }
+      ]
+    },
     {
       "id": "B0GMWYYRQL",
       "title": "Sandisk 1TB Extreme Portable SSD, Up to 2000MB/s Transfer Speeds-New Model",
@@ -54,7 +138,7 @@
         },
         {
           "date": "2026-10-06",
-          "price": 49.99
+          "price": 59.99
         }
       ]
     },
@@ -887,30 +971,6 @@
       ]
     },
     {
-      "id": "B0DX2DPJZ5",
-      "title": "Samsung SSD 9100 PRO 2TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
-      "price": 399.99,
-      "currency": "USD",
-      "previous_price": 399.99,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/71qygJIcKnL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0DX2DPJZ5?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T11:00:02Z",
-      "source_query": "SSD",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 399.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 399.99
-        }
-      ]
-    },
-    {
       "id": "B0H34W2MS8",
       "title": "iRobot Roomba 115X Combo Robot Vacuum & Mop with AutoEmpty Dock, 15,000Pa, Self-Empties for 90 Days, Intense Power-Lifting Suction, LiDAR Navigation, Multiple Cleaning Modes, Avoids Mopping Carpet",
       "price": 199.99,
@@ -1182,7 +1242,7 @@
         },
         {
           "date": "2026-10-06",
-          "price": 464.81
+          "price": 462.31
         }
       ]
     },
