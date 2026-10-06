@@ -1,7 +1,91 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T17:00:18Z",
+  "generated_at": "2026-10-06T19:00:32Z",
   "deals": [
+    {
+      "id": "B0GMWYYRQL",
+      "title": "Sandisk 1TB Extreme Portable SSD, Up to 2000MB/s Transfer Speeds-New Model",
+      "price": 209.99,
+      "currency": "USD",
+      "previous_price": 251.94,
+      "discount_pct": 12,
+      "score": 78.5019581420811,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/71u6LfJqm-L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GMWYYRQL?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T19:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 250.48
+        },
+        {
+          "date": "2026-10-05",
+          "price": 251.94
+        },
+        {
+          "date": "2026-10-06",
+          "price": 209.99
+        }
+      ]
+    },
+    {
+      "id": "B0CNY1YVDD",
+      "title": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes, Features Hi-Fry Technology for Extra Crisp, Touchscreen Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
+      "price": 49.99,
+      "currency": "USD",
+      "previous_price": 59.99,
+      "discount_pct": 12,
+      "score": 81.18373830676,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71WCBoDBHsL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CNY1YVDD?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T19:00:02Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 59.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 59.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 49.99
+        }
+      ]
+    },
+    {
+      "id": "B0BYJ7N7LX",
+      "title": "SOLAKAKA SM600 Wireless Gaming Mouse,Tri-Modes BT5.0/Type-C Wired/2.4G Wireless Mouse with 2 Side Buttons, Programmable Macro Gamer Mouse with RGB Light for Laptop/PC/Mac",
+      "price": 23.64,
+      "currency": "USD",
+      "previous_price": 26.89,
+      "discount_pct": 8,
+      "score": 66.38517179023509,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/61nDTw3ZemL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0BYJ7N7LX?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T19:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 26.89
+        },
+        {
+          "date": "2026-10-05",
+          "price": 26.89
+        },
+        {
+          "date": "2026-10-06",
+          "price": 23.64
+        }
+      ]
+    },
     {
       "id": "B0GGRSMXKN",
       "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
