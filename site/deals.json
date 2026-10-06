@@ -1,7 +1,79 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T13:00:33Z",
+  "generated_at": "2026-10-06T15:00:18Z",
   "deals": [
+    {
+      "id": "B0FX3VC8S6",
+      "title": "AreShark Office Chair - Ergonomic Breathable Mesh Desk Chair with Adjustable Lumbar Support and Flip-up Armrests - Executive High Back Rolling Swivel Comfortable Computer Gaming Chair for Home Office",
+      "price": 89.99,
+      "currency": "USD",
+      "previous_price": 99.99,
+      "discount_pct": 5,
+      "score": 53.42299189388357,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/81EXM6rJY4L._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0FX3VC8S6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T15:00:03Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 89.99
+        }
+      ]
+    },
+    {
+      "id": "B0CNY1F31S",
+      "title": "Chefman Air Fryer – 4 QT Compact Airfryer for Quick & Easy Meals in Minutes, Features Hi-Fry Technology for Extra Crisp, Touchscreen Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
+      "price": 49.99,
+      "currency": "USD",
+      "previous_price": 49.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71Ld+1SBc5L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CNY1F31S?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T15:00:03Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 49.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 49.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 49.99
+        }
+      ]
+    },
+    {
+      "id": "B0B17KHCQN",
+      "title": "SANSUI Monitor 24 Inch 100Hz PC Computer Monitor, FHD for Home Office",
+      "price": 84.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71mbLz-Uw+L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0B17KHCQN?tag=dealhunter0e2-20",
+      "published_at": "2026-10-06T15:00:03Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "price": 84.99
+        }
+      ]
+    },
     {
       "id": "B0F334DN9J",
       "title": "roborock Q7 L5 Robot Vacuum and Mop Combo, 8,000Pa Suction",
@@ -431,6 +503,10 @@
         {
           "date": "2026-10-05",
           "price": 549.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 484.99
         }
       ]
     },
@@ -982,7 +1058,7 @@
         },
         {
           "date": "2026-10-06",
-          "price": 459.99
+          "price": 464.81
         }
       ]
     },
