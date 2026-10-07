@@ -1,7 +1,95 @@
 {
   "version": 1,
-  "generated_at": "2026-10-06T23:00:18Z",
+  "generated_at": "2026-10-07T21:56:34Z",
   "deals": [
+    {
+      "id": "B0HJCRV1J6",
+      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
+      "currency": "USD",
+      "previous_price": 429.99,
+      "discount_pct": 26,
+      "score": 100.0,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T21:56:05Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 699.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 749.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 429.99
+        }
+      ]
+    },
+    {
+      "id": "B0CNY1YVDD",
+      "title": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes, Features Hi-Fry Technology for Extra Crisp, Touchscreen Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
+      "price": 39.99,
+      "currency": "USD",
+      "previous_price": 39.99,
+      "discount_pct": 20,
+      "score": 100.0,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71WCBoDBHsL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CNY1YVDD?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T21:56:05Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 59.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 59.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 39.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 39.99
+        }
+      ]
+    },
+    {
+      "id": "B0C1QWWZR4",
+      "title": "JBL Tune Buds - Noise Cancelling Earbuds - Black",
+      "price": 32.95,
+      "currency": "USD",
+      "previous_price": 79.95,
+      "discount_pct": 42,
+      "score": 97.0,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/51EZig0rEAL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0C1QWWZR4?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T21:56:05Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 79.95
+        },
+        {
+          "date": "2026-10-07",
+          "price": 32.95
+        }
+      ]
+    },
     {
       "id": "B0HDCYL6MR",
       "title": "KAIGERR 18.5 inch Light Gaming Laptop, ΑΜD Ryzen 7430U, 16GB RAM 512GB SSD",
@@ -47,6 +135,10 @@
         {
           "date": "2026-10-06",
           "price": 42.73
+        },
+        {
+          "date": "2026-10-07",
+          "price": 40.59
         }
       ]
     },
@@ -155,6 +247,10 @@
         {
           "date": "2026-10-06",
           "price": 42.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 40.84
         }
       ]
     },
@@ -183,34 +279,10 @@
         {
           "date": "2026-10-06",
           "price": 209.99
-        }
-      ]
-    },
-    {
-      "id": "B0CNY1YVDD",
-      "title": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes, Features Hi-Fry Technology for Extra Crisp, Touchscreen Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
-      "price": 49.99,
-      "currency": "USD",
-      "previous_price": 59.99,
-      "discount_pct": 12,
-      "score": 81.18373830676,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/71WCBoDBHsL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0CNY1YVDD?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T19:00:02Z",
-      "source_query": "air fryer",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 59.99
         },
         {
-          "date": "2026-10-05",
-          "price": 59.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 39.99
+          "date": "2026-10-07",
+          "price": 209.99
         }
       ]
     },
@@ -267,6 +339,10 @@
         {
           "date": "2026-10-06",
           "price": 384.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 384.99
         }
       ]
     },
@@ -290,6 +366,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 109.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 109.99
         }
       ]
@@ -319,6 +399,10 @@
         {
           "date": "2026-10-06",
           "price": 53.98
+        },
+        {
+          "date": "2026-10-07",
+          "price": 51.28
         }
       ]
     },
@@ -371,6 +455,10 @@
         {
           "date": "2026-10-06",
           "price": 49.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 49.99
         }
       ]
     },
@@ -415,6 +503,10 @@
         {
           "date": "2026-10-06",
           "price": 119.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 119.99
         }
       ]
     },
@@ -442,6 +534,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 161.47
+        },
+        {
+          "date": "2026-10-07",
           "price": 161.47
         }
       ]
@@ -471,34 +567,10 @@
         {
           "date": "2026-10-06",
           "price": 23.68
-        }
-      ]
-    },
-    {
-      "id": "B0HJCRV1J6",
-      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
-      "price": 429.99,
-      "currency": "USD",
-      "previous_price": 749.99,
-      "discount_pct": 31,
-      "score": 100.0,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T12:09:54Z",
-      "source_query": "laptop",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 699.99
         },
         {
-          "date": "2026-10-05",
-          "price": 749.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 429.99
+          "date": "2026-10-07",
+          "price": 23.68
         }
       ]
     },
@@ -555,6 +627,10 @@
         {
           "date": "2026-10-06",
           "price": 206.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 196.64
         }
       ]
     },
@@ -603,6 +679,10 @@
         {
           "date": "2026-10-06",
           "price": 135.95
+        },
+        {
+          "date": "2026-10-07",
+          "price": 135.95
         }
       ]
     },
@@ -630,6 +710,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 37.99
         }
       ]
@@ -707,6 +791,10 @@
         {
           "date": "2026-10-06",
           "price": 29.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 29.99
         }
       ]
     },
@@ -758,6 +846,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 239.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 239.99
         }
       ]
@@ -835,6 +927,10 @@
         {
           "date": "2026-10-06",
           "price": 484.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 484.99
         }
       ]
     },
@@ -862,6 +958,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 249.99
         }
       ]
@@ -918,6 +1018,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 112.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 112.99
         }
       ]
@@ -1287,6 +1391,10 @@
         {
           "date": "2026-10-06",
           "price": 89.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 89.99
         }
       ]
     },
@@ -1370,6 +1478,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-07",
           "price": 389.99
         }
       ]
