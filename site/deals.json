@@ -1,7 +1,103 @@
 {
   "version": 1,
-  "generated_at": "2026-10-07T21:56:34Z",
+  "generated_at": "2026-10-07T23:01:02Z",
   "deals": [
+    {
+      "id": "B0GGRSMXKN",
+      "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
+      "price": 384.99,
+      "currency": "USD",
+      "previous_price": 384.99,
+      "discount_pct": 6,
+      "score": 56.32562762276375,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/615KW-IyiHL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GGRSMXKN?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T23:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 384.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 384.99
+        }
+      ]
+    },
+    {
+      "id": "B0DX2G349M",
+      "title": "Samsung SSD 9100 PRO 1TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
+      "price": 196.64,
+      "currency": "USD",
+      "previous_price": 206.99,
+      "discount_pct": 13,
+      "score": 85.33759033211234,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71qygJIcKnL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DX2G349M?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T23:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 206.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 196.64
+        }
+      ]
+    },
+    {
+      "id": "B07NSSPV9S",
+      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 51.28,
+      "currency": "USD",
+      "previous_price": 53.98,
+      "discount_pct": 15,
+      "score": 91.74899256366578,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
+      "published_at": "2026-10-07T23:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 68.49
+        },
+        {
+          "date": "2026-10-05",
+          "price": 66.96
+        },
+        {
+          "date": "2026-10-06",
+          "price": 53.98
+        },
+        {
+          "date": "2026-10-07",
+          "price": 51.28
+        }
+      ]
+    },
     {
       "id": "B0HJCRV1J6",
       "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
@@ -62,7 +158,7 @@
         },
         {
           "date": "2026-10-07",
-          "price": 39.99
+          "price": 59.99
         }
       ]
     },
@@ -311,38 +407,10 @@
         {
           "date": "2026-10-06",
           "price": 23.64
-        }
-      ]
-    },
-    {
-      "id": "B0GGRSMXKN",
-      "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
-      "price": 384.99,
-      "currency": "USD",
-      "previous_price": 429.99,
-      "discount_pct": 7,
-      "score": 62.301814501554254,
-      "label": "GOOD",
-      "image": "https://m.media-amazon.com/images/I/615KW-IyiHL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0GGRSMXKN?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T17:00:02Z",
-      "source_query": "robot vacuum",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 384.99
         },
         {
           "date": "2026-10-07",
-          "price": 384.99
+          "price": 23.64
         }
       ]
     },
@@ -371,38 +439,6 @@
         {
           "date": "2026-10-07",
           "price": 109.99
-        }
-      ]
-    },
-    {
-      "id": "B07NSSPV9S",
-      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
-      "price": 53.98,
-      "currency": "USD",
-      "previous_price": 66.96,
-      "discount_pct": 15,
-      "score": 90.79184923190621,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T17:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 68.49
-        },
-        {
-          "date": "2026-10-05",
-          "price": 66.96
-        },
-        {
-          "date": "2026-10-06",
-          "price": 53.98
-        },
-        {
-          "date": "2026-10-07",
-          "price": 51.28
         }
       ]
     },
@@ -599,38 +635,6 @@
         {
           "date": "2026-10-06",
           "price": 47.48
-        }
-      ]
-    },
-    {
-      "id": "B0DX2G349M",
-      "title": "Samsung SSD 9100 PRO 1TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
-      "price": 206.99,
-      "currency": "USD",
-      "previous_price": 249.99,
-      "discount_pct": 12,
-      "score": 82.5760640479794,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/71qygJIcKnL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0DX2G349M?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T12:09:54Z",
-      "source_query": "SSD",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 206.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 196.64
         }
       ]
     },
@@ -879,6 +883,10 @@
         {
           "date": "2026-10-06",
           "price": 19.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 19.99
         }
       ]
     },
@@ -962,7 +970,7 @@
         },
         {
           "date": "2026-10-07",
-          "price": 249.99
+          "price": 449.99
         }
       ]
     },
@@ -1271,6 +1279,10 @@
         {
           "date": "2026-10-06",
           "price": 99.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 99.99
         }
       ]
     },
@@ -1423,6 +1435,10 @@
         {
           "date": "2026-10-06",
           "price": 462.31
+        },
+        {
+          "date": "2026-10-07",
+          "price": 481.15
         }
       ]
     },
