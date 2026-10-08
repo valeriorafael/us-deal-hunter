@@ -1,7 +1,95 @@
 {
   "version": 1,
-  "generated_at": "2026-10-08T01:00:47Z",
+  "generated_at": "2026-10-08T22:19:54Z",
   "deals": [
+    {
+      "id": "B0H3KHVZS2",
+      "title": "HP 14 inch Laptop, HD Display, Intel N150, 4 GB RAM, 128 GB UFS, Intel Graphics, Windows 11 Home, Includes a 1-Year Microsoft 365 Personal Subscription. Jet Black, 14-dq6199nr",
+      "price": 209.99,
+      "currency": "USD",
+      "previous_price": 239.99,
+      "discount_pct": 7,
+      "score": 57.73642954836241,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71Na4bC1-6L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0H3KHVZS2?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T22:19:38Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "price": 229.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 239.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 209.99
+        }
+      ]
+    },
+    {
+      "id": "B0FP95S9XK",
+      "title": "Amzfast 27 inch 240Hz Curved Monitor, FHD 1080p Gaming Monitor, Built-in Speakers, FreeSync, MPRT 1ms, 130% sRGB, 4000:1, 1500R, VESA Mount, HDMI 2.0&DP 1.4, 12 Months Warranty, AMZG27C1 Pro",
+      "price": 139.99,
+      "currency": "USD",
+      "previous_price": 135.98,
+      "discount_pct": -1,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71Qa2gIEnQL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0FP95S9XK?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T22:19:38Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 135.98
+        },
+        {
+          "date": "2026-10-08",
+          "price": 139.99
+        }
+      ]
+    },
+    {
+      "id": "B0BHJJ9Y77",
+      "title": "Samsung SSD 990 PRO 2TB, PCIe 4.0 M.2 2280, Up to 7,450 MB/s",
+      "price": 389.99,
+      "currency": "USD",
+      "previous_price": 389.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71OWtcxKgvL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0BHJJ9Y77?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T22:19:38Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 389.99
+        }
+      ]
+    },
     {
       "id": "B0GD1LMWH3",
       "title": "Dell 27 Plus QHD Monitor - S2725DSM - 27-inch QHD (2560x1440) 144Hz 1ms Display, 2 x 3W Speakers, HDMI/DisplayPort 1.4 Connectivity, Height/Tilt/Pivot/Swivel Adjustability, AMD FreeSync - Ash White",
@@ -55,6 +143,10 @@
         {
           "date": "2026-10-07",
           "price": 23.68
+        },
+        {
+          "date": "2026-10-08",
+          "price": 24.99
         }
       ]
     },
@@ -87,6 +179,10 @@
         {
           "date": "2026-10-07",
           "price": 76.49
+        },
+        {
+          "date": "2026-10-08",
+          "price": 89.99
         }
       ]
     },
@@ -151,6 +247,10 @@
         {
           "date": "2026-10-07",
           "price": 196.64
+        },
+        {
+          "date": "2026-10-08",
+          "price": 249.99
         }
       ]
     },
@@ -183,6 +283,10 @@
         {
           "date": "2026-10-07",
           "price": 51.28
+        },
+        {
+          "date": "2026-10-08",
+          "price": 53.98
         }
       ]
     },
@@ -323,6 +427,10 @@
         {
           "date": "2026-10-07",
           "price": 40.59
+        },
+        {
+          "date": "2026-10-08",
+          "price": 44.99
         }
       ]
     },
@@ -435,6 +543,10 @@
         {
           "date": "2026-10-07",
           "price": 40.84
+        },
+        {
+          "date": "2026-10-08",
+          "price": 42.99
         }
       ]
     },
@@ -467,6 +579,10 @@
         {
           "date": "2026-10-07",
           "price": 209.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 249.99
         }
       ]
     },
@@ -499,6 +615,10 @@
         {
           "date": "2026-10-07",
           "price": 23.64
+        },
+        {
+          "date": "2026-10-08",
+          "price": 26.89
         }
       ]
     },
@@ -583,6 +703,10 @@
         {
           "date": "2026-10-07",
           "price": 49.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 79.99
         }
       ]
     },
@@ -631,6 +755,10 @@
         {
           "date": "2026-10-07",
           "price": 119.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 139.99
         }
       ]
     },
@@ -691,6 +819,10 @@
         {
           "date": "2026-10-06",
           "price": 47.48
+        },
+        {
+          "date": "2026-10-08",
+          "price": 63.39
         }
       ]
     },
@@ -743,6 +875,10 @@
         {
           "date": "2026-10-07",
           "price": 135.95
+        },
+        {
+          "date": "2026-10-08",
+          "price": 179.99
         }
       ]
     },
@@ -774,6 +910,10 @@
         },
         {
           "date": "2026-10-07",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-08",
           "price": 37.99
         }
       ]
@@ -855,6 +995,10 @@
         {
           "date": "2026-10-07",
           "price": 29.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 29.99
         }
       ]
     },
@@ -878,6 +1022,10 @@
         },
         {
           "date": "2026-10-06",
+          "price": 92.99
+        },
+        {
+          "date": "2026-10-08",
           "price": 92.99
         }
       ]
@@ -911,6 +1059,10 @@
         {
           "date": "2026-10-07",
           "price": 239.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 239.99
         }
       ]
     },
@@ -942,6 +1094,10 @@
         },
         {
           "date": "2026-10-07",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-08",
           "price": 19.99
         }
       ]
@@ -995,6 +1151,10 @@
         {
           "date": "2026-10-07",
           "price": 484.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 549.99
         }
       ]
     },
@@ -1283,6 +1443,10 @@
         {
           "date": "2026-10-05",
           "price": 39.95
+        },
+        {
+          "date": "2026-10-08",
+          "price": 39.95
         }
       ]
     },
@@ -1338,6 +1502,10 @@
         },
         {
           "date": "2026-10-07",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-08",
           "price": 99.99
         }
       ]
@@ -1415,26 +1583,6 @@
       ]
     },
     {
-      "id": "B0FP95S9XK",
-      "title": "Amzfast 27 inch 240Hz Curved Monitor, FHD 1080p Gaming Monitor, Built-in Speakers, FreeSync, MPRT 1ms, 130% sRGB, 4000:1, 1500R, VESA Mount, HDMI 2.0&DP 1.4, 12 Months Warranty, AMZG27C1 Pro",
-      "price": 135.98,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/71Qa2gIEnQL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0FP95S9XK?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T03:00:02Z",
-      "source_query": "computer monitor",
-      "history": [
-        {
-          "date": "2026-10-05",
-          "price": 135.98
-        }
-      ]
-    },
-    {
       "id": "B0C33CHG99",
       "title": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating",
       "price": 89.99,
@@ -1462,6 +1610,10 @@
         },
         {
           "date": "2026-10-07",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-08",
           "price": 89.99
         }
       ]
@@ -1495,6 +1647,10 @@
         {
           "date": "2026-10-07",
           "price": 483.67
+        },
+        {
+          "date": "2026-10-08",
+          "price": 486.19
         }
       ]
     },
@@ -1523,38 +1679,6 @@
         {
           "date": "2026-10-06",
           "price": 407.99
-        }
-      ]
-    },
-    {
-      "id": "B0BHJJ9Y77",
-      "title": "Samsung SSD 990 PRO 2TB, PCIe 4.0 M.2 2280, Up to 7,450 MB/s",
-      "price": 389.99,
-      "currency": "USD",
-      "previous_price": null,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/71OWtcxKgvL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0BHJJ9Y77?tag=dealhunter0e2-20",
-      "published_at": "2026-10-04T23:00:06Z",
-      "source_query": "SSD",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 389.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 389.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 389.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 389.99
         }
       ]
     },
