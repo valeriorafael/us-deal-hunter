@@ -1,7 +1,95 @@
 {
   "version": 1,
-  "generated_at": "2026-10-07T23:01:02Z",
+  "generated_at": "2026-10-08T01:00:47Z",
   "deals": [
+    {
+      "id": "B0GD1LMWH3",
+      "title": "Dell 27 Plus QHD Monitor - S2725DSM - 27-inch QHD (2560x1440) 144Hz 1ms Display, 2 x 3W Speakers, HDMI/DisplayPort 1.4 Connectivity, Height/Tilt/Pivot/Swivel Adjustability, AMD FreeSync - Ash White",
+      "price": 161.49,
+      "currency": "USD",
+      "previous_price": 169.99,
+      "discount_pct": 3,
+      "score": 46.974900446482444,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71E--5UD9vL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GD1LMWH3?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T01:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "price": 169.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 161.49
+        }
+      ]
+    },
+    {
+      "id": "B0CRTR3PMF",
+      "title": "Soundcore P30i by Anker Noise Cancelling Earbuds, Hands-Free Viewing",
+      "price": 23.68,
+      "currency": "USD",
+      "previous_price": 23.68,
+      "discount_pct": 7,
+      "score": 63.060191518467875,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/51013C6va8L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CRTR3PMF?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T01:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 24.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 23.68
+        },
+        {
+          "date": "2026-10-07",
+          "price": 23.68
+        }
+      ]
+    },
+    {
+      "id": "B07XZLN9KM",
+      "title": "PNY CS900 500GB 2.5\" SATA III Internal SSD",
+      "price": 76.49,
+      "currency": "USD",
+      "previous_price": 76.49,
+      "discount_pct": 8,
+      "score": 68.36246771190007,
+      "label": "GOOD",
+      "image": "https://m.media-amazon.com/images/I/61cyHqB+KmL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07XZLN9KM?tag=dealhunter0e2-20",
+      "published_at": "2026-10-08T01:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 89.97
+        },
+        {
+          "date": "2026-10-05",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 76.49
+        },
+        {
+          "date": "2026-10-07",
+          "price": 76.49
+        }
+      ]
+    },
     {
       "id": "B0GGRSMXKN",
       "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
@@ -575,38 +663,6 @@
         {
           "date": "2026-10-07",
           "price": 161.47
-        }
-      ]
-    },
-    {
-      "id": "B0CRTR3PMF",
-      "title": "Soundcore P30i by Anker Noise Cancelling Earbuds, Hands-Free Viewing",
-      "price": 23.68,
-      "currency": "USD",
-      "previous_price": 29.99,
-      "discount_pct": 10,
-      "score": 70.90541571319602,
-      "label": "GOOD",
-      "image": "https://m.media-amazon.com/images/I/51013C6va8L._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0CRTR3PMF?tag=dealhunter0e2-20",
-      "published_at": "2026-10-06T13:00:03Z",
-      "source_query": "wireless earbuds",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 24.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 23.68
-        },
-        {
-          "date": "2026-10-07",
-          "price": 23.68
         }
       ]
     },
@@ -1438,7 +1494,7 @@
         },
         {
           "date": "2026-10-07",
-          "price": 481.15
+          "price": 483.67
         }
       ]
     },
