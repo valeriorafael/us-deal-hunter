@@ -1,7 +1,115 @@
 {
   "version": 1,
-  "generated_at": "2026-10-08T22:19:54Z",
+  "generated_at": "2026-10-09T01:00:55Z",
   "deals": [
+    {
+      "id": "B0HJCRV1J6",
+      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
+      "currency": "USD",
+      "previous_price": 429.99,
+      "discount_pct": 22,
+      "score": 100.0,
+      "label": "GREAT",
+      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T01:00:03Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 699.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 749.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 429.99
+        }
+      ]
+    },
+    {
+      "id": "B09T4YZGQR",
+      "title": "Shark AI Ultra Robot Vacuum, 60-Day Self-Emptying Base, Black, AV2511AE",
+      "price": 269.99,
+      "currency": "USD",
+      "previous_price": 449.99,
+      "discount_pct": 8,
+      "score": 51.57240042178305,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71n99mtBmqL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B09T4YZGQR?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T01:00:03Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 449.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 269.99
+        }
+      ]
+    },
+    {
+      "id": "B07NSSPV9S",
+      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 53.98,
+      "currency": "USD",
+      "previous_price": 51.28,
+      "discount_pct": 8,
+      "score": 59.44280430282673,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T01:00:03Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 68.49
+        },
+        {
+          "date": "2026-10-05",
+          "price": 66.96
+        },
+        {
+          "date": "2026-10-06",
+          "price": 53.98
+        },
+        {
+          "date": "2026-10-07",
+          "price": 51.28
+        },
+        {
+          "date": "2026-10-08",
+          "price": 53.98
+        }
+      ]
+    },
     {
       "id": "B0H3KHVZS2",
       "title": "HP 14 inch Laptop, HD Display, Intel N150, 4 GB RAM, 128 GB UFS, Intel Graphics, Windows 11 Home, Includes a 1-Year Microsoft 365 Personal Subscription. Jet Black, 14-dq6199nr",
@@ -86,7 +194,7 @@
         },
         {
           "date": "2026-10-08",
-          "price": 389.99
+          "price": 389.5
         }
       ]
     },
@@ -251,74 +359,6 @@
         {
           "date": "2026-10-08",
           "price": 249.99
-        }
-      ]
-    },
-    {
-      "id": "B07NSSPV9S",
-      "title": "Logitech G703 Lightspeed Wireless Gaming Mouse - Black",
-      "price": 51.28,
-      "currency": "USD",
-      "previous_price": 53.98,
-      "discount_pct": 15,
-      "score": 91.74899256366578,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/61-jAartdjL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07NSSPV9S?tag=dealhunter0e2-20",
-      "published_at": "2026-10-07T23:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 68.49
-        },
-        {
-          "date": "2026-10-05",
-          "price": 66.96
-        },
-        {
-          "date": "2026-10-06",
-          "price": 53.98
-        },
-        {
-          "date": "2026-10-07",
-          "price": 51.28
-        },
-        {
-          "date": "2026-10-08",
-          "price": 53.98
-        }
-      ]
-    },
-    {
-      "id": "B0HJCRV1J6",
-      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
-      "price": 429.99,
-      "currency": "USD",
-      "previous_price": 429.99,
-      "discount_pct": 26,
-      "score": 100.0,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
-      "published_at": "2026-10-07T21:56:05Z",
-      "source_query": "laptop",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 699.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 749.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 429.99
         }
       ]
     },
@@ -1155,38 +1195,6 @@
         {
           "date": "2026-10-08",
           "price": 549.99
-        }
-      ]
-    },
-    {
-      "id": "B09T4YZGQR",
-      "title": "Shark AI Ultra Robot Vacuum, 60-Day Self-Emptying Base, Black, AV2511AE",
-      "price": 249.99,
-      "currency": "USD",
-      "previous_price": 249.99,
-      "discount_pct": 0,
-      "score": 37.0,
-      "label": "WEAK",
-      "image": "https://m.media-amazon.com/images/I/71n99mtBmqL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B09T4YZGQR?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T17:00:02Z",
-      "source_query": "robot vacuum",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 449.99
         }
       ]
     },
