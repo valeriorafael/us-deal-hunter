@@ -1,7 +1,95 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T03:00:33Z",
+  "generated_at": "2026-10-09T05:00:32Z",
   "deals": [
+    {
+      "id": "B0HJ1QBMNL",
+      "title": "HAOYUYAN Wireless Earbuds, Sports Bluetooth Headphones, 80Hrs Playtime Ear Buds with LED Power Display, Noise Canceling Headset, IPX7 Waterproof Earphones for Workout/Running（Black）",
+      "price": 23.98,
+      "currency": "USD",
+      "previous_price": 23.98,
+      "discount_pct": 0,
+      "score": 36.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71QZW38j75L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HJ1QBMNL?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T05:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 23.98
+        },
+        {
+          "date": "2026-10-08",
+          "price": 23.98
+        },
+        {
+          "date": "2026-10-09",
+          "price": 23.98
+        }
+      ]
+    },
+    {
+      "id": "B0H29CH5X4",
+      "title": "SIHOO B100 Mesh Office Chair, Comfy Ergonomic Office Chair",
+      "price": 159.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/61BFqOqtMUL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0H29CH5X4?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T05:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "price": 159.99
+        }
+      ]
+    },
+    {
+      "id": "B094PS5RZQ",
+      "title": "Razer DeathAdder Essential Ergonomic Wired Gaming Mouse, Black",
+      "price": 19.99,
+      "currency": "USD",
+      "previous_price": 19.99,
+      "discount_pct": 1,
+      "score": 42.86529397171916,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/8189uwDnMkL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B094PS5RZQ?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T05:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 20.98
+        },
+        {
+          "date": "2026-10-05",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 19.99
+        }
+      ]
+    },
     {
       "id": "B0DGKWQMSM",
       "title": "TOZO Hybrid Active Noise Cancelling in Ear Wireless Earbuds, 68H Playtime",
@@ -198,7 +286,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 53.98
+          "price": 66.96
         }
       ]
     },
@@ -667,6 +755,10 @@
         {
           "date": "2026-10-06",
           "price": 349.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 399.99
         }
       ]
     },
@@ -1263,46 +1355,6 @@
       ]
     },
     {
-      "id": "B094PS5RZQ",
-      "title": "Razer DeathAdder Essential Ergonomic Wired Gaming Mouse, Black",
-      "price": 19.99,
-      "currency": "USD",
-      "previous_price": 20.98,
-      "discount_pct": 2,
-      "score": 48.457407859409344,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/8189uwDnMkL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B094PS5RZQ?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T19:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 20.98
-        },
-        {
-          "date": "2026-10-05",
-          "price": 19.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 19.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 19.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 19.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 19.99
-        }
-      ]
-    },
-    {
       "id": "B0HCZ4Y6PJ",
       "title": "Wireless Earbuds, Bluetooth 5.3 Headphones HiFi Stereo 50H Playback LED Digital Display Ear Buds with ENC Noise Canceling Headset, IPX7 Waterproof Earphones for Gym/Running/Work(Black)",
       "price": 18.98,
@@ -1810,7 +1862,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 486.19
+          "price": 483.67
         }
       ]
     },
