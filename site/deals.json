@@ -1,7 +1,111 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T11:00:47Z",
+  "generated_at": "2026-10-09T13:00:46Z",
   "deals": [
+    {
+      "id": "B0GGRSMXKN",
+      "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
+      "price": 399.99,
+      "currency": "USD",
+      "previous_price": 384.99,
+      "discount_pct": 1,
+      "score": 42.172541195595954,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/615KW-IyiHL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GGRSMXKN?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T13:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 384.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 384.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 399.99
+        }
+      ]
+    },
+    {
+      "id": "B0CVM2GJCN",
+      "title": "Philips 22 Inch Computer Monitor FHD 100Hz VA VESA Flicker-Free, 221V8LB",
+      "price": 69.99,
+      "currency": "USD",
+      "previous_price": 75.8,
+      "discount_pct": 5,
+      "score": 56.89556703834653,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/71RTruFctrL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0CVM2GJCN?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T13:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-05",
+          "price": 74.83
+        },
+        {
+          "date": "2026-10-08",
+          "price": 75.8
+        },
+        {
+          "date": "2026-10-09",
+          "price": 69.99
+        }
+      ]
+    },
+    {
+      "id": "B07GBZ4Q68",
+      "title": "Logitech G502 Hero Wired Gaming Mouse - Black",
+      "price": 37.99,
+      "currency": "USD",
+      "previous_price": 37.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07GBZ4Q68?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T13:00:02Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 37.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 37.99
+        }
+      ]
+    },
     {
       "id": "B0GT6BYB85",
       "title": "iRobot Roomba 415X Robot Vacuum & Mop Combo, 20,000Pa, 90 Days Self-Emptying, Multifunction Dock Self-Cleaning & Hot Dry, Smart Obstacle Avoidance, Lifting Spinning Mops, Ideal for Pet Hair",
@@ -182,7 +286,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 129.99
+          "price": 179.99
         }
       ]
     },
@@ -795,38 +899,6 @@
       ]
     },
     {
-      "id": "B0GGRSMXKN",
-      "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
-      "price": 384.99,
-      "currency": "USD",
-      "previous_price": 384.99,
-      "discount_pct": 6,
-      "score": 56.32562762276375,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/615KW-IyiHL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0GGRSMXKN?tag=dealhunter0e2-20",
-      "published_at": "2026-10-07T23:00:02Z",
-      "source_query": "robot vacuum",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 384.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 384.99
-        }
-      ]
-    },
-    {
       "id": "B0DX2G349M",
       "title": "Samsung SSD 9100 PRO 1TB, PCIe 5.0x4 M.2 2280, Up to 14,700MB/s",
       "price": 196.64,
@@ -1391,46 +1463,6 @@
         {
           "date": "2026-10-05",
           "price": 249.9
-        }
-      ]
-    },
-    {
-      "id": "B07GBZ4Q68",
-      "title": "Logitech G502 Hero Wired Gaming Mouse - Black",
-      "price": 37.99,
-      "currency": "USD",
-      "previous_price": 37.99,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07GBZ4Q68?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T23:00:02Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 37.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 37.99
         }
       ]
     },
