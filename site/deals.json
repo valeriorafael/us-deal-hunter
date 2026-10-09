@@ -1,7 +1,111 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T13:00:46Z",
+  "generated_at": "2026-10-09T15:00:32Z",
   "deals": [
+    {
+      "id": "B0DK468KVS",
+      "title": "Samsung 24\" (S30GD) Essential Monitor with IPS Panel and Tilt Only Stand",
+      "price": 79.99,
+      "currency": "USD",
+      "previous_price": 79.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61ReaNcCHwL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DK468KVS?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T15:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 79.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 79.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 79.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 79.99
+        }
+      ]
+    },
+    {
+      "id": "B09XPX59JK",
+      "title": "Wireless Earbuds, Bluetooth 5.4 Headphones in Ear with 4 Noise Cancelling Mic, Earbuds Stereo Bass, IP7 Waterproof Sports Wireless Earphones, 36H Playtime USB C Charging Buds White for Android iOS",
+      "price": 19.99,
+      "currency": "USD",
+      "previous_price": 19.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/51MgM6MaiSL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B09XPX59JK?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T15:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 19.99
+        }
+      ]
+    },
+    {
+      "id": "B07CRG94G3",
+      "title": "Seagate 2TB Portable Hard Drive | USB 3.0 (STGX2000400)",
+      "price": 119.99,
+      "currency": "USD",
+      "previous_price": 119.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/41OUh0ZU1NL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07CRG94G3?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T15:00:02Z",
+      "source_query": "SSD",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 119.99
+        }
+      ]
+    },
     {
       "id": "B0GGRSMXKN",
       "title": "roborock 2026 New Qrevo S Pro Robot Vacuum and Mop, 18,500Pa Suction",
@@ -286,7 +390,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 179.99
+          "price": 79.99
         }
       ]
     },
@@ -1214,7 +1318,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 249.99
+          "price": 254.24
         }
       ]
     },
