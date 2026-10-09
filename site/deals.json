@@ -1,7 +1,67 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T15:00:32Z",
+  "generated_at": "2026-10-09T19:00:19Z",
   "deals": [
+    {
+      "id": "B0HK3NJYS6",
+      "title": "Lenovo Business 15.6\" FHD Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/7176jURTcRL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HK3NJYS6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T19:00:02Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "price": 429.99
+        }
+      ]
+    },
+    {
+      "id": "B0H25T73KB",
+      "title": "OLIXIS Home Office Chair, Mesh Desk Chair, Ergonomic Lumbar Support",
+      "price": 37.89,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 38.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71bqWJlyVJL._AC_UL320_.jpg",
+      "url": "https://www.amazon.com/dp/B0H25T73KB?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T19:00:02Z",
+      "source_query": "office chair",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "price": 37.89
+        }
+      ]
+    },
+    {
+      "id": "B0G5YDVR99",
+      "title": "ILIFE A30s Robot Vacuum, 10000Pa Max Suction, White",
+      "price": 138.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/61XtYzJjN0L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0G5YDVR99?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T19:00:02Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "price": 138.99
+        }
+      ]
+    },
     {
       "id": "B0DK468KVS",
       "title": "Samsung 24\" (S30GD) Essential Monitor with IPS Panel and Tilt Only Stand",
@@ -390,7 +450,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 79.99
+          "price": 179.99
         }
       ]
     },
@@ -598,7 +658,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 20.98
+          "price": 19.99
         }
       ]
     },
@@ -919,6 +979,10 @@
         {
           "date": "2026-10-07",
           "price": 161.49
+        },
+        {
+          "date": "2026-10-09",
+          "price": 169.99
         }
       ]
     },
@@ -1071,6 +1135,10 @@
         {
           "date": "2026-10-07",
           "price": 59.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 99.99
         }
       ]
     },
