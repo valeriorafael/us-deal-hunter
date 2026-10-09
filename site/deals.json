@@ -1,7 +1,127 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T09:00:31Z",
+  "generated_at": "2026-10-09T11:00:47Z",
   "deals": [
+    {
+      "id": "B0GT6BYB85",
+      "title": "iRobot Roomba 415X Robot Vacuum & Mop Combo, 20,000Pa, 90 Days Self-Emptying, Multifunction Dock Self-Cleaning & Hot Dry, Smart Obstacle Avoidance, Lifting Spinning Mops, Ideal for Pet Hair",
+      "price": 398.99,
+      "currency": "USD",
+      "previous_price": 398.99,
+      "discount_pct": 0,
+      "score": 37.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/71WVB97Iz6L._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0GT6BYB85?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T11:00:03Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 398.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 398.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 398.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 398.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 398.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 398.99
+        }
+      ]
+    },
+    {
+      "id": "B0DK44759Y",
+      "title": "Samsung 27\" (S30GD) Essential Monitor with IPS Panel",
+      "price": 99.99,
+      "currency": "USD",
+      "previous_price": 99.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/61hW+rfpcML._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0DK44759Y?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T11:00:03Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 99.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 99.99
+        }
+      ]
+    },
+    {
+      "id": "B07CMS5Q6P",
+      "title": "Logitech G305 Lightspeed Wireless Gaming Mouse - Black",
+      "price": 29.99,
+      "currency": "USD",
+      "previous_price": 29.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B07CMS5Q6P?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T11:00:03Z",
+      "source_query": "gaming mouse",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 29.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 29.99
+        }
+      ]
+    },
     {
       "id": "B0HGFTXXXM",
       "title": "HP 2026 Everyday Laptop, Intel CPU, 128GB Storage, Copilot AI, Office 365",
@@ -62,7 +182,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 95.46
+          "price": 129.99
         }
       ]
     },
@@ -270,7 +390,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 19.99
+          "price": 20.98
         }
       ]
     },
@@ -1363,46 +1483,6 @@
       ]
     },
     {
-      "id": "B07CMS5Q6P",
-      "title": "Logitech G305 Lightspeed Wireless Gaming Mouse - Black",
-      "price": 29.99,
-      "currency": "USD",
-      "previous_price": 29.99,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B07CMS5Q6P?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T21:00:03Z",
-      "source_query": "gaming mouse",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 29.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 29.99
-        }
-      ]
-    },
-    {
       "id": "B0F9T613DL",
       "title": "SANSUI 24 Inch Curved 160Hz Gaming Monitor,1500R Curved Gaming Monitor",
       "price": 92.99,
@@ -1795,46 +1875,6 @@
         {
           "date": "2026-10-05",
           "price": 329.99
-        }
-      ]
-    },
-    {
-      "id": "B0DK44759Y",
-      "title": "Samsung 27\" (S30GD) Essential Monitor with IPS Panel",
-      "price": 99.99,
-      "currency": "USD",
-      "previous_price": 99.99,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/61hW+rfpcML._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0DK44759Y?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T07:00:02Z",
-      "source_query": "computer monitor",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 99.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 99.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 99.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 99.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 99.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 99.99
         }
       ]
     },
