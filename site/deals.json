@@ -1,7 +1,95 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T05:00:32Z",
+  "generated_at": "2026-10-09T07:00:16Z",
   "deals": [
+    {
+      "id": "B0HCTKSSQK",
+      "title": "Wireless Earbuds, 2026 Bluetooth 5.4 Headphones Bass Stereo Ear Buds with Noise Cancelling Mic, LED Display in Ear Earphones 50H Playtime Ear Buds, IP7 Waterproof for Laptop Pad Phones Pure Black",
+      "price": 19.99,
+      "currency": "USD",
+      "previous_price": 19.99,
+      "discount_pct": 0,
+      "score": 38.0,
+      "label": "WEAK",
+      "image": "https://m.media-amazon.com/images/I/61aSuH86kYL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HCTKSSQK?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T07:00:02Z",
+      "source_query": "wireless earbuds",
+      "history": [
+        {
+          "date": "2026-10-07",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 19.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 19.99
+        }
+      ]
+    },
+    {
+      "id": "B0C33CHG99",
+      "title": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating",
+      "price": 89.99,
+      "currency": "USD",
+      "previous_price": 89.99,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/81R9sA3IyBL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0C33CHG99?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T07:00:02Z",
+      "source_query": "air fryer",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 89.99
+        }
+      ]
+    },
+    {
+      "id": "B09FP4H99P",
+      "title": "KOORUI 22 Inch Computer Monitor FHD 120Hz VA VESA Low Blue Light, E2212H",
+      "price": 69.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": 0,
+      "score": 40.0,
+      "label": "FAIR",
+      "image": "https://m.media-amazon.com/images/I/81wOjsmFjtL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B09FP4H99P?tag=dealhunter0e2-20",
+      "published_at": "2026-10-09T07:00:02Z",
+      "source_query": "computer monitor",
+      "history": [
+        {
+          "date": "2026-10-09",
+          "price": 69.99
+        }
+      ]
+    },
     {
       "id": "B0HJ1QBMNL",
       "title": "HAOYUYAN Wireless Earbuds, Sports Bluetooth Headphones, 80Hrs Playtime Ear Buds with LED Power Display, Noise Canceling Headset, IPX7 Waterproof Earphones for Workout/Running（Black）",
@@ -1091,6 +1179,10 @@
         {
           "date": "2026-10-08",
           "price": 63.39
+        },
+        {
+          "date": "2026-10-09",
+          "price": 62.0
         }
       ]
     },
@@ -1471,6 +1563,10 @@
         {
           "date": "2026-10-07",
           "price": 112.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 139.99
         }
       ]
     },
@@ -1783,46 +1879,6 @@
         {
           "date": "2026-10-05",
           "price": 134.98
-        }
-      ]
-    },
-    {
-      "id": "B0C33CHG99",
-      "title": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating",
-      "price": 89.99,
-      "currency": "USD",
-      "previous_price": 89.99,
-      "discount_pct": 0,
-      "score": 40.0,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/81R9sA3IyBL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0C33CHG99?tag=dealhunter0e2-20",
-      "published_at": "2026-10-05T03:00:02Z",
-      "source_query": "air fryer",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 89.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 89.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 89.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 89.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 89.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 89.99
         }
       ]
     },
