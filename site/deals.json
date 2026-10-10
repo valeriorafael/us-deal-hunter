@@ -1,14 +1,102 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T19:00:19Z",
+  "generated_at": "2026-10-10T05:45:13Z",
   "deals": [
+    {
+      "id": "B09T4YZGQR",
+      "title": "Shark AI Ultra Robot Vacuum, 60-Day Self-Emptying Base, Black, AV2511AE",
+      "price": 269.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "FEATURED PRODUCT",
+      "image": "https://m.media-amazon.com/images/I/71n99mtBmqL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B09T4YZGQR?tag=dealhunter0e2-20",
+      "published_at": "2026-10-10T05:45:13Z",
+      "source_query": "robot vacuum",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 249.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 449.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 269.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 269.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 269.99
+        }
+      ]
+    },
+    {
+      "id": "B0HJCRV1J6",
+      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
+      "price": 429.99,
+      "currency": "USD",
+      "previous_price": null,
+      "discount_pct": null,
+      "score": null,
+      "label": "FEATURED PRODUCT",
+      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
+      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
+      "published_at": "2026-10-10T05:15:13Z",
+      "source_query": "laptop",
+      "history": [
+        {
+          "date": "2026-10-04",
+          "price": 699.99
+        },
+        {
+          "date": "2026-10-05",
+          "price": 749.99
+        },
+        {
+          "date": "2026-10-06",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-07",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-08",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 429.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 429.99
+        }
+      ]
+    },
     {
       "id": "B0HK3NJYS6",
       "title": "Lenovo Business 15.6\" FHD Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
       "price": 429.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/7176jURTcRL._AC_UY218_.jpg",
@@ -28,7 +116,7 @@
       "price": 37.89,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 38.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71bqWJlyVJL._AC_UL320_.jpg",
@@ -48,7 +136,7 @@
       "price": 138.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/61XtYzJjN0L._AC_UY218_.jpg",
@@ -68,7 +156,7 @@
       "price": 79.99,
       "currency": "USD",
       "previous_price": 79.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/61ReaNcCHwL._AC_UY218_.jpg",
@@ -100,7 +188,7 @@
       "price": 19.99,
       "currency": "USD",
       "previous_price": 19.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/51MgM6MaiSL._AC_UY218_.jpg",
@@ -132,7 +220,7 @@
       "price": 119.99,
       "currency": "USD",
       "previous_price": 119.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/41OUh0ZU1NL._AC_UY218_.jpg",
@@ -162,6 +250,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 119.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 119.99
         }
       ]
@@ -199,6 +291,10 @@
         {
           "date": "2026-10-09",
           "price": 399.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 399.99
         }
       ]
     },
@@ -227,6 +323,10 @@
         {
           "date": "2026-10-09",
           "price": 69.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 69.99
         }
       ]
     },
@@ -236,7 +336,7 @@
       "price": 37.99,
       "currency": "USD",
       "previous_price": 37.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg",
@@ -267,6 +367,10 @@
         {
           "date": "2026-10-09",
           "price": 37.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 37.99
         }
       ]
     },
@@ -276,7 +380,7 @@
       "price": 398.99,
       "currency": "USD",
       "previous_price": 398.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71WVB97Iz6L._AC_UY218_.jpg",
@@ -307,6 +411,10 @@
         {
           "date": "2026-10-09",
           "price": 398.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 398.99
         }
       ]
     },
@@ -316,7 +424,7 @@
       "price": 99.99,
       "currency": "USD",
       "previous_price": 99.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/61hW+rfpcML._AC_UY218_.jpg",
@@ -347,6 +455,10 @@
         {
           "date": "2026-10-09",
           "price": 99.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 99.99
         }
       ]
     },
@@ -356,7 +468,7 @@
       "price": 29.99,
       "currency": "USD",
       "previous_price": 29.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg",
@@ -387,6 +499,10 @@
         {
           "date": "2026-10-09",
           "price": 29.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 29.99
         }
       ]
     },
@@ -396,7 +512,7 @@
       "price": 319.98,
       "currency": "USD",
       "previous_price": 319.98,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/81zV-uXEduL._AC_UY218_.jpg",
@@ -410,6 +526,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 319.98
+        },
+        {
+          "date": "2026-10-10",
           "price": 319.98
         }
       ]
@@ -451,6 +571,10 @@
         {
           "date": "2026-10-09",
           "price": 179.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 179.99
         }
       ]
     },
@@ -460,7 +584,7 @@
       "price": 109.99,
       "currency": "USD",
       "previous_price": 109.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/619WSKm18ZL._AC_UY218_.jpg",
@@ -483,6 +607,10 @@
         {
           "date": "2026-10-09",
           "price": 109.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 109.99
         }
       ]
     },
@@ -492,7 +620,7 @@
       "price": 19.99,
       "currency": "USD",
       "previous_price": 19.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 38.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/61aSuH86kYL._AC_UY218_.jpg",
@@ -511,6 +639,10 @@
         {
           "date": "2026-10-09",
           "price": 19.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 19.99
         }
       ]
     },
@@ -520,7 +652,7 @@
       "price": 89.99,
       "currency": "USD",
       "previous_price": 89.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/81R9sA3IyBL._AC_UY218_.jpg",
@@ -551,6 +683,10 @@
         {
           "date": "2026-10-09",
           "price": 89.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 89.99
         }
       ]
     },
@@ -560,7 +696,7 @@
       "price": 69.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/81wOjsmFjtL._AC_UY218_.jpg",
@@ -580,7 +716,7 @@
       "price": 23.98,
       "currency": "USD",
       "previous_price": 23.98,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 36.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71QZW38j75L._AC_UY218_.jpg",
@@ -599,6 +735,10 @@
         {
           "date": "2026-10-09",
           "price": 23.98
+        },
+        {
+          "date": "2026-10-10",
+          "price": 23.98
         }
       ]
     },
@@ -608,7 +748,7 @@
       "price": 159.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/61BFqOqtMUL._AC_UL320_.jpg",
@@ -659,6 +799,10 @@
         {
           "date": "2026-10-09",
           "price": 19.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 19.99
         }
       ]
     },
@@ -668,7 +812,7 @@
       "price": 26.96,
       "currency": "USD",
       "previous_price": 26.96,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71NQ3OBW5hL._AC_UY218_.jpg",
@@ -692,7 +836,7 @@
       "price": 64.99,
       "currency": "USD",
       "previous_price": 64.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71Mu4+sWUfL._AC_UY218_.jpg",
@@ -707,6 +851,10 @@
         {
           "date": "2026-10-09",
           "price": 64.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 64.99
         }
       ]
     },
@@ -716,7 +864,7 @@
       "price": 39.95,
       "currency": "USD",
       "previous_price": 39.95,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 38.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71+dsV1QgdL._AC_UL320_.jpg",
@@ -739,86 +887,6 @@
         {
           "date": "2026-10-09",
           "price": 39.95
-        }
-      ]
-    },
-    {
-      "id": "B0HJCRV1J6",
-      "title": "Lenovo 15.6\" FHD Essential Laptop, Intel Processor, 8GB DDR5, 128GB Storage",
-      "price": 429.99,
-      "currency": "USD",
-      "previous_price": 429.99,
-      "discount_pct": 22,
-      "score": 100.0,
-      "label": "GREAT",
-      "image": "https://m.media-amazon.com/images/I/71bzQcnkcKL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B0HJCRV1J6?tag=dealhunter0e2-20",
-      "published_at": "2026-10-09T01:00:03Z",
-      "source_query": "laptop",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 699.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 749.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 429.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 429.99
-        }
-      ]
-    },
-    {
-      "id": "B09T4YZGQR",
-      "title": "Shark AI Ultra Robot Vacuum, 60-Day Self-Emptying Base, Black, AV2511AE",
-      "price": 269.99,
-      "currency": "USD",
-      "previous_price": 449.99,
-      "discount_pct": 8,
-      "score": 51.57240042178305,
-      "label": "FAIR",
-      "image": "https://m.media-amazon.com/images/I/71n99mtBmqL._AC_UY218_.jpg",
-      "url": "https://www.amazon.com/dp/B09T4YZGQR?tag=dealhunter0e2-20",
-      "published_at": "2026-10-09T01:00:03Z",
-      "source_query": "robot vacuum",
-      "history": [
-        {
-          "date": "2026-10-04",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-05",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-06",
-          "price": 249.99
-        },
-        {
-          "date": "2026-10-07",
-          "price": 449.99
-        },
-        {
-          "date": "2026-10-08",
-          "price": 269.99
-        },
-        {
-          "date": "2026-10-09",
-          "price": 269.99
         }
       ]
     },
@@ -858,7 +926,11 @@
         },
         {
           "date": "2026-10-09",
-          "price": 66.96
+          "price": 57.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 57.99
         }
       ]
     },
@@ -896,7 +968,7 @@
       "price": 139.99,
       "currency": "USD",
       "previous_price": 135.98,
-      "discount_pct": -1,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71Qa2gIEnQL._AC_UY218_.jpg",
@@ -915,6 +987,10 @@
         {
           "date": "2026-10-09",
           "price": 139.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 139.99
         }
       ]
     },
@@ -924,7 +1000,7 @@
       "price": 389.99,
       "currency": "USD",
       "previous_price": 389.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71OWtcxKgvL._AC_UY218_.jpg",
@@ -954,6 +1030,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 389.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 389.99
         }
       ]
@@ -1103,6 +1183,10 @@
         {
           "date": "2026-10-09",
           "price": 249.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 249.99
         }
       ]
     },
@@ -1139,6 +1223,10 @@
         {
           "date": "2026-10-09",
           "price": 99.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 99.99
         }
       ]
     },
@@ -1172,7 +1260,7 @@
       "price": 569.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 36.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/715nB9V1UqL._AC_UY218_.jpg",
@@ -1222,6 +1310,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 44.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 44.99
         }
       ]
@@ -1427,6 +1519,10 @@
         {
           "date": "2026-10-09",
           "price": 25.88
+        },
+        {
+          "date": "2026-10-10",
+          "price": 25.88
         }
       ]
     },
@@ -1460,7 +1556,7 @@
       "price": 49.99,
       "currency": "USD",
       "previous_price": 49.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71Ld+1SBc5L._AC_UY218_.jpg",
@@ -1491,6 +1587,10 @@
         {
           "date": "2026-10-09",
           "price": 79.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 79.99
         }
       ]
     },
@@ -1500,7 +1600,7 @@
       "price": 84.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71mbLz-Uw+L._AC_UY218_.jpg",
@@ -1510,6 +1610,10 @@
       "history": [
         {
           "date": "2026-10-06",
+          "price": 84.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 84.99
         }
       ]
@@ -1546,6 +1650,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 139.99
         }
       ]
@@ -1624,7 +1732,7 @@
       "price": 249.9,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/81NsZOh58WL._AC_UY218_.jpg",
@@ -1644,7 +1752,7 @@
       "price": 329.99,
       "currency": "USD",
       "previous_price": 329.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/714TSHAAQrL._AC_UY218_.jpg",
@@ -1672,7 +1780,7 @@
       "price": 299.95,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/6154mct-b7L._AC_UY218_.jpg",
@@ -1692,7 +1800,7 @@
       "price": 92.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71Qi-TBrlhL._AC_UY218_.jpg",
@@ -1715,6 +1823,10 @@
         {
           "date": "2026-10-09",
           "price": 92.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 92.99
         }
       ]
     },
@@ -1724,7 +1836,7 @@
       "price": 239.99,
       "currency": "USD",
       "previous_price": 239.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/61ZL9Qpo1-L._AC_UY218_.jpg",
@@ -1754,6 +1866,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 239.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 239.99
         }
       ]
@@ -1788,7 +1904,7 @@
       "price": 549.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/61oLk13zjcL._AC_UY218_.jpg",
@@ -1815,6 +1931,10 @@
         {
           "date": "2026-10-09",
           "price": 549.99
+        },
+        {
+          "date": "2026-10-10",
+          "price": 549.99
         }
       ]
     },
@@ -1824,7 +1944,7 @@
       "price": 139.99,
       "currency": "USD",
       "previous_price": 139.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/713aOvtWV7L._AC_UY218_.jpg",
@@ -1852,7 +1972,7 @@
       "price": 112.99,
       "currency": "USD",
       "previous_price": 112.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/712kZm3lUrL._AC_UL320_.jpg",
@@ -1878,6 +1998,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 139.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 139.99
         }
       ]
@@ -1912,7 +2036,7 @@
       "price": 429.99,
       "currency": "USD",
       "previous_price": 429.98,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71+qsPm3XbL._AC_UY218_.jpg",
@@ -1982,7 +2106,7 @@
         },
         {
           "date": "2026-10-09",
-          "price": 229.9
+          "price": 229.0
         }
       ]
     },
@@ -1992,7 +2116,7 @@
       "price": 259.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 35.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/81E-XOtqbzL._AC_UY218_.jpg",
@@ -2003,6 +2127,10 @@
         {
           "date": "2026-10-05",
           "price": 259.99
+        },
+        {
+          "date": "2026-10-09",
+          "price": 259.98
         }
       ]
     },
@@ -2012,7 +2140,7 @@
       "price": 199.99,
       "currency": "USD",
       "previous_price": 199.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 37.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71m-IwdVvsL._AC_UY218_.jpg",
@@ -2040,7 +2168,7 @@
       "price": 152.99,
       "currency": "USD",
       "previous_price": 152.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71LIFg6xi2L._AC_UY218_.jpg",
@@ -2064,7 +2192,7 @@
       "price": 329.99,
       "currency": "USD",
       "previous_price": 329.99,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71nSGeOnPxL._AC_UY218_.jpg",
@@ -2112,7 +2240,7 @@
       "price": 19.98,
       "currency": "USD",
       "previous_price": 19.98,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 38.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/618n7fFdFXL._AC_UY218_.jpg",
@@ -2136,7 +2264,7 @@
       "price": 134.98,
       "currency": "USD",
       "previous_price": 134.98,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 38.0,
       "label": "WEAK",
       "image": "https://m.media-amazon.com/images/I/71apghzaq-L._AC_UL320_.jpg",
@@ -2190,7 +2318,11 @@
         },
         {
           "date": "2026-10-09",
-          "price": 483.67
+          "price": 491.23
+        },
+        {
+          "date": "2026-10-10",
+          "price": 491.23
         }
       ]
     },
@@ -2200,7 +2332,7 @@
       "price": 429.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71YodqcTw8L._AC_UY218_.jpg",
@@ -2228,7 +2360,7 @@
       "price": 79.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/81dL-e6kh5L._AC_UY218_.jpg",
@@ -2252,7 +2384,7 @@
       "price": 80.69,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/71e5GgPXQzL._AC_UY218_.jpg",
@@ -2272,7 +2404,7 @@
       "price": 89.99,
       "currency": "USD",
       "previous_price": null,
-      "discount_pct": 0,
+      "discount_pct": null,
       "score": 40.0,
       "label": "FAIR",
       "image": "https://m.media-amazon.com/images/I/715BOo6P-BL._AC_UY218_.jpg",
@@ -2290,6 +2422,10 @@
         },
         {
           "date": "2026-10-09",
+          "price": 89.99
+        },
+        {
+          "date": "2026-10-10",
           "price": 89.99
         }
       ]
